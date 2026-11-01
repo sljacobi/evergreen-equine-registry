@@ -61,24 +61,50 @@ const horseOrigin =
 const brand =
     document.getElementById("brand").value;
 
-    const { error } = await supabaseClient
+  let error;
+
+if (editingHorseId) {
+
+    ({ error } = await supabaseClient
         .from("horses")
-.insert([
-    {
-        registered_name: horseName,
-        breed: breed,
-        gender: gender,
-        age: age,
+        .update({
+            registered_name: horseName,
+            breed: breed,
+            gender: gender,
+            age: age,
 
-        owner_name: owner,
+            owner_name: owner,
 
-        horse_status: horseStatus,
+            horse_status: horseStatus,
 
-        horse_origin: horseOrigin,
+            horse_origin: horseOrigin,
 
-        brand: brand
-    }
-]);
+            brand: brand
+        })
+        .eq("id", editingHorseId));
+
+} else {
+
+    ({ error } = await supabaseClient
+        .from("horses")
+        .insert([
+            {
+                registered_name: horseName,
+                breed: breed,
+                gender: gender,
+                age: age,
+
+                owner_name: owner,
+
+                horse_status: horseStatus,
+
+                horse_origin: horseOrigin,
+
+                brand: brand
+            }
+        ]));
+
+}
 
     if (error) {
         console.error(error);
