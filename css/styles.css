@@ -91,3 +91,29 @@ select{
     text-decoration: underline;
     color: #f5c542;
 }
+
+#ownersList h3,
+#brandsList h3 {
+    cursor: pointer;
+    color: #d4af37;
+    transition: all 0.2s ease;
+}
+
+#ownersList h3:hover,
+#brandsList h3:hover {
+    text-decoration: underline;
+    color: #ffd700;
+}
+
+#ownersList h3,
+#brandsList h3 {
+    cursor: pointer;
+    color: #d4af37;
+    transition: all 0.2s ease;
+}
+
+#ownersList h3:hover,
+#brandsList h3:hover {
+    color: #ffd700;
+    text-decoration: underline;
+}

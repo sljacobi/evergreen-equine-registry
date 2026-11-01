@@ -4,6 +4,9 @@ const horseList = document.getElementById("horseList");
 let ownerFilter = "";
 let brandFilter = "";
 
+const activeFilter =
+    document.getElementById("activeFilter");
+
 const ownersList =
     document.getElementById("ownersList");
 
@@ -20,6 +23,18 @@ const searchBox =
     "input",
     loadHorses
 );
+
+activeFilter.innerHTML = "";
+
+if (ownerFilter) {
+    activeFilter.innerHTML =
+        `Filtering by Owner: ${ownerFilter}`;
+}
+
+if (brandFilter) {
+    activeFilter.innerHTML =
+        `Filtering by Brand: ${brandFilter}`;
+}
 
 loadHorses();
 
