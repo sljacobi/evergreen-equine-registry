@@ -3,6 +3,9 @@ const horseList = document.getElementById("horseList");
 const ownersList =
     document.getElementById("ownersList");
 
+const brandsList =
+    document.getElementById("brandsList");
+
 const searchBox =
     document.getElementById("searchBox");
 
@@ -176,6 +179,31 @@ Object.entries(ownerCounts)
         ownersList.innerHTML += `
             <div class="card">
                 <h3>${owner}</h3>
+                <p>${count} horse(s)</p>
+            </div>
+        `;
+
+});
+
+const brandCounts = {};
+
+data.forEach(horse => {
+
+    if (!horse.brand) return;
+
+    brandCounts[horse.brand] =
+        (brandCounts[horse.brand] || 0) + 1;
+
+});
+
+brandsList.innerHTML = "";
+
+Object.entries(brandCounts)
+    .forEach(([brand,count]) => {
+
+        brandsList.innerHTML += `
+            <div class="card">
+                <h3>${brand}</h3>
                 <p>${count} horse(s)</p>
             </div>
         `;
