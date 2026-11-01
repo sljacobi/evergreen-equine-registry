@@ -1,5 +1,9 @@
 const horseForm = document.getElementById("horseForm");
 const horseList = document.getElementById("horseList");
+
+let ownerFilter = "";
+let brandFilter = "";
+
 const ownersList =
     document.getElementById("ownersList");
 
@@ -94,6 +98,22 @@ async function loadHorses() {
 
     data
 .filter(horse => {
+
+    if (
+        ownerFilter &&
+        horse.owner_name !== ownerFilter
+    ) {
+        return false;
+    }
+
+    if (
+        brandFilter &&
+        horse.brand !== brandFilter
+    ) {
+        return false;
+    }
+
+    return (
 
     return (
         (horse.registered_name || "")
@@ -216,11 +236,19 @@ Object.entries(ownerCounts)
     .forEach(([owner,count]) => {
 
         ownersList.innerHTML += `
-            <div class="card">
-                <h3>${owner}</h3>
-                <p>${count} horse(s)</p>
-            </div>
-        `;
+    <div class="card">
+
+        <h3
+            onclick="filterOwner('${owner}')"
+            style="cursor:pointer;"
+        >
+            ${owner}
+        </h3>
+
+        <p>${count} horse(s)</p>
+
+    </div>
+`;
 
 });
 
@@ -242,10 +270,12 @@ Object.entries(brandCounts)
 
         brandsList.innerHTML += `
             <div class="card">
-                <h3>${brand}</h3>
-                <p>${count} horse(s)</p>
-            </div>
-        `;
+                <h3
+    onclick="filterBrand('${brand}')"
+    style="cursor:pointer;"
+>
+    ${brand}
+</h3>
 
 });
 
@@ -270,6 +300,32 @@ async function archiveHorse(id) {
         alert("Failed to archive horse.");
         return;
     }
+
+    loadHorses();
+
+}
+
+function filterOwner(owner) {
+
+    ownerFilter = owner;
+
+    loadHorses();
+
+}
+
+function filterBrand(brand) {
+
+    brandFilter = brand;
+
+    loadHorses();
+
+}
+
+function clearFilters() {
+
+    ownerFilter = "";
+
+    brandFilter = "";
 
     loadHorses();
 
