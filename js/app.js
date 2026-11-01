@@ -10,15 +10,36 @@ horseForm.addEventListener("submit", async (e) => {
     const breed = document.getElementById("breed").value;
     const gender = document.getElementById("gender").value;
     const age = Number(document.getElementById("age").value);
+    const owner =
+    document.getElementById("owner").value;
+
+const horseStatus =
+    document.getElementById("status").value;
+
+const horseOrigin =
+    document.getElementById("origin").value;
+
+const brand =
+    document.getElementById("brand").value;
 
     const { error } = await supabaseClient
         .from("horses")
         .insert([
             {
-                registered_name: horseName,
-                breed: breed,
-                gender: gender,
-                age: age
+{
+    registered_name: horseName,
+    breed: breed,
+    gender: gender,
+    age: age,
+
+    owner_name: owner,
+
+    horse_status: horseStatus,
+
+    horse_origin: horseOrigin,
+
+    brand: brand
+}
             }
         ]);
 
@@ -60,11 +81,19 @@ async function loadHorses() {
 
             <h3>${horse.registered_name}</h3>
 
-            <p>Breed: ${horse.breed || ""}</p>
+<p>Breed: ${horse.breed || ""}</p>
 
-            <p>Gender: ${horse.gender || ""}</p>
+<p>Gender: ${horse.gender || ""}</p>
 
-            <p>Age: ${horse.age || ""}</p>
+<p>Age: ${horse.age || ""}</p>
+
+<p>Owner: ${horse.owner_name || ""}</p>
+
+<p>Status: ${horse.horse_status || ""}</p>
+
+<p>Origin: ${horse.horse_origin || ""}</p>
+
+<p>Brand: ${horse.brand || ""}</p>
 
         </div>
         `;
