@@ -78,3 +78,16 @@ select{
     flex: 1;
     min-width: 250px;
 }
+
+#ownersList h3,
+#brandsList h3 {
+    cursor: pointer;
+    color: #d4af37;
+    transition: 0.2s;
+}
+
+#ownersList h3:hover,
+#brandsList h3:hover {
+    text-decoration: underline;
+    color: #f5c542;
+}
