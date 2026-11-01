@@ -115,7 +115,6 @@ async function loadHorses() {
 
     return (
 
-    return (
         (horse.registered_name || "")
             .toLowerCase()
             .includes(searchTerm)
@@ -270,14 +269,20 @@ Object.entries(brandCounts)
 
         brandsList.innerHTML += `
             <div class="card">
-                <h3
-    onclick="filterBrand('${brand}')"
-    style="cursor:pointer;"
->
-    ${brand}
-</h3>
 
-});
+                <h3
+                    onclick="filterBrand('${brand}')"
+                    style="cursor:pointer;"
+                >
+                    ${brand}
+                </h3>
+
+                <p>${count} horse(s)</p>
+
+            </div>
+        `;
+
+    });
 
 }
 
