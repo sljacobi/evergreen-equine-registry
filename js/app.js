@@ -331,6 +331,61 @@ async function archiveHorse(id) {
 
 }
 
+async function editHorse(id) {
+
+    const newOwner =
+        prompt("Enter new owner:");
+
+    if (!newOwner) return;
+
+    const { data: horseData } =
+        await supabaseClient
+            .from("horses")
+            .select("*")
+            .eq("id", id)
+            .single();
+
+    if (!horseData) return;
+
+    const previousOwner =
+        horseData.owner_name || "";
+
+    const { error } =
+        await supabaseClient
+            .from("horses")
+            .update({
+                owner_name: newOwner
+            })
+            .eq("id", id);
+
+    if (error) {
+
+        console.error(error);
+
+        alert("Unable to update horse.");
+
+        return;
+
+    }
+
+    if (previousOwner !== newOwner) {
+
+        await supabaseClient
+            .from("ownership_history")
+            .insert([
+                {
+                    horse_id: id,
+                    previous_owner: previousOwner,
+                    new_owner: newOwner
+                }
+            ]);
+
+    }
+
+    loadHorses();
+
+}
+
 window.filterOwner = function(owner) {
 
     ownerFilter = owner;
