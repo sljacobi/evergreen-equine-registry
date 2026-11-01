@@ -6,6 +6,8 @@ const horseList = document.getElementById("horseList");
 let ownerFilter = "";
 let brandFilter = "";
 
+let editingHorseId = null;
+
 const activeFilter =
     document.getElementById("activeFilter");
 
@@ -335,56 +337,48 @@ async function archiveHorse(id) {
 
 async function editHorse(id) {
 
-    const newOwner =
-        prompt("Enter new owner:");
-
-    if (!newOwner) return;
-
-    const { data: horseData } =
+    const { data, error } =
         await supabaseClient
             .from("horses")
             .select("*")
             .eq("id", id)
             .single();
 
-    if (!horseData) return;
-
-    const previousOwner =
-        horseData.owner_name || "";
-
-    const { error } =
-        await supabaseClient
-            .from("horses")
-            .update({
-                owner_name: newOwner
-            })
-            .eq("id", id);
-
     if (error) {
-
         console.error(error);
-
-        alert("Unable to update horse.");
-
         return;
-
     }
 
-    if (previousOwner !== newOwner) {
+    editingHorseId = id;
 
-        await supabaseClient
-            .from("ownership_history")
-            .insert([
-                {
-                    horse_id: id,
-                    previous_owner: previousOwner,
-                    new_owner: newOwner
-                }
-            ]);
+    document.getElementById("horseName").value =
+        data.registered_name || "";
 
-    }
+    document.getElementById("breed").value =
+        data.breed || "";
 
-    loadHorses();
+    document.getElementById("gender").value =
+        data.gender || "";
+
+    document.getElementById("age").value =
+        data.age || "";
+
+    document.getElementById("owner").value =
+        data.owner_name || "";
+
+    document.getElementById("status").value =
+        data.horse_status || "Active";
+
+    document.getElementById("origin").value =
+        data.horse_origin || "Wild Caught";
+
+    document.getElementById("brand").value =
+        data.brand || "";
+
+    horseForm.querySelector(
+        "button[type='submit']"
+    ).textContent =
+        "Save Changes";
 
 }
 
