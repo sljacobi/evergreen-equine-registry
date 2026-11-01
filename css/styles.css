@@ -1,7 +1,6 @@
 body{
-    font-family:Arial,sans-serif;
+    font-family: Arial, sans-serif;
     margin:0;
-    padding:0;
     background:#1d1d1d;
     color:white;
 }
@@ -14,25 +13,29 @@ header{
 
 nav{
     display:flex;
+    justify-content:center;
     gap:10px;
     padding:15px;
-    justify-content:center;
     flex-wrap:wrap;
 }
 
 button{
-    padding:10px 15px;
+    padding:8px 12px;
     border:none;
+    border-radius:6px;
     background:#b8860b;
     color:white;
     cursor:pointer;
-    border-radius:6px;
+}
+
+button:hover{
+    background:#d4a017;
 }
 
 .card{
     background:#2a2a2a;
     margin:10px;
-    padding:12px;
+    padding:15px;
     border-radius:10px;
 }
 
@@ -44,16 +47,16 @@ button{
 
 .stat-box{
     background:#333;
-    padding:20px;
     border-radius:10px;
-    width:150px;
+    padding:15px;
+    min-width:120px;
     text-align:center;
 }
 
 input,
 select{
-    padding:10px;
-    margin:5px;
+    padding:8px;
+    margin:4px;
 }
 
 .registry-grid{
@@ -64,105 +67,41 @@ select{
 
 .registry-grid .card{
     flex:1;
-    min-width:250px;
-}
-
-.registry-grid {
-    display: flex;
-    gap: 20px;
-    flex-wrap: wrap;
-    margin-bottom: 20px;
-}
-
-.registry-grid .card {
-    flex: 1;
-    min-width: 250px;
-}
-
-#ownersList h3,
-#brandsList h3 {
-    cursor: pointer;
-    color: #d4af37;
-    transition: 0.2s;
-}
-
-#ownersList h3:hover,
-#brandsList h3:hover {
-    text-decoration: underline;
-    color: #f5c542;
-}
-
-#ownersList h3,
-#brandsList h3 {
-    cursor: pointer;
-    color: #d4af37;
-    transition: all 0.2s ease;
-}
-
-#ownersList h3:hover,
-#brandsList h3:hover {
-    text-decoration: underline;
-    color: #ffd700;
-}
-
-#ownersList h3,
-#brandsList h3 {
-    cursor: pointer;
-    color: #d4af37;
-    transition: all 0.2s ease;
-}
-
-#ownersList h3:hover,
-#brandsList h3:hover {
-    color: #ffd700;
-    text-decoration: underline;
-}
-
-#ownersList h3,
-#brandsList h3 {
-    cursor: pointer;
-    color: #d4af37;
-    transition: all 0.2s ease;
-}
-
-#ownersList h3:hover,
-#brandsList h3:hover {
-    color: #ffd700;
-    text-decoration: underline;
-}
-
-#activeFilter {
-    margin-bottom: 10px;
-    color: #ffd700;
-    font-weight: bold;
-}
-
-#horseList .card{
-    max-width:600px;
-    margin-bottom:12px;
-}
-
-#horseList h3{
-    margin:0 0 8px 0;
-}
-
-#horseList p{
-    margin:4px 0;
-}
-
-#horseList button{
-    margin-top:8px;
-    margin-right:6px;
+    min-width:300px;
 }
 
 #ownersList h3,
 #brandsList h3{
     cursor:pointer;
     color:#d4af37;
+    margin-bottom:5px;
 }
 
 #ownersList h3:hover,
 #brandsList h3:hover{
-    text-decoration:underline;
     color:#ffd700;
+    text-decoration:underline;
+}
+
+#activeFilter{
+    margin:10px 0;
+    color:#ffd700;
+    font-weight:bold;
+}
+
+#horseList .card{
+    max-width:700px;
+}
+
+#horseList h3{
+    margin-bottom:8px;
+}
+
+#horseList p{
+    margin:5px 0;
+}
+
+#horseList button{
+    margin-right:8px;
+    margin-top:10px;
 }
