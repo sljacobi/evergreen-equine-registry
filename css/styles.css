@@ -66,3 +66,15 @@ select{
     flex:1;
     min-width:250px;
 }
+
+.registry-grid {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+.registry-grid .card {
+    flex: 1;
+    min-width: 250px;
+}
