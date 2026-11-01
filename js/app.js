@@ -1,49 +1,70 @@
 const horseForm = document.getElementById("horseForm");
 const horseList = document.getElementById("horseList");
 
-let horses = [];
+loadHorses();
 
-horseForm.addEventListener("submit", function(e){
-
+horseForm.addEventListener("submit", async (e) => {
     e.preventDefault();
 
-    const horse = {
-        name: document.getElementById("horseName").value,
-        breed: document.getElementById("breed").value,
-        gender: document.getElementById("gender").value,
-        age: document.getElementById("age").value
-    };
+    const horseName = document.getElementById("horseName").value;
+    const breed = document.getElementById("breed").value;
+    const gender = document.getElementById("gender").value;
+    const age = Number(document.getElementById("age").value);
 
-    horses.push(horse);
+    const { error } = await supabaseClient
+        .from("horses")
+        .insert([
+            {
+                registered_name: horseName,
+                breed: breed,
+                gender: gender,
+                age: age
+            }
+        ]);
 
-    renderHorses();
+    if (error) {
+        console.error(error);
+        alert("Error saving horse.");
+        return;
+    }
 
     horseForm.reset();
 
+    loadHorses();
 });
 
-function renderHorses(){
+async function loadHorses() {
+
+    const { data, error } = await supabaseClient
+        .from("horses")
+        .select("*")
+        .order("registered_name");
+
+    if (error) {
+        console.error(error);
+        return;
+    }
 
     horseList.innerHTML = "";
 
-    horses.forEach(horse => {
+    if (data.length === 0) {
+        horseList.innerHTML =
+            "<p>No horses entered yet.</p>";
+        return;
+    }
+
+    data.forEach(horse => {
 
         horseList.innerHTML += `
         <div class="card">
 
-            <h3>${horse.name}</h3>
+            <h3>${horse.registered_name}</h3>
 
-            <p>
-            Breed: ${horse.breed}
-            </p>
+            <p>Breed: ${horse.breed || ""}</p>
 
-            <p>
-            Gender: ${horse.gender}
-            </p>
+            <p>Gender: ${horse.gender || ""}</p>
 
-            <p>
-            Age: ${horse.age}
-            </p>
+            <p>Age: ${horse.age || ""}</p>
 
         </div>
         `;
