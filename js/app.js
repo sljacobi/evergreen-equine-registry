@@ -310,7 +310,7 @@ async function archiveHorse(id) {
 
 }
 
-function filterOwner(owner) {
+window.filterOwner = function(owner) {
 
     ownerFilter = owner;
 
@@ -318,7 +318,7 @@ function filterOwner(owner) {
 
 }
 
-function filterBrand(brand) {
+window.filterBrand = function(brand) {
 
     brandFilter = brand;
 
@@ -326,7 +326,7 @@ function filterBrand(brand) {
 
 }
 
-function clearFilters() {
+window.clearFilters = function() {
 
     ownerFilter = "";
 
