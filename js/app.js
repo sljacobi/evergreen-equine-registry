@@ -95,9 +95,41 @@ async function loadHorses() {
 
 <p>Brand: ${horse.brand || ""}</p>
 
+<button onclick="editHorse('${horse.id}')">
+    Edit
+</button>
+
         </div>
         `;
 
     });
+
+}
+
+async function editHorse(id) {
+
+    const newName =
+        prompt("Enter new horse name:");
+
+    if (!newName) return;
+
+    const { error } = await supabaseClient
+        .from("horses")
+        .update({
+            registered_name: newName
+        })
+        .eq("id", id);
+
+    if (error) {
+
+        console.error(error);
+
+        alert("Failed to update horse.");
+
+        return;
+
+    }
+
+    loadHorses();
 
 }
