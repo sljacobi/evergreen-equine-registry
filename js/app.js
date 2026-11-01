@@ -54,10 +54,11 @@ const brand =
 
 async function loadHorses() {
 
-    const { data, error } = await supabaseClient
-        .from("horses")
-        .select("*")
-        .order("registered_name");
+   const { data, error } = await supabaseClient
+    .from("horses")
+    .select("*")
+    .eq("archived", false)
+    .order("registered_name");
 
     if (error) {
         console.error(error);
@@ -97,9 +98,37 @@ async function loadHorses() {
     Edit
 </button>
 
+<button onclick="archiveHorse('${horse.id}')">
+    Archive
+</button>
+
         </div>
         `;
 
     });
+
+}
+
+async function archiveHorse(id) {
+
+    const confirmed =
+        confirm("Archive this horse?");
+
+    if (!confirmed) return;
+
+    const { error } = await supabaseClient
+        .from("horses")
+        .update({
+            archived: true
+        })
+        .eq("id", id);
+
+    if (error) {
+        console.error(error);
+        alert("Failed to archive horse.");
+        return;
+    }
+
+    loadHorses();
 
 }
