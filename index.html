@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Evergreen Equine Registry</title>
+
+<link rel="stylesheet" href="CSS/styles.css">
+</head>
+
+<body>
+
+<header>
+    <h1>Evergreen Equine Registry</h1>
+    <p>Horse Registry & Breeding Manager</p>
+</header>
+
+<nav>
+    <button>Dashboard</button>
+    <button>Registry</button>
+    <button>Breedings</button>
+    <button>Pedigrees</button>
+    <button>Marketplace</button>
+    <button>Brands</button>
+    <button>User Guide</button>
+</nav>
+
+<main>
+
+<section class="card">
+    <h2>Registry Statistics</h2>
+
+    <div class="stats">
+
+        <div class="stat-box">
+            <h3 id="horseCount">0</h3>
+            <p>Total Horses</p>
+        </div>
+
+        <div class="stat-box">
+            <h3 id="activeCount">0</h3>
+            <p>Active Horses</p>
+        </div>
+
+        <div class="stat-box">
+            <h3 id="breedingCount">0</h3>
+            <p>Breedings</p>
+        </div>
+
+    </div>
+</section>
+
+<section class="card">
+
+<h2>Add Horse</h2>
+
+<form id="horseForm">
+
+<input type="text" id="horseName" placeholder="Registered Name">
+
+<input type="text" id="breed" placeholder="Breed">
+
+<select id="gender">
+<option>Stallion</option>
+<option>Mare</option>
+</select>
+
+<input type="number" id="age" placeholder="Age">
+
+<button type="submit">
+Add Horse
+</button>
+
+</form>
+
+</section>
+
+<section class="card">
+
+<h2>Horse Registry</h2>
+
+<div id="horseList">
+
+<p>No horses entered yet.</p>
+
+</div>
+
+</section>
+
+</main>
+
+<script src="JS/app.js"></script>
+
+</body>
+</html>
+
