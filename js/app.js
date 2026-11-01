@@ -6,6 +6,9 @@ const ownersList =
 const brandsList =
     document.getElementById("brandsList");
 
+const historyList =
+    document.getElementById("historyList");
+
 const searchBox =
     document.getElementById("searchBox");
 
@@ -151,6 +154,42 @@ async function loadHorses() {
         `;
 
     });
+
+const { data: historyData } =
+    await supabaseClient
+        .from("ownership_history")
+        .select("*")
+        .order("transfer_date", {
+            ascending: false
+        });
+
+historyList.innerHTML = "";
+
+if (!historyData ||
+    historyData.length === 0) {
+
+    historyList.innerHTML =
+        "<p>No ownership transfers recorded.</p>";
+
+} else {
+
+    historyData.forEach(record => {
+
+        historyList.innerHTML += `
+            <div class="card">
+
+                <p>
+                    ${record.previous_owner}
+                    →
+                    ${record.new_owner}
+                </p>
+
+            </div>
+        `;
+
+    });
+
+}
 
     document.getElementById("horseCount").textContent =
     data.length;
