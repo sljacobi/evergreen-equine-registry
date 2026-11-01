@@ -107,6 +107,14 @@ async function loadHorses() {
 
     });
 
+    document.getElementById("horseCount").textContent =
+    data.length;
+
+document.getElementById("activeCount").textContent =
+    data.filter(
+        horse => horse.archived === false
+    ).length;
+
 }
 
 async function archiveHorse(id) {
