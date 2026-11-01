@@ -1,3 +1,5 @@
+console.log("APPJS VERSION 2");
+
 const horseForm = document.getElementById("horseForm");
 const horseList = document.getElementById("horseList");
 
