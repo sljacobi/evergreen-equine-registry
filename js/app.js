@@ -1,6 +1,14 @@
 const horseForm = document.getElementById("horseForm");
 const horseList = document.getElementById("horseList");
 
+const searchBox =
+    document.getElementById("searchBox");
+
+    searchBox.addEventListener(
+    "input",
+    loadHorses
+);
+
 loadHorses();
 
 horseForm.addEventListener("submit", async (e) => {
@@ -65,6 +73,9 @@ async function loadHorses() {
         return;
     }
 
+    const searchTerm =
+    searchBox.value.toLowerCase();
+
     horseList.innerHTML = "";
 
     if (data.length === 0) {
@@ -73,7 +84,36 @@ async function loadHorses() {
         return;
     }
 
-    data.forEach(horse => {
+    data
+.filter(horse => {
+
+    return (
+        (horse.registered_name || "")
+            .toLowerCase()
+            .includes(searchTerm)
+
+        ||
+
+        (horse.owner_name || "")
+            .toLowerCase()
+            .includes(searchTerm)
+
+        ||
+
+        (horse.breed || "")
+            .toLowerCase()
+            .includes(searchTerm)
+
+        ||
+
+        (horse.brand || "")
+            .toLowerCase()
+            .includes(searchTerm)
+
+    );
+
+})
+.forEach(horse => {
 
         horseList.innerHTML += `
         <div class="card">
