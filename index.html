@@ -57,48 +57,44 @@
 
 <section class="card">
 
-<h2>Add Horse</h2>
+    <h2>Add Horse</h2>
 
-<form id="horseForm">
+    <form id="horseForm">
 
-<input type="text" id="horseName" placeholder="Registered Name">
+        <input type="text" id="horseName" placeholder="Registered Name">
 
-<input type="text" id="breed" placeholder="Breed">
+        <input type="text" id="breed" placeholder="Breed">
 
-<select id="gender">
-<option>Stallion</option>
-<option>Mare</option>
-</select>
+        <select id="gender">
+            <option>Stallion</option>
+            <option>Mare</option>
+        </select>
 
-<input type="number" id="age" placeholder="Age">
+        <input type="number" id="age" placeholder="Age">
 
-<input type="text"
-       id="owner"
-       placeholder="Owner">
+        <input type="text" id="owner" placeholder="Owner">
 
-<select id="status">
-    <option>Active</option>
-    <option>Personal</option>
-    <option>Retired</option>
-    <option>Sold</option>
-</select>
+        <select id="status">
+            <option>Active</option>
+            <option>Personal</option>
+            <option>Retired</option>
+            <option>Sold</option>
+        </select>
 
-<select id="origin">
-    <option>Wild Caught</option>
-    <option>Bred</option>
-    <option>Purchased</option>
-    <option>Event Horse</option>
-</select>
+        <select id="origin">
+            <option>Wild Caught</option>
+            <option>Bred</option>
+            <option>Purchased</option>
+            <option>Event Horse</option>
+        </select>
 
-<input type="text"
-       id="brand"
-       placeholder="Brand">
+        <input type="text" id="brand" placeholder="Brand">
 
-<button type="submit">
-Add Horse
-</button>
+        <button type="submit">
+            Add Horse
+        </button>
 
-</form>
+    </form>
 
 </section>
 
@@ -121,40 +117,32 @@ Add Horse
     <h2>Ownership History</h2>
 
     <div id="historyList">
-        <p>Ownership history will appear here when horses change owners.</p>
+        <p>
+            Ownership history will appear here when horses change owners.
+        </p>
     </div>
 
 </section>
 
-</section>
+<section class="card">
 
-<section class="card"></section>
+    <h2>Horse Registry</h2>
 
-<div id="horseList">
-...
-</div>
+    <div id="activeFilter"></div>
 
-</section>
+    <button onclick="clearFilters()">
+        Show All Horses
+    </button>
 
-<h2>Horse Registry</h2>
+    <input
+        type="text"
+        id="searchBox"
+        placeholder="Search horses..."
+    >
 
-<div id="activeFilter"></div>
-
-<button onclick="clearFilters()">
-    Show All Horses
-</button>
-
-<input
-    type="text"
-    id="searchBox"
-    placeholder="Search horses..."
->
-
-<div id="horseList">
-
-<p>No horses entered yet.</p>
-
-</div>
+    <div id="horseList">
+        <p>No horses entered yet.</p>
+    </div>
 
 </section>
 
