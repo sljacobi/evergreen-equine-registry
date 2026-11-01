@@ -88,7 +88,14 @@ const brand =
 
     horseForm.reset();
 
-    loadHorses();
+    editingHorseId = null;
+
+horseForm.querySelector(
+    "button[type='submit']"
+).textContent = "Add Horse";
+
+loadHorses();
+
 });
 
 async function loadHorses() {
