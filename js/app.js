@@ -24,10 +24,22 @@ const brand =
 
     const { error } = await supabaseClient
         .from("horses")
-        .insert([
-            {
-{
-    registered_name: horseName,
+.insert([
+    {
+        registered_name: horseName,
+        breed: breed,
+        gender: gender,
+        age: age,
+
+        owner_name: owner,
+
+        horse_status: horseStatus,
+
+        horse_origin: horseOrigin,
+
+        brand: brand
+    }
+]);
     breed: breed,
     gender: gender,
     age: age,
