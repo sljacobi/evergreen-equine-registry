@@ -91,12 +91,19 @@ const previousOwner =
 
             brand: brand
         })
-        .eq("id", editingHorseId));
+        .eq("id", editingHorseId));     
 
 if (
     previousOwner &&
     previousOwner !== owner
 ) {
+
+    console.log(
+    "Ownership transfer:",
+    previousOwner,
+    "->",
+    owner
+);
 
     await supabaseClient
         .from("ownership_history")
