@@ -145,21 +145,27 @@ async function loadHorses() {
         horseList.innerHTML += `
         <div class="card">
 
-            <h3>${horse.registered_name}</h3>
+<h3>${horse.registered_name}</h3>
 
-<p>Breed: ${horse.breed || ""}</p>
+<p>
+Owner: ${horse.owner_name || ""}
+|
+Brand: ${horse.brand || ""}
+</p>
 
-<p>Gender: ${horse.gender || ""}</p>
+<p>
+${horse.breed || ""}
+|
+${horse.gender || ""}
+|
+Age ${horse.age || ""}
+</p>
 
-<p>Age: ${horse.age || ""}</p>
-
-<p>Owner: ${horse.owner_name || ""}</p>
-
-<p>Status: ${horse.horse_status || ""}</p>
-
-<p>Origin: ${horse.horse_origin || ""}</p>
-
-<p>Brand: ${horse.brand || ""}</p>
+<p>
+Status: ${horse.horse_status || ""}
+|
+Origin: ${horse.horse_origin || ""}
+</p>
 
 <button onclick="editHorse('${horse.id}')">
     Edit
