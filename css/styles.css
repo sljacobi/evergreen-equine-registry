@@ -55,3 +55,14 @@ select{
     padding:10px;
     margin:5px;
 }
+
+.registry-grid{
+    display:flex;
+    gap:20px;
+    flex-wrap:wrap;
+}
+
+.registry-grid .card{
+    flex:1;
+    min-width:250px;
+}
