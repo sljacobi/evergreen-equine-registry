@@ -117,3 +117,22 @@ select{
     color: #ffd700;
     text-decoration: underline;
 }
+
+#ownersList h3,
+#brandsList h3 {
+    cursor: pointer;
+    color: #d4af37;
+    transition: all 0.2s ease;
+}
+
+#ownersList h3:hover,
+#brandsList h3:hover {
+    color: #ffd700;
+    text-decoration: underline;
+}
+
+#activeFilter {
+    margin-bottom: 10px;
+    color: #ffd700;
+    font-weight: bold;
+}
