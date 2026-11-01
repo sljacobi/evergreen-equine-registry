@@ -157,41 +157,41 @@ async function loadHorses() {
 })
 .forEach(horse => {
 
-        horseList.innerHTML += `
-        <div class="card">
+horseList.innerHTML += `
+<div class="card">
 
-<h3>${horse.registered_name}</h3>
+    <h3>${horse.registered_name}</h3>
 
-<p>
-Owner: ${horse.owner_name || ""}
-|
-Brand: ${horse.brand || ""}
-</p>
+    <p>
+        <strong>Owner:</strong> ${horse.owner_name || "None"}
+        |
+        <strong>Brand:</strong> ${horse.brand || "None"}
+    </p>
 
-<p>
-${horse.breed || ""}
-|
-${horse.gender || ""}
-|
-Age ${horse.age || ""}
-</p>
+    <p>
+        ${horse.breed || "Unknown"}
+        |
+        ${horse.gender || "Unknown"}
+        |
+        Age ${horse.age || "?"}
+    </p>
 
-<p>
-Status: ${horse.horse_status || ""}
-|
-Origin: ${horse.horse_origin || ""}
-</p>
+    <p>
+        Status: ${horse.horse_status || "Active"}
+        |
+        Origin: ${horse.horse_origin || "Unknown"}
+    </p>
 
-<button onclick="editHorse('${horse.id}')">
-    Edit
-</button>
+    <button onclick="editHorse('${horse.id}')">
+        Edit
+    </button>
 
-<button onclick="archiveHorse('${horse.id}')">
-    Archive
-</button>
+    <button onclick="archiveHorse('${horse.id}')">
+        Archive
+    </button>
 
-        </div>
-        `;
+</div>
+`;
 
     });
 
