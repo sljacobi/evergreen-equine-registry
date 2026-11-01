@@ -65,6 +65,16 @@ const brand =
 
 if (editingHorseId) {
 
+const { data: existingHorse } =
+    await supabaseClient
+        .from("horses")
+        .select("*")
+        .eq("id", editingHorseId)
+        .single();
+
+const previousOwner =
+    existingHorse?.owner_name || "";
+
     ({ error } = await supabaseClient
         .from("horses")
         .update({
@@ -82,6 +92,23 @@ if (editingHorseId) {
             brand: brand
         })
         .eq("id", editingHorseId));
+
+if (
+    previousOwner &&
+    previousOwner !== owner
+) {
+
+    await supabaseClient
+        .from("ownership_history")
+        .insert([
+            {
+                horse_id: editingHorseId,
+                previous_owner: previousOwner,
+                new_owner: owner
+            }
+        ]);
+
+}
 
 } else {
 
