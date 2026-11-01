@@ -1,5 +1,7 @@
 const horseForm = document.getElementById("horseForm");
 const horseList = document.getElementById("horseList");
+const ownersList =
+    document.getElementById("ownersList");
 
 const searchBox =
     document.getElementById("searchBox");
@@ -154,6 +156,31 @@ document.getElementById("activeCount").textContent =
     data.filter(
         horse => horse.archived === false
     ).length;
+
+    const ownerCounts = {};
+
+data.forEach(horse => {
+
+    if (!horse.owner_name) return;
+
+    ownerCounts[horse.owner_name] =
+        (ownerCounts[horse.owner_name] || 0) + 1;
+
+});
+
+ownersList.innerHTML = "";
+
+Object.entries(ownerCounts)
+    .forEach(([owner,count]) => {
+
+        ownersList.innerHTML += `
+            <div class="card">
+                <h3>${owner}</h3>
+                <p>${count} horse(s)</p>
+            </div>
+        `;
+
+});
 
 }
 
