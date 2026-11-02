@@ -106,15 +106,19 @@ if (
     );
 
     const { error: historyError } =
-        await supabaseClient
-            .from("ownership_history")
-            .insert([
-                {
-                    horse_id: editingHorseId,
-                    previous_owner: previousOwner,
-                    new_owner: owner
-                }
-            ]);
+
+    const { error: historyError } =
+    await supabaseClient
+        .from("ownership_history")
+        .insert([
+            {
+                horse_id: editingHorseId,
+                previous_owner: previousOwner,
+                new_owner: owner
+            }
+        ]);
+
+console.log("History Error:", historyError);
 
     console.log(
         "History Error:",
