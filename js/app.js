@@ -106,8 +106,6 @@ if (
     );
 
     const { error: historyError } =
-
-    const { error: historyError } =
     await supabaseClient
         .from("ownership_history")
         .insert([
