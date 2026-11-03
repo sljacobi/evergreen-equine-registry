@@ -149,6 +149,20 @@ const horseOrigin =
 const brand =
     document.getElementById("brand").value;
 
+const sire =
+    document.getElementById("sire").value;
+
+const dam =
+    document.getElementById("dam").value;
+
+const photoUrl =
+    document.getElementById("photoUrl").value;
+
+const acquisitionMethod =
+    document.getElementById(
+        "acquisitionMethod"
+    ).value;
+
   let error;
 
 if (editingHorseId) {
@@ -165,20 +179,29 @@ const previousOwner =
 
     ({ error } = await supabaseClient
         .from("horses")
-        .update({
-            registered_name: horseName,
-            breed: breed,
-            gender: gender,
-            age: age,
+       .update({
+    registered_name: horseName,
+    breed: breed,
+    gender: gender,
+    age: age,
 
-            owner_name: owner,
+    owner_name: owner,
 
-            horse_status: horseStatus,
+    horse_status: horseStatus,
 
-            horse_origin: horseOrigin,
+    horse_origin: horseOrigin,
 
-            brand: brand
-        })
+    brand: brand,
+
+    sire: sire,
+
+    dam: dam,
+
+    photo_url: photoUrl,
+
+    acquisition_method:
+        acquisitionMethod
+}) 
         .eq("id", editingHorseId));     
 
 if (
@@ -222,19 +245,28 @@ console.log("History Error:", historyError);
         .from("horses")
         .insert([
             {
-                registered_name: horseName,
-                breed: breed,
-                gender: gender,
-                age: age,
+    registered_name: horseName,
+    breed: breed,
+    gender: gender,
+    age: age,
 
-                owner_name: owner,
+    owner_name: owner,
 
-                horse_status: horseStatus,
+    horse_status: horseStatus,
 
-                horse_origin: horseOrigin,
+    horse_origin: horseOrigin,
 
-                brand: brand
-            }
+    brand: brand,
+
+    sire: sire,
+
+    dam: dam,
+
+    photo_url: photoUrl,
+
+    acquisition_method:
+        acquisitionMethod
+}
         ]));
 
 }
