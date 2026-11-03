@@ -719,7 +719,25 @@ async function(id) {
     profile.style.display =
         "block";
 
-    content.innerHTML = `
+    const { data: ownershipHistory } =
+    await supabaseClient
+        .from("ownership_history")
+        .select("*")
+        .eq(
+            "horse_name",
+            data.registered_name
+        );
+
+const { data: marketplaceHistory } =
+    await supabaseClient
+        .from("marketplace_archive")
+        .select("*")
+        .eq(
+            "horse_name",
+            data.registered_name
+        );
+
+        content.innerHTML = `
 
         <h3>
             ${data.registered_name}
@@ -759,6 +777,36 @@ async function(id) {
             Origin:
             ${data.horse_origin}
         </p>
+
+        <h3>Ownership History</h3>
+
+${
+    ownershipHistory?.length
+    ? ownershipHistory.map(record => `
+        <p>
+            ${record.previous_owner}
+            →
+            ${record.new_owner}
+        </p>
+    `).join("")
+    : "<p>No ownership history.</p>"
+}
+
+<h3>Marketplace History</h3>
+
+${
+    marketplaceHistory?.length
+    ? marketplaceHistory.map(record => `
+        <p>
+            ${record.seller}
+            →
+            ${record.buyer}
+
+            ($${record.sale_price})
+        </p>
+    `).join("")
+    : "<p>No marketplace records.</p>"
+}
 
     `;
 
