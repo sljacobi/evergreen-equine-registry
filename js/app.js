@@ -108,13 +108,16 @@ if (
     const { error: historyError } =
     await supabaseClient
         .from("ownership_history")
-        .insert([
-            {
-                horse_id: editingHorseId,
-                previous_owner: previousOwner,
-                new_owner: owner
-            }
-        ]);
+
+.insert([
+{
+    horse_id: editingHorseId,
+    horse_name: horseName,
+    previous_owner: previousOwner,
+    new_owner: owner,
+    transfer_date: new Date()
+}
+]);
 
 console.log("History Error:", historyError);
 
@@ -294,17 +297,27 @@ if (!historyData ||
 
     historyData.forEach(record => {
 
-        historyList.innerHTML += `
-            <div class="card">
+historyList.innerHTML += `
+    <div class="card">
 
-                <p>
-                    ${record.previous_owner}
-                    →
-                    ${record.new_owner}
-                </p>
+        <strong>
+            ${record.horse_name}
+        </strong>
 
-            </div>
-        `;
+        <p>
+            ${record.previous_owner}
+            →
+            ${record.new_owner}
+        </p>
+
+        <p>
+            ${new Date(
+                record.transfer_date
+            ).toLocaleDateString()}
+        </p>
+
+    </div>
+`;
 
     });
 
