@@ -301,7 +301,7 @@ historyList.innerHTML += `
     <div class="card">
 
         <strong>
-            ${record.horse_name}
+            ${record.horse_name || "Unknown Horse"}
         </strong>
 
         <p>
@@ -311,9 +311,13 @@ historyList.innerHTML += `
         </p>
 
         <p>
-            ${new Date(
+            ${
                 record.transfer_date
-            ).toLocaleDateString()}
+                    ? new Date(
+                        record.transfer_date
+                      ).toLocaleDateString()
+                    : "Date Unknown"
+            }
         </p>
 
     </div>
