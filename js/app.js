@@ -83,11 +83,18 @@ saleForm.addEventListener(
 
         if (error) {
 
-            console.error(error);
+    console.error(
+        "Marketplace Error:",
+        error
+    );
 
-            return;
+    alert(
+        JSON.stringify(error)
+    );
 
-        }
+    return;
+
+}
 
         saleForm.reset();
 
