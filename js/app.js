@@ -60,6 +60,16 @@ saleForm.addEventListener(
                 "salePrice"
             ).value;
 
+        const saleType =
+            document.getElementById(
+                "saleType"
+            ).value;
+
+        const saleDate =
+            document.getElementById(
+                "saleDate"
+            ).value;
+
         const saleNotes =
             document.getElementById(
                 "saleNotes"
@@ -72,13 +82,14 @@ saleForm.addEventListener(
                 )
                 .insert([
                     {
-                        horse_name: horseName,
-                        seller: seller,
-                        buyer: buyer,
-                        sale_price: salePrice,
-                        notes: saleNotes,
-                        sale_date: new Date()
-                    }
+    horse_name: horseName,
+    seller: seller,
+    buyer: buyer,
+    sale_price: salePrice,
+    sale_type: saleType,
+    notes: saleNotes,
+    sale_date: saleDate || new Date()
+}
                 ]);
 
         if (error) {
@@ -621,8 +632,22 @@ async function loadMarketplace() {
                 </p>
 
                 <p>
-                    $${sale.sale_price}
-                </p>
+    ${sale.sale_type}
+</p>
+
+<p>
+    $${sale.sale_price}
+</p>
+
+<p>
+    ${
+        sale.sale_date
+        ? new Date(
+            sale.sale_date
+          ).toLocaleDateString()
+        : ""
+    }
+</p>
 
             </div>
         `;
