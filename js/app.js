@@ -775,6 +775,16 @@ const { data: marketplaceHistory } =
             ${data.registered_name}
         </h3>
 
+        <img
+    src="${data.photo_url || ''}"
+    alt="${data.registered_name}"
+    style="
+        max-width:300px;
+        display:block;
+        margin:15px auto;
+        border-radius:10px;
+    ">
+
         <p>
             Breed:
             ${data.breed || "Unknown"}
@@ -809,6 +819,21 @@ const { data: marketplaceHistory } =
             Origin:
             ${data.horse_origin}
         </p>
+
+        <p>
+    Acquisition Method:
+    ${data.acquisition_method || "Unknown"}
+</p>
+
+<p>
+    Sire:
+    ${data.sire || "Unknown"}
+</p>
+
+<p>
+    Dam:
+    ${data.dam || "Unknown"}
+</p>
 
         <h3>Ownership History</h3>
 
