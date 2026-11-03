@@ -330,9 +330,9 @@ async function loadHorses() {
 horseList.innerHTML += `
 <div class="card">
 
-    <h3
-    onclick="viewHorse('${horse.id}')"
+<h3
     class="horse-link"
+    onclick="viewHorse('${horse.id}')"
 >
     ${horse.registered_name}
 </h3>
@@ -696,10 +696,70 @@ async function loadMarketplace() {
 
 }
 
-window.viewHorse = function(id) {
+window.viewHorse =
+async function(id) {
 
-    alert(
-        "Horse Profile Page Coming Soon"
-    );
+    const { data } =
+        await supabaseClient
+            .from("horses")
+            .select("*")
+            .eq("id", id)
+            .single();
+
+    const profile =
+        document.getElementById(
+            "horseProfile"
+        );
+
+    const content =
+        document.getElementById(
+            "horseProfileContent"
+        );
+
+    profile.style.display =
+        "block";
+
+    content.innerHTML = `
+
+        <h3>
+            ${data.registered_name}
+        </h3>
+
+        <p>
+            Breed:
+            ${data.breed || "Unknown"}
+        </p>
+
+        <p>
+            Gender:
+            ${data.gender || "Unknown"}
+        </p>
+
+        <p>
+            Age:
+            ${data.age || "Unknown"}
+        </p>
+
+        <p>
+            Owner:
+            ${data.owner_name || "None"}
+        </p>
+
+        <p>
+            Brand:
+            ${data.brand || "None"}
+        </p>
+
+        <p>
+            Status:
+            ${data.horse_status}
+        </p>
+
+        <p>
+            Origin:
+            ${data.horse_origin}
+        </p>
+
+    `;
 
 }
