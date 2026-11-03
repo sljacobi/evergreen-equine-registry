@@ -8,6 +8,12 @@ let brandFilter = "";
 
 let editingHorseId = null;
 
+const saleForm =
+    document.getElementById("saleForm");
+
+const marketplaceList =
+    document.getElementById("marketplaceList");
+
 const activeFilter =
     document.getElementById("activeFilter");
 
@@ -28,6 +34,68 @@ const searchBox =
     loadHorses
 );
 
+saleForm.addEventListener(
+    "submit",
+    async (e) => {
+
+        e.preventDefault();
+
+        const horseName =
+            document.getElementById(
+                "saleHorse"
+            ).value;
+
+        const seller =
+            document.getElementById(
+                "seller"
+            ).value;
+
+        const buyer =
+            document.getElementById(
+                "buyer"
+            ).value;
+
+        const salePrice =
+            document.getElementById(
+                "salePrice"
+            ).value;
+
+        const saleNotes =
+            document.getElementById(
+                "saleNotes"
+            ).value;
+
+        const { error } =
+            await supabaseClient
+                .from(
+                    "marketplace_archive"
+                )
+                .insert([
+                    {
+                        horse_name: horseName,
+                        seller: seller,
+                        buyer: buyer,
+                        sale_price: salePrice,
+                        notes: saleNotes,
+                        sale_date: new Date()
+                    }
+                ]);
+
+        if (error) {
+
+            console.error(error);
+
+            return;
+
+        }
+
+        saleForm.reset();
+
+        loadMarketplace();
+
+    }
+);
+
 activeFilter.innerHTML = "";
 
 if (ownerFilter) {
@@ -41,6 +109,7 @@ if (brandFilter) {
 }
 
 loadHorses();
+loadMarketplace();
 
 horseForm.addEventListener("submit", async (e) => {
     e.preventDefault();
@@ -497,5 +566,60 @@ window.clearFilters = function() {
     brandFilter = "";
 
     loadHorses();
+
+}
+
+async function loadMarketplace() {
+
+    const { data } =
+        await supabaseClient
+            .from(
+                "marketplace_archive"
+            )
+            .select("*")
+            .order(
+                "sale_date",
+                {
+                    ascending: false
+                }
+            );
+
+    marketplaceList.innerHTML = "";
+
+    if (
+        !data ||
+        data.length === 0
+    ) {
+
+        marketplaceList.innerHTML =
+            "<p>No sales recorded.</p>";
+
+        return;
+
+    }
+
+    data.forEach(sale => {
+
+        marketplaceList.innerHTML += `
+            <div class="card">
+
+                <strong>
+                    ${sale.horse_name}
+                </strong>
+
+                <p>
+                    ${sale.seller}
+                    →
+                    ${sale.buyer}
+                </p>
+
+                <p>
+                    $${sale.sale_price}
+                </p>
+
+            </div>
+        `;
+
+    });
 
 }
