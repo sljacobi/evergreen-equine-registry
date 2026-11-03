@@ -128,6 +128,7 @@ if (brandFilter) {
 
 loadHorses();
 loadMarketplace();
+loadHorseDropdown();
 
 horseForm.addEventListener("submit", async (e) => {
     e.preventDefault();
@@ -329,7 +330,12 @@ async function loadHorses() {
 horseList.innerHTML += `
 <div class="card">
 
-    <h3>${horse.registered_name}</h3>
+    <h3
+    onclick="viewHorse('${horse.id}')"
+    class="horse-link"
+>
+    ${horse.registered_name}
+</h3>
 
     <p>
         <strong>Owner:</strong> ${horse.owner_name || "None"}
@@ -511,6 +517,7 @@ async function archiveHorse(id) {
     }
 
     loadHorses();
+    loadHorseDropdown();
 
 }
 
@@ -558,6 +565,35 @@ async function editHorse(id) {
         "button[type='submit']"
     ).textContent =
         "Save Changes";
+
+}
+
+async function loadHorseDropdown() {
+
+    const { data } =
+        await supabaseClient
+            .from("horses")
+            .select("*")
+            .eq("archived", false)
+            .order("registered_name");
+
+    const saleHorse =
+        document.getElementById(
+            "saleHorse"
+        );
+
+    saleHorse.innerHTML =
+        '<option>Select Horse</option>';
+
+    data.forEach(horse => {
+
+        saleHorse.innerHTML += `
+            <option>
+                ${horse.registered_name}
+            </option>
+        `;
+
+    });
 
 }
 
@@ -649,9 +685,21 @@ async function loadMarketplace() {
     }
 </p>
 
+<p>
+    ${sale.notes || ""}
+</p>
+
             </div>
         `;
 
     });
+
+}
+
+window.viewHorse = function(id) {
+
+    alert(
+        "Horse Profile Page Coming Soon"
+    );
 
 }

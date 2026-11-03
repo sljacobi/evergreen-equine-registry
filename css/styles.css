@@ -105,3 +105,19 @@ select{
     margin-right:8px;
     margin-top:10px;
 }
+
+.horse-link {
+
+    cursor: pointer;
+
+    color: #d4af37;
+
+}
+
+.horse-link:hover {
+
+    color: #ffd700;
+
+    text-decoration: underline;
+
+}
