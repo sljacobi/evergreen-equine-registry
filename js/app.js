@@ -787,11 +787,12 @@ ${
             src="${data.photo_url}"
             alt="${data.registered_name}"
             style="
-                max-width:300px;
-                display:block;
-                margin:15px auto;
-                border-radius:10px;
-            "
+    max-width:450px;
+    max-height:450px;
+    display:block;
+    margin:15px auto;
+    border-radius:10px;
+"
         >
     `
     : `
