@@ -780,16 +780,32 @@ const { data: marketplaceHistory } =
     ${data.registered_name}
 </h2>
 
-<img
-    src="${data.photo_url || ''}"
-    alt="${data.registered_name}"
-    style="
-        max-width:300px;
-        display:block;
-        margin:15px auto;
-        border-radius:10px;
-    "
->
+${
+    data.photo_url
+    ? `
+        <img
+            src="${data.photo_url}"
+            alt="${data.registered_name}"
+            style="
+                max-width:300px;
+                display:block;
+                margin:15px auto;
+                border-radius:10px;
+            "
+        >
+    `
+    : `
+        <p
+            style="
+                text-align:center;
+                color:#999;
+                margin:20px 0;
+            "
+        >
+            No horse photo uploaded.
+        </p>
+    `
+}
 
     <h3 class="profile-section-title">
     Horse Information
