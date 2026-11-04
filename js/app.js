@@ -776,9 +776,9 @@ const { data: marketplaceHistory } =
 
         content.innerHTML = `
 
-        <h3>
-            ${data.registered_name}
-        </h3>
+        <h2 class="profile-title">
+    ${data.registered_name}
+</h2>
 
         <img
     src="${data.photo_url || ''}"
@@ -840,7 +840,9 @@ const { data: marketplaceHistory } =
     ${data.dam || "Unknown"}
 </p>
 
-        <h3>Ownership History</h3>
+        <h3 class="profile-section-title">
+    Ownership History
+</h3>
 
 ${
     ownershipHistory?.length
@@ -854,7 +856,9 @@ ${
     : "<p>No ownership history.</p>"
 }
 
-<h3>Marketplace History</h3>
+<h3 class="profile-section-title">
+    Marketplace History
+</h3>
 
 ${
     marketplaceHistory?.length
