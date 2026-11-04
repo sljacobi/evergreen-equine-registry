@@ -776,13 +776,31 @@ const { data: marketplaceHistory } =
 
         content.innerHTML = `
 
-        <h2 class="profile-title">
-    ${data.registered_name}
-</h2>
+        <div class="profile-header">
+
+    <div class="profile-photo">
 
         <img
-    src="${data.photo_url || ''}"
-    alt="${data.registered_name}"
+            src="${data.photo_url || ''}"
+            alt="${data.registered_name}"
+            style="
+                max-width:300px;
+                max-height:300px;
+                border-radius:10px;
+            "
+        >
+
+    </div>
+
+    <div class="profile-name">
+
+        <h2 class="profile-title">
+            ${data.registered_name}
+        </h2>
+
+    </div>
+
+</div>
     style="
         max-width:300px;
         display:block;

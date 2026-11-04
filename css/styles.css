@@ -185,3 +185,29 @@ select{
     margin-bottom:15px;
 
 }
+
+.profile-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:flex-start;
+
+    margin-bottom:30px;
+
+}
+
+.profile-name{
+
+    text-align:right;
+
+    flex:1;
+
+}
+
+.profile-photo{
+
+    margin-right:25px;
+
+}
