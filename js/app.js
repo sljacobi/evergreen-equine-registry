@@ -776,37 +776,20 @@ const { data: marketplaceHistory } =
 
         content.innerHTML = `
 
-        <div class="profile-header">
+<h2 class="profile-title">
+    ${data.registered_name}
+</h2>
 
-    <div class="profile-photo">
-
-        <img
-            src="${data.photo_url || ''}"
-            alt="${data.registered_name}"
-            style="
-                max-width:300px;
-                max-height:300px;
-                border-radius:10px;
-            "
-        >
-
-    </div>
-
-    <div class="profile-name">
-
-        <h2 class="profile-title">
-            ${data.registered_name}
-        </h2>
-
-    </div>
-
-</div>
+<img
+    src="${data.photo_url || ''}"
+    alt="${data.registered_name}"
     style="
         max-width:300px;
         display:block;
         margin:15px auto;
         border-radius:10px;
-    ">
+    "
+>
 
     <h3 class="profile-section-title">
     Horse Information
@@ -882,14 +865,6 @@ ${
     Marketplace History
 </h3>
 
-<h3 class="profile-section-title">
-    Breeding Records
-</h3>
-
-<p>
-    No breeding records recorded.
-</p>
-
 ${
     marketplaceHistory?.length
     ? marketplaceHistory.map(record => `
@@ -904,7 +879,13 @@ ${
     : "<p>No marketplace records.</p>"
 }
 
-    `;
+<h3 class="profile-section-title">
+    Breeding Records
+</h3>
+
+<p>
+    No breeding records recorded.
+</p>
 
 }
 
