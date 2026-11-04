@@ -751,6 +751,11 @@ async function(id) {
     profile.style.display =
         "block";
 
+    document.getElementById(
+    "horseRegistry"
+).style.display =
+    "none";
+
     const { data: ownershipHistory } =
     await supabaseClient
         .from("ownership_history")
@@ -866,5 +871,20 @@ ${
 }
 
     `;
+
+}
+
+window.closeHorseProfile =
+function() {
+
+    document.getElementById(
+        "horseProfile"
+    ).style.display =
+        "none";
+
+    document.getElementById(
+        "horseRegistry"
+    ).style.display =
+        "block";
 
 }
