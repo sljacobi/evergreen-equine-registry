@@ -790,9 +790,13 @@ const { data: marketplaceHistory } =
         border-radius:10px;
     ">
 
+    <h3 class="profile-section-title">
+    Horse Information
+</h3>
+
         <p>
-            Breed:
-            ${data.breed || "Unknown"}
+           Breed:
+           ${data.breed || "Unknown"}
         </p>
 
         <p>
@@ -859,6 +863,14 @@ ${
 <h3 class="profile-section-title">
     Marketplace History
 </h3>
+
+<h3 class="profile-section-title">
+    Breeding Records
+</h3>
+
+<p>
+    No breeding records recorded.
+</p>
 
 ${
     marketplaceHistory?.length
