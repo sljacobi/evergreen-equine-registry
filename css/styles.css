@@ -211,3 +211,13 @@ select{
     margin-right:25px;
 
 }
+
+.profile-photo-frame{
+
+    display:flex;
+
+    justify-content:center;
+
+    margin-bottom:25px;
+
+}

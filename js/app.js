@@ -783,17 +783,24 @@ const { data: marketplaceHistory } =
 ${
     data.photo_url
     ? `
+
+     <div class="profile-photo-frame">
+
         <img
-            src="${data.photo_url}"
-            alt="${data.registered_name}"
-            style="
-    max-width:450px;
-    max-height:450px;
+    src="${data.photo_url}"
+    alt="${data.registered_name}"
+    style="
+    max-width:800px;
+    max-height:600px;
+    width:auto;
+    height:auto;
     display:block;
-    margin:15px auto;
-    border-radius:10px;
-"
-        >
+    margin:20px auto;
+    border-radius:12px;
+                "
+            >
+
+        </div>
     `
     : `
         <p
