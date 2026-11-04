@@ -883,11 +883,13 @@ ${
     Breeding Records
 </h3>
 
-<p>
-    No breeding records recorded.
-</p>
+ <p>
+        No breeding records recorded.
+    </p>
 
 `;
+
+}
 
 window.closeHorseProfile =
 function() {
