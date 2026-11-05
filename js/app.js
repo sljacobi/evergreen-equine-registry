@@ -888,7 +888,7 @@ async function loadMarketplace() {
 
 async function loadBreedingHistory() {
 
-    const { data } =
+    const { data: breedingData } =
         await supabaseClient
             .from("breeding_logs")
             .select("*")
@@ -899,12 +899,17 @@ async function loadBreedingHistory() {
                 }
             );
 
+    const { data: horses } =
+        await supabaseClient
+            .from("horses")
+            .select("*");
+
     breedingHistoryList.innerHTML =
         "";
 
     if (
-        !data ||
-        data.length === 0
+        !breedingData ||
+        breedingData.length === 0
     ) {
 
         breedingHistoryList.innerHTML =
@@ -914,26 +919,56 @@ async function loadBreedingHistory() {
 
     }
 
-    data.forEach(record => {
+    breedingData.forEach(record => {
+
+        const sire =
+            horses.find(
+                horse =>
+                    horse.id ===
+                    record.sire_id
+            );
+
+        const dam =
+            horses.find(
+                horse =>
+                    horse.id ===
+                    record.dam_id
+            );
+
+        const foal =
+            horses.find(
+                horse =>
+                    horse.id ===
+                    record.foal_id
+            );
 
         breedingHistoryList.innerHTML += `
             <div class="card">
 
                 <p>
-                    <strong>Sire ID:</strong>
-                    ${record.sire_id}
-                </p>
-
-                <p>
-                    <strong>Dam ID:</strong>
-                    ${record.dam_id}
-                </p>
-
-                <p>
-                    <strong>Foal ID:</strong>
+                    <strong>Sire:</strong>
                     ${
-                        record.foal_id ||
-                        "Pending"
+                        sire
+                        ? sire.registered_name
+                        : "Unknown"
+                    }
+                </p>
+
+                <p>
+                    <strong>Dam:</strong>
+                    ${
+                        dam
+                        ? dam.registered_name
+                        : "Unknown"
+                    }
+                </p>
+
+                <p>
+                    <strong>Foal:</strong>
+                    ${
+                        foal
+                        ? foal.registered_name
+                        : "Pending"
                     }
                 </p>
 
@@ -944,7 +979,11 @@ async function loadBreedingHistory() {
 
                 <p>
                     <strong>Date:</strong>
-                    ${record.breeding_date}
+                    ${
+                        new Date(
+                            record.breeding_date
+                        ).toLocaleDateString()
+                    }
                 </p>
 
                 <p>
@@ -954,6 +993,10 @@ async function loadBreedingHistory() {
                         "None"
                     }
                 </p>
+
+                <button>
+                    Edit
+                </button>
 
             </div>
         `;
