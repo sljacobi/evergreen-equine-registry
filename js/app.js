@@ -646,22 +646,64 @@ async function loadHorseDropdown() {
             .order("registered_name");
 
     const saleHorse =
-        document.getElementById(
-            "saleHorse"
-        );
+    document.getElementById(
+        "saleHorse"
+    );
 
-    saleHorse.innerHTML =
-        '<option>Select Horse</option>';
+const breedingSire =
+    document.getElementById(
+        "breedingSire"
+    );
 
-    data.forEach(horse => {
+const breedingDam =
+    document.getElementById(
+        "breedingDam"
+    );
 
-        saleHorse.innerHTML += `
-            <option>
-                ${horse.registered_name}
-            </option>
-        `;
+const breedingFoal =
+    document.getElementById(
+        "breedingFoal"
+    );
 
-    });
+saleHorse.innerHTML =
+    '<option>Select Horse</option>';
+
+breedingSire.innerHTML =
+    '<option>Select Sire</option>';
+
+breedingDam.innerHTML =
+    '<option>Select Dam</option>';
+
+breedingFoal.innerHTML =
+    '<option>Select Foal</option>';
+
+data.forEach(horse => {
+
+    saleHorse.innerHTML += `
+        <option value="${horse.id}">
+            ${horse.registered_name}
+        </option>
+    `;
+
+    breedingSire.innerHTML += `
+        <option value="${horse.id}">
+            ${horse.registered_name}
+        </option>
+    `;
+
+    breedingDam.innerHTML += `
+        <option value="${horse.id}">
+            ${horse.registered_name}
+        </option>
+    `;
+
+    breedingFoal.innerHTML += `
+        <option value="${horse.id}">
+            ${horse.registered_name}
+        </option>
+    `;
+
+});
 
 }
 

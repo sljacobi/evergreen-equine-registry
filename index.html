@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Evergreen Equine Registry</title>
+<title>KPS Legacy Stables</title>
 
 <link rel="stylesheet" href="css/styles.css">
 
@@ -16,18 +16,40 @@
 <body>
 
 <header>
-    <h1>Evergreen Equine Registry</h1>
+    <h1>KPS Legacy Stables</h1>
     <p>Horse Registry & Breeding Manager</p>
 </header>
 
 <nav>
-    <button>Dashboard</button>
-    <button>Registry</button>
-    <button>Breedings</button>
-    <button>Pedigrees</button>
-    <button>Marketplace</button>
-    <button>Brands</button>
-    <button>User Guide</button>
+
+    <button onclick="showSection('dashboardSection')">
+        Dashboard
+    </button>
+
+    <button onclick="showSection('registrySection')">
+        Registry
+    </button>
+
+    <button onclick="showSection('breedingsSection')">
+        Breedings
+    </button>
+
+    <button onclick="showSection('pedigreesSection')">
+        Pedigrees
+    </button>
+
+    <button onclick="showSection('marketplaceSection')">
+        Marketplace
+    </button>
+
+    <button onclick="showSection('brandsSection')">
+        Brands
+    </button>
+
+    <button onclick="showSection('guideSection')">
+        User Guide
+    </button>
+
 </nav>
 
 <main>
@@ -296,6 +318,57 @@
     <div id="horseList">
         <p>No horses entered yet.</p>
     </div>
+
+</section>
+
+<section
+    class="card"
+    id="breedingsSection"
+    style="display:none;"
+>
+
+    <h2>Breeding Management</h2>
+
+    <form id="breedingForm">
+
+        <select id="breedingSire">
+            <option>Select Sire</option>
+        </select>
+
+        <select id="breedingDam">
+            <option>Select Dam</option>
+        </select>
+
+        <select id="breedingFoal">
+            <option>Select Foal</option>
+        </select>
+
+        <input
+            type="date"
+            id="breedingDate">
+
+        <select id="breedingRecordStatus">
+
+            <option>Pending</option>
+
+            <option>Confirmed</option>
+
+            <option>Pregnant</option>
+
+            <option>Foaled</option>
+
+        </select>
+
+        <textarea
+            id="breedingNotes"
+            placeholder="Notes">
+        </textarea>
+
+        <button type="submit">
+            Save Breeding Record
+        </button>
+
+    </form>
 
 </section>
 
