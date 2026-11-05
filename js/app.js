@@ -1213,10 +1213,16 @@ breedingForm.addEventListener(
                 "breedingDam"
             ).value;
 
-        const foalId =
-            document.getElementById(
-                "breedingFoal"
-            ).value || null;
+        let foalId =
+    document.getElementById(
+        "breedingFoal"
+    ).value;
+
+if (
+    foalId === "Select Foal"
+) {
+    foalId = null;
+}
 
         const breedingDate =
             document.getElementById(
