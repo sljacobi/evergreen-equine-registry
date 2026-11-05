@@ -362,60 +362,61 @@ async function loadHorses() {
 horseList.innerHTML += `
 <div class="card">
 
-${
-    horse.photo_url
-    ? `
-        <img
-            src="${horse.photo_url}"
-            style="
-                width:120px;
-                height:120px;
-                object-fit:cover;
-                border-radius:10px;
-                display:block;
-                margin-bottom:10px;
-            "
+<div class="horse-card-layout">
+
+    ${
+        horse.photo_url
+        ? `
+            <img
+                src="${horse.photo_url}"
+                class="horse-preview-image"
+            >
+        `
+        : `
+            <div
+                class="horse-preview-placeholder"
+            ></div>
+        `
+    }
+
+    <div class="horse-card-info">
+
+        <h3
+            class="horse-link"
+            onclick="viewHorse('${horse.id}')"
         >
-    `
-    : `
-        <div
-            style="
-                width:120px;
-                height:120px;
-                background:#444;
-                border-radius:10px;
-                margin-bottom:10px;
-            "
-        ></div>
-    `
-}
+            ${horse.registered_name}
+        </h3>
 
-<h3
-    class="horse-link"
-    onclick="viewHorse('${horse.id}')"
->
-    ${horse.registered_name}
-</h3>
+        <p>
+            <strong>Owner:</strong>
+            ${horse.owner_name || "None"}
 
-    <p>
-        <strong>Owner:</strong> ${horse.owner_name || "None"}
-        |
-        <strong>Brand:</strong> ${horse.brand || "None"}
-    </p>
+            |
 
-    <p>
-        ${horse.breed || "Unknown"}
-        |
-        ${horse.gender || "Unknown"}
-        |
-        Age ${horse.age || "?"}
-    </p>
+            <strong>Brand:</strong>
+            ${horse.brand || "None"}
+        </p>
 
-    <p>
-        Status: ${horse.horse_status || "Active"}
-        |
-        Origin: ${horse.horse_origin || "Unknown"}
-    </p>
+        <p>
+            ${horse.breed || "Unknown"}
+            |
+            ${horse.gender || "Unknown"}
+            |
+            Age ${horse.age || "?"}
+        </p>
+
+        <p>
+            Status:
+            ${horse.horse_status || "Active"}
+            |
+            Origin:
+            ${horse.horse_origin || "Unknown"}
+        </p>
+
+    </div>
+
+</div>
 
     <button onclick="editHorse('${horse.id}')">
     Edit

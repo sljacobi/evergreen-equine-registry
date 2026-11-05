@@ -221,3 +221,91 @@ select{
     margin:20px 0 35px 0;
 
 }
+
+.horse-card-layout{
+
+    display:flex;
+
+    gap:20px;
+
+    align-items:flex-start;
+
+}
+
+.horse-preview-image{
+
+    width:180px;
+
+    height:180px;
+
+    object-fit:cover;
+
+    border-radius:10px;
+
+    flex-shrink:0;
+
+}
+
+.horse-preview-placeholder{
+
+    width:180px;
+
+    height:180px;
+
+    background:#444;
+
+    border-radius:10px;
+
+    flex-shrink:0;
+
+}
+
+.horse-card-info{
+
+    flex:1;
+
+}
+
+.horse-card-layout{
+
+    display:flex;
+
+    gap:20px;
+
+    align-items:flex-start;
+
+}
+
+.horse-preview-image{
+
+    width:220px;
+
+    height:220px;
+
+    object-fit:cover;
+
+    border-radius:10px;
+
+    flex-shrink:0;
+
+}
+
+.horse-preview-placeholder{
+
+    width:220px;
+
+    height:220px;
+
+    background:#444;
+
+    border-radius:10px;
+
+    flex-shrink:0;
+
+}
+
+.horse-card-info{
+
+    flex:1;
+
+}
