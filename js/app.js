@@ -994,17 +994,18 @@ function(id) {
 
         if (uploadError) {
 
-            console.error(
-                uploadError
-            );
+    console.error(
+        "UPLOAD ERROR:",
+        uploadError
+    );
 
-            alert(
-                "Upload failed."
-            );
+    alert(
+        JSON.stringify(uploadError)
+    );
 
-            return;
+    return;
 
-        }
+}
 
         const {
             data: photoData
