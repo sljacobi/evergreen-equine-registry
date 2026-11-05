@@ -962,22 +962,72 @@ function() {
 }
 
 window.uploadPhoto =
-async function(id) {
+function(id) {
 
-    const photoUrl =
-        prompt(
-            "Enter horse photo URL:"
+    const input =
+        document.getElementById(
+            "photoUploadInput"
         );
 
-    if (!photoUrl) return;
+    input.onchange =
+    async function(event) {
 
-    await supabaseClient
-        .from("horses")
-        .update({
-            photo_url: photoUrl
-        })
-        .eq("id", id);
+        const file =
+            event.target.files[0];
 
-    loadHorses();
+        if (!file) return;
+
+        const fileName =
+            `${id}-${Date.now()}-${file.name}`;
+
+        const { error: uploadError } =
+            await supabaseClient
+                .storage
+                .from("horse-photos")
+                .upload(
+                    fileName,
+                    file,
+                    {
+                        upsert: true
+                    }
+                );
+
+        if (uploadError) {
+
+            console.error(
+                uploadError
+            );
+
+            alert(
+                "Upload failed."
+            );
+
+            return;
+
+        }
+
+        const {
+            data: photoData
+        } =
+            supabaseClient
+                .storage
+                .from("horse-photos")
+                .getPublicUrl(
+                    fileName
+                );
+
+        await supabaseClient
+            .from("horses")
+            .update({
+                photo_url:
+                    photoData.publicUrl
+            })
+            .eq("id", id);
+
+        loadHorses();
+
+    };
+
+    input.click();
 
 }
