@@ -155,9 +155,6 @@ const sire =
 const dam =
     document.getElementById("dam").value;
 
-const photoUrl =
-    document.getElementById("photoUrl").value;
-
 const acquisitionMethod =
     document.getElementById(
         "acquisitionMethod"
@@ -201,8 +198,6 @@ const previousOwner =
     sire: sire,
 
     dam: dam,
-
-    photo_url: photoUrl,
 
     acquisition_method:
         acquisitionMethod,
@@ -270,8 +265,6 @@ console.log("History Error:", historyError);
     sire: sire,
 
     dam: dam,
-
-    photo_url: photoUrl,
 
     acquisition_method:
         acquisitionMethod,
