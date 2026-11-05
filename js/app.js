@@ -205,7 +205,7 @@ const previousOwner =
     photo_url: photoUrl,
 
     acquisition_method:
-        acquisitionMethod
+        acquisitionMethod,
 
     breeding_status:
         breedingStatus,
