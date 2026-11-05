@@ -274,7 +274,7 @@ console.log("History Error:", historyError);
     photo_url: photoUrl,
 
     acquisition_method:
-        acquisitionMethod
+        acquisitionMethod,
 
     breeding_status:
         breedingStatus,
