@@ -17,6 +17,9 @@ const breedingForm =
 const marketplaceList =
     document.getElementById("marketplaceList");
 
+const breedingHistoryList =
+    document.getElementById("breedingHistoryList");
+
 const activeFilter =
     document.getElementById("activeFilter");
 
@@ -131,6 +134,7 @@ if (brandFilter) {
 
 loadHorses();
 loadMarketplace();
+loadBreedingHistory();
 loadHorseDropdown();
 
 horseForm.addEventListener("submit", async (e) => {
@@ -809,6 +813,155 @@ async function loadMarketplace() {
 
 }
 
+async function loadMarketplace() {
+
+    const { data } =
+        await supabaseClient
+            .from(
+                "marketplace_archive"
+            )
+            .select("*")
+            .order(
+                "sale_date",
+                {
+                    ascending: false
+                }
+            );
+
+    marketplaceList.innerHTML = "";
+
+    if (
+        !data ||
+        data.length === 0
+    ) {
+
+        marketplaceList.innerHTML =
+            "<p>No sales recorded.</p>";
+
+        return;
+
+    }
+
+    data.forEach(sale => {
+
+        marketplaceList.innerHTML += `
+            <div class="card">
+
+                <strong>
+                    ${sale.horse_name}
+                </strong>
+
+                <p>
+                    ${sale.seller}
+                    →
+                    ${sale.buyer}
+                </p>
+
+                <p>
+                    ${sale.sale_type}
+                </p>
+
+                <p>
+                    $${sale.sale_price}
+                </p>
+
+                <p>
+                    ${
+                        sale.sale_date
+                        ? new Date(
+                            sale.sale_date
+                          ).toLocaleDateString()
+                        : ""
+                    }
+                </p>
+
+                <p>
+                    ${sale.notes || ""}
+                </p>
+
+            </div>
+        `;
+
+    });
+
+}
+
+async function loadBreedingHistory() {
+
+    const { data } =
+        await supabaseClient
+            .from("breeding_logs")
+            .select("*")
+            .order(
+                "breeding_date",
+                {
+                    ascending: false
+                }
+            );
+
+    breedingHistoryList.innerHTML =
+        "";
+
+    if (
+        !data ||
+        data.length === 0
+    ) {
+
+        breedingHistoryList.innerHTML =
+            "<p>No breeding records found.</p>";
+
+        return;
+
+    }
+
+    data.forEach(record => {
+
+        breedingHistoryList.innerHTML += `
+            <div class="card">
+
+                <p>
+                    <strong>Sire ID:</strong>
+                    ${record.sire_id}
+                </p>
+
+                <p>
+                    <strong>Dam ID:</strong>
+                    ${record.dam_id}
+                </p>
+
+                <p>
+                    <strong>Foal ID:</strong>
+                    ${
+                        record.foal_id ||
+                        "Pending"
+                    }
+                </p>
+
+                <p>
+                    <strong>Status:</strong>
+                    ${record.status}
+                </p>
+
+                <p>
+                    <strong>Date:</strong>
+                    ${record.breeding_date}
+                </p>
+
+                <p>
+                    <strong>Notes:</strong>
+                    ${
+                        record.notes ||
+                        "None"
+                    }
+                </p>
+
+            </div>
+        `;
+
+    });
+
+}
+
 window.viewHorse =
 async function(id) {
 
@@ -1269,10 +1422,12 @@ if (
 }
 
         alert(
-            "Breeding record saved."
-        );
+    "Breeding record saved."
+);
 
-        breedingForm.reset();
+breedingForm.reset();
+
+loadBreedingHistory();
 
     }
 );
