@@ -1247,20 +1247,20 @@ breedingForm.addEventListener(
                     }
                 ]);
 
-        if (error) {
+       if (error) {
 
-            console.error(
-                "BREEDING ERROR:",
-                error
-            );
+    console.error(
+        "BREEDING ERROR:",
+        error
+    );
 
-            alert(
-                "Failed to save breeding record."
-            );
+    alert(
+        JSON.stringify(error)
+    );
 
-            return;
+    return;
 
-        }
+}
 
         alert(
             "Breeding record saved."
