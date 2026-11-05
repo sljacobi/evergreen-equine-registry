@@ -362,6 +362,34 @@ async function loadHorses() {
 horseList.innerHTML += `
 <div class="card">
 
+${
+    horse.photo_url
+    ? `
+        <img
+            src="${horse.photo_url}"
+            style="
+                width:120px;
+                height:120px;
+                object-fit:cover;
+                border-radius:10px;
+                display:block;
+                margin-bottom:10px;
+            "
+        >
+    `
+    : `
+        <div
+            style="
+                width:120px;
+                height:120px;
+                background:#444;
+                border-radius:10px;
+                margin-bottom:10px;
+            "
+        ></div>
+    `
+}
+
 <h3
     class="horse-link"
     onclick="viewHorse('${horse.id}')"
@@ -390,12 +418,16 @@ horseList.innerHTML += `
     </p>
 
     <button onclick="editHorse('${horse.id}')">
-        Edit
-    </button>
+    Edit
+</button>
 
-    <button onclick="archiveHorse('${horse.id}')">
-        Archive
-    </button>
+<button onclick="uploadPhoto('${horse.id}')">
+    Upload Photo
+</button>
+
+<button onclick="archiveHorse('${horse.id}')">
+    Archive
+</button>
 
 </div>
 `;
@@ -927,5 +959,26 @@ function() {
         "horseRegistry"
     ).style.display =
         "block";
+
+}
+
+window.uploadPhoto =
+async function(id) {
+
+    const photoUrl =
+        prompt(
+            "Enter horse photo URL:"
+        );
+
+    if (!photoUrl) return;
+
+    await supabaseClient
+        .from("horses")
+        .update({
+            photo_url: photoUrl
+        })
+        .eq("id", id);
+
+    loadHorses();
 
 }
