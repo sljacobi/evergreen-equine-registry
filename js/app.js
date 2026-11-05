@@ -1098,51 +1098,29 @@ function() {
 window.showSection =
 function(sectionId) {
 
-    const sections = [
-
-        "dashboardSection",
-
-        "registrySection",
-
-        "breedingsSection",
-
-        "pedigreesSection",
-
-        "marketplaceSection",
-
-        "brandsSection",
-
-        "guideSection"
-
-    ];
-
-    sections.forEach(id => {
-
-        const section =
-            document.getElementById(id);
-
-        if (section) {
-
-            section.style.display =
-                "none";
-
-        }
-
-    });
-
-    const activeSection =
+    const breedingsSection =
         document.getElementById(
-            sectionId
+            "breedingsSection"
         );
 
-    if (activeSection) {
+    if (!breedingsSection) return;
 
-        activeSection.style.display =
+    if (
+        sectionId ===
+        "breedingsSection"
+    ) {
+
+        breedingsSection.style.display =
             "block";
+
+    } else {
+
+        breedingsSection.style.display =
+            "none";
 
     }
 
-}
+};
 
 window.uploadPhoto =
 function(id) {
