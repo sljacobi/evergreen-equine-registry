@@ -1254,22 +1254,33 @@ function() {
 window.showSection =
 function(sectionId) {
 
+    const registrySection =
+        document.getElementById(
+            "registrySection"
+        );
+
     const breedingsSection =
         document.getElementById(
             "breedingsSection"
         );
-
-    if (!breedingsSection) return;
 
     if (
         sectionId ===
         "breedingsSection"
     ) {
 
+        registrySection.style.display =
+            "none";
+
         breedingsSection.style.display =
             "block";
 
-    } else {
+    }
+
+    else {
+
+        registrySection.style.display =
+            "block";
 
         breedingsSection.style.display =
             "none";
