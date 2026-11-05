@@ -1095,6 +1095,55 @@ function() {
 
 }
 
+window.showSection =
+function(sectionId) {
+
+    const sections = [
+
+        "dashboardSection",
+
+        "registrySection",
+
+        "breedingsSection",
+
+        "pedigreesSection",
+
+        "marketplaceSection",
+
+        "brandsSection",
+
+        "guideSection"
+
+    ];
+
+    sections.forEach(id => {
+
+        const section =
+            document.getElementById(id);
+
+        if (section) {
+
+            section.style.display =
+                "none";
+
+        }
+
+    });
+
+    const activeSection =
+        document.getElementById(
+            sectionId
+        );
+
+    if (activeSection) {
+
+        activeSection.style.display =
+            "block";
+
+    }
+
+}
+
 window.uploadPhoto =
 function(id) {
 
