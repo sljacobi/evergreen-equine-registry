@@ -818,6 +818,14 @@ const { data: breedingHistory } =
             `sire_id.eq.${id},dam_id.eq.${id},foal_id.eq.${id}`
         );
 
+const { data: offspringLogs } =
+    await supabaseClient
+        .from("breeding_logs")
+        .select("*")
+        .or(
+            `sire_id.eq.${id},dam_id.eq.${id}`
+        );
+
         content.innerHTML = `
 
 <h2 class="profile-title">
@@ -909,12 +917,24 @@ ${
 
 <p>
     Sire:
-    ${data.sire || "Not Recorded"}
+
+    <span
+        class="horse-link"
+        onclick="openHorseByName('${data.sire}')"
+    >
+        ${data.sire || "Not Recorded"}
+    </span>
 </p>
 
 <p>
     Dam:
-    ${data.dam || "Not Recorded"}
+
+    <span
+        class="horse-link"
+        onclick="openHorseByName('${data.dam}')"
+    >
+        ${data.dam || "Not Recorded"}
+    </span>
 </p>
 
         <h3 class="profile-section-title">
@@ -952,6 +972,21 @@ ${
 }
 
 <h3 class="profile-section-title">
+    Offspring
+</h3>
+
+${
+    offspringLogs?.length
+    ? offspringLogs.map(record => `
+        <p>
+            Foal ID:
+            ${record.foal_id}
+        </p>
+    `).join("")
+    : "<p>No offspring recorded.</p>"
+}
+
+<h3 class="profile-section-title">
     Breeding Records
 </h3>
 
@@ -979,6 +1014,27 @@ ${
 }
 
 `;
+
+}
+
+window.openHorseByName =
+async function(name) {
+
+    if (!name) return;
+
+    const { data } =
+        await supabaseClient
+            .from("horses")
+            .select("*")
+            .eq(
+                "registered_name",
+                name
+            )
+            .single();
+
+    if (!data) return;
+
+    viewHorse(data.id);
 
 }
 
