@@ -11,6 +11,9 @@ let editingHorseId = null;
 const saleForm =
     document.getElementById("saleForm");
 
+const breedingForm =
+    document.getElementById("breedingForm");
+
 const marketplaceList =
     document.getElementById("marketplaceList");
 
@@ -1193,3 +1196,77 @@ function(id) {
     input.click();
 
 }
+
+breedingForm.addEventListener(
+    "submit",
+    async (e) => {
+
+        e.preventDefault();
+
+        const sireId =
+            document.getElementById(
+                "breedingSire"
+            ).value;
+
+        const damId =
+            document.getElementById(
+                "breedingDam"
+            ).value;
+
+        const foalId =
+            document.getElementById(
+                "breedingFoal"
+            ).value || null;
+
+        const breedingDate =
+            document.getElementById(
+                "breedingDate"
+            ).value;
+
+        const status =
+            document.getElementById(
+                "breedingRecordStatus"
+            ).value;
+
+        const notes =
+            document.getElementById(
+                "breedingNotes"
+            ).value;
+
+        const { error } =
+            await supabaseClient
+                .from("breeding_logs")
+                .insert([
+                    {
+                        sire_id: sireId,
+                        dam_id: damId,
+                        foal_id: foalId,
+                        breeding_date: breedingDate,
+                        status: status,
+                        notes: notes
+                    }
+                ]);
+
+        if (error) {
+
+            console.error(
+                "BREEDING ERROR:",
+                error
+            );
+
+            alert(
+                "Failed to save breeding record."
+            );
+
+            return;
+
+        }
+
+        alert(
+            "Breeding record saved."
+        );
+
+        breedingForm.reset();
+
+    }
+);
