@@ -805,6 +805,14 @@ const { data: marketplaceHistory } =
             data.registered_name
         );
 
+const { data: breedingHistory } =
+    await supabaseClient
+        .from("breeding_logs")
+        .select("*")
+        .or(
+            `sire_id.eq.${id},dam_id.eq.${id},foal_id.eq.${id}`
+        );
+
         content.innerHTML = `
 
 <h2 class="profile-title">
@@ -938,9 +946,28 @@ ${
     Breeding Records
 </h3>
 
- <p>
-        No breeding records recorded.
-    </p>
+${
+    breedingHistory?.length
+    ? breedingHistory.map(record => `
+        <p>
+            Date:
+            ${record.breeding_date || "Not Recorded"}
+        </p>
+
+        <p>
+            Status:
+            ${record.status || "Not Recorded"}
+        </p>
+
+        <p>
+            Notes:
+            ${record.notes || "None"}
+        </p>
+
+        <hr>
+    `).join("")
+    : "<p>No breeding records recorded.</p>"
+}
 
 `;
 
