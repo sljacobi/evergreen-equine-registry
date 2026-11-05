@@ -163,6 +163,11 @@ const acquisitionMethod =
         "acquisitionMethod"
     ).value;
 
+const breedingStatus =
+    document.getElementById(
+        "breedingStatus"
+    ).value;
+
   let error;
 
 if (editingHorseId) {
@@ -201,6 +206,10 @@ const previousOwner =
 
     acquisition_method:
         acquisitionMethod
+
+    breeding_status:
+        breedingStatus,
+
 }) 
         .eq("id", editingHorseId));     
 
@@ -266,6 +275,9 @@ console.log("History Error:", historyError);
 
     acquisition_method:
         acquisitionMethod
+
+    breeding_status:
+        breedingStatus,
 }
         ]));
 
@@ -884,9 +896,9 @@ ${
         </p>
 
         <p>
-            Status:
-            ${data.horse_status}
-        </p>
+    Breeding Status:
+    ${data.breeding_status || "Not Recorded"}
+</p>
 
         <p>
             Origin:
@@ -895,17 +907,21 @@ ${
 
         <p>
     Acquisition Method:
-    ${data.acquisition_method || "Unknown"}
+    ${data.acquisition_method || "Not Recorded"}
 </p>
+
+<h3 class="profile-section-title">
+    Family
+</h3>
 
 <p>
     Sire:
-    ${data.sire || "Unknown"}
+    ${data.sire || "Not Recorded"}
 </p>
 
 <p>
     Dam:
-    ${data.dam || "Unknown"}
+    ${data.dam || "Not Recorded"}
 </p>
 
         <h3 class="profile-section-title">
