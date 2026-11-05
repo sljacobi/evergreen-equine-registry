@@ -278,9 +278,9 @@ select{
 
 .horse-preview-image{
 
-    width:220px;
+    width:250px;
 
-    height:220px;
+    height:170px;
 
     object-fit:cover;
 
@@ -292,9 +292,9 @@ select{
 
 .horse-preview-placeholder{
 
-    width:220px;
+    width:250px;
 
-    height:220px;
+    height:170px;
 
     background:#444;
 

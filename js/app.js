@@ -414,11 +414,7 @@ horseList.innerHTML += `
             ${horse.horse_origin || "Unknown"}
         </p>
 
-    </div>
-
-</div>
-
-    <button onclick="editHorse('${horse.id}')">
+        <button onclick="editHorse('${horse.id}')">
     Edit
 </button>
 
@@ -429,6 +425,8 @@ horseList.innerHTML += `
 <button onclick="archiveHorse('${horse.id}')">
     Archive
 </button>
+
+</div>
 
 </div>
 `;
