@@ -612,15 +612,16 @@ select:focus {
 ======================================== */
 
 .parent-field {
-    display: in*ine-flex;
-    align-items: center;*    gap: 6px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
     margin: 4px;
 }
 
-*parent-field select,
-.parent-field*input {
+.parent-field select,
+.parent-field input {
     margin: 0;
-    min-wid*h: 180px;
+    min-width: 180px;
 }
 
 /* ========================================
