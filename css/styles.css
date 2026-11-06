@@ -658,3 +658,28 @@ select:focus {
     align-items: center;
     gap: 4px;
 }
+
+/* ========================================
+   SMART OWNER FIELD
+======================================== */
+
+#horseForm .owner-field {
+    display: inline-flex;
+    vertical-align: top;
+    align-items: center;
+    gap: 8px;
+    width: auto;
+    margin: 4px;
+}
+
+#horseForm .owner-field select {
+    width: 190px;
+    min-width: 190px;
+    margin: 0;
+}
+
+#horseForm .owner-field input {
+    width: 190px;
+    min-width: 190px;
+    margin: 0;
+}

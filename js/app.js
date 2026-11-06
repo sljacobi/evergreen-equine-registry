@@ -301,6 +301,7 @@ loadHorses();
 loadHorseDropdown();
 loadParentDropdowns();
 loadBrandDropdown();
+loadOwnerDropdown();
 
 });
 
@@ -630,8 +631,59 @@ async function editHorse(id) {
     document.getElementById("age").value =
         data.age || "";
 
-    document.getElementById("owner").value =
-        data.owner_name || "";
+    const ownerSelect =
+    document.getElementById(
+        "ownerSelect"
+    );
+
+const ownerInput =
+    document.getElementById(
+        "owner"
+    );
+
+const ownerExists =
+    Array.from(
+        ownerSelect.options
+    ).some(
+        option =>
+            option.value ===
+            data.owner_name
+    );
+
+if (
+    data.owner_name &&
+    ownerExists
+) {
+
+    ownerSelect.value =
+        data.owner_name;
+
+    ownerInput.value =
+        data.owner_name;
+
+    ownerInput.style.display =
+        "none";
+
+} else if (data.owner_name) {
+
+    ownerSelect.value =
+        "new";
+
+    ownerInput.value =
+        data.owner_name;
+
+    ownerInput.style.display =
+        "inline-block";
+
+} else {
+
+    ownerSelect.value = "";
+
+    ownerInput.value = "";
+
+    ownerInput.style.display =
+        "none";
+}
 
     document.getElementById("status").value =
         data.horse_status || "Active";
@@ -2198,3 +2250,141 @@ function setupBrandDropdown() {
 
 setupBrandDropdown();
 loadBrandDropdown();
+
+// ========================================
+// SMART OWNER DROPDOWN
+// ========================================
+
+async function loadOwnerDropdown() {
+
+    const { data, error } =
+        await supabaseClient
+            .from("horses")
+            .select("owner_name")
+            .eq("archived", false);
+
+    if (error) {
+
+        console.error(
+            "Owner dropdown error:",
+            error
+        );
+
+        return;
+    }
+
+    const ownerSelect =
+        document.getElementById(
+            "ownerSelect"
+        );
+
+    if (!ownerSelect) {
+        return;
+    }
+
+    const currentValue =
+        ownerSelect.value;
+
+    const uniqueOwners =
+        [...new Set(
+            (data || [])
+                .map(horse =>
+                    horse.owner_name?.trim()
+                )
+                .filter(Boolean)
+        )]
+        .sort((a, b) =>
+            a.localeCompare(b)
+        );
+
+    ownerSelect.innerHTML = `
+        <option value="">
+            Select Owner
+        </option>
+
+        <option value="new">
+            Other / New Owner
+        </option>
+    `;
+
+    uniqueOwners.forEach(owner => {
+
+        const option =
+            document.createElement(
+                "option"
+            );
+
+        option.value = owner;
+        option.textContent = owner;
+
+        ownerSelect.appendChild(
+            option
+        );
+
+    });
+
+    if (
+        currentValue &&
+        Array.from(ownerSelect.options)
+            .some(
+                option =>
+                    option.value ===
+                    currentValue
+            )
+    ) {
+
+        ownerSelect.value =
+            currentValue;
+    }
+}
+
+function setupOwnerDropdown() {
+
+    const ownerSelect =
+        document.getElementById(
+            "ownerSelect"
+        );
+
+    const ownerInput =
+        document.getElementById(
+            "owner"
+        );
+
+    if (
+        !ownerSelect ||
+        !ownerInput
+    ) {
+        return;
+    }
+
+    ownerSelect.addEventListener(
+        "change",
+        function() {
+
+            if (
+                ownerSelect.value ===
+                "new"
+            ) {
+
+                ownerInput.style.display =
+                    "inline-block";
+
+                ownerInput.value = "";
+
+                ownerInput.focus();
+
+            } else {
+
+                ownerInput.style.display =
+                    "none";
+
+                ownerInput.value =
+                    ownerSelect.value;
+            }
+
+        }
+    );
+}
+
+setupOwnerDropdown();
+loadOwnerDropdown();

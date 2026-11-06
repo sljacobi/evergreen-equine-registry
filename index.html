@@ -204,13 +204,28 @@
             <option>Mare</option>
         </select>
 
-        <input type="number"
-               id="age"
-               placeholder="Age">
+        <div class="owner-field">
 
-        <input type="text"
-               id="owner"
-               placeholder="Owner">
+    <select id="ownerSelect">
+
+        <option value="">
+            Select Owner
+        </option>
+
+        <option value="new">
+            Other / New Owner
+        </option>
+
+    </select>
+
+    <input
+        type="text"
+        id="owner"
+        placeholder="Enter Owner Name"
+        style="display:none;"
+    >
+
+</div>
 
         <select id="status">
             <option>Active</option>
