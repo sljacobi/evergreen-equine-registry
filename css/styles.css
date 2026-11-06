@@ -411,3 +411,198 @@ select:focus {
         grid-template-columns: 1fr;
     }
 }
+
+/* ========================================
+   FINAL REGISTRY PAGE LAYOUT
+======================================== */
+
+/*
+    Existing registry-grid order:
+
+    1 = Owners Registry
+    2 = Brands Registry
+    3 = Ownership History
+    4 = Record Sale
+    5 = Marketplace Archive
+*/
+
+.registry-grid {
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1fr)
+        minmax(0, 1fr);
+
+    grid-template-areas:
+        "sale sale"
+        "history owners"
+        "history brands"
+        "market market";
+
+    gap: 16px;
+
+    margin: 10px;
+    align-items: stretch;
+}
+
+
+/* Owners Registry */
+.registry-grid > .card:nth-child(1) {
+    grid-area: owners;
+}
+
+
+/* Brands Registry */
+.registry-grid > .card:nth-child(2) {
+    grid-area: brands;
+}
+
+
+/* Ownership History */
+.registry-grid > .card:nth-child(3) {
+    grid-area: history;
+}
+
+
+/* Record Sale */
+.registry-grid > .card:nth-child(4) {
+    grid-area: sale;
+}
+
+
+/* Marketplace Archive */
+.registry-grid > .card:nth-child(5) {
+    grid-area: market;
+}
+
+
+/* Remove old card margins inside this grid */
+.registry-grid > .card {
+    margin: 0;
+    min-width: 0;
+}
+
+
+/* ========================================
+   RECORD SALE HORIZONTAL LAYOUT
+======================================== */
+
+#saleForm {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+#saleForm select,
+#saleForm input {
+    margin: 0;
+}
+
+#saleHorse {
+    min-width: 150px;
+}
+
+#seller,
+#buyer {
+    min-width: 150px;
+}
+
+#salePrice {
+    min-width: 130px;
+}
+
+#saleNotes {
+    flex: 1;
+    min-width: 180px;
+}
+
+
+/* ========================================
+   OWNERS + BRANDS
+======================================== */
+
+#ownersList,
+#brandsList {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+
+/* Keep these two cards compact */
+.registry-grid > .card:nth-child(1),
+.registry-grid > .card:nth-child(2) {
+    align-self: start;
+}
+
+
+/* ========================================
+   OWNERSHIP HISTORY
+======================================== */
+
+#historyList {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#historyList .card {
+    margin: 0;
+}
+
+
+/* ========================================
+   MARKETPLACE ARCHIVE
+======================================== */
+
+#marketplaceList {
+    display: grid;
+
+    grid-template-columns:
+        repeat(
+            auto-fit,
+            minmax(280px, 1fr)
+        );
+
+    gap: 12px;
+}
+
+#marketplaceList .card {
+    margin: 0;
+}
+
+
+/* ========================================
+   MOBILE REGISTRY LAYOUT
+======================================== */
+
+@media (max-width: 800px) {
+
+    .registry-grid {
+        grid-template-columns: 1fr;
+
+        grid-template-areas:
+            "sale"
+            "owners"
+            "brands"
+            "history"
+            "market";
+    }
+
+    #saleForm {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    #saleForm select,
+    #saleForm input,
+    #saleForm button {
+        width: 100%;
+        margin: 0;
+    }
+
+    #marketplaceList {
+        grid-template-columns: 1fr;
+    }
+}
