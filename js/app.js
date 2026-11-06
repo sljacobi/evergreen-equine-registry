@@ -2346,3 +2346,397 @@ if (editHorseDialog) {
     );
 
 }
+
+// ========================================
+// SAVE EDITED HORSE
+// ========================================
+
+const editHorseForm =
+    document.getElementById(
+        "editHorseForm"
+    );
+
+
+if (editHorseForm) {
+
+    editHorseForm.addEventListener(
+        "submit",
+        async function(event) {
+
+            event.preventDefault();
+
+
+            const horseId =
+                document.getElementById(
+                    "editHorseId"
+                ).value;
+
+
+            const horseName =
+                document.getElementById(
+                    "editHorseName"
+                ).value.trim();
+
+
+            const breed =
+                document.getElementById(
+                    "editBreed"
+                ).value;
+
+
+            const gender =
+                document.getElementById(
+                    "editGender"
+                ).value;
+
+
+            const ageValue =
+                document.getElementById(
+                    "editAge"
+                ).value;
+
+
+            const owner =
+                document.getElementById(
+                    "editOwner"
+                ).value.trim();
+
+
+            const brand =
+                document.getElementById(
+                    "editBrand"
+                ).value.trim();
+
+
+            const horseStatus =
+                document.getElementById(
+                    "editStatus"
+                ).value;
+
+
+            const horseOrigin =
+                document.getElementById(
+                    "editOrigin"
+                ).value;
+
+
+            const sire =
+                document.getElementById(
+                    "editSire"
+                ).value.trim();
+
+
+            const dam =
+                document.getElementById(
+                    "editDam"
+                ).value.trim();
+
+
+            const acquisitionMethod =
+                document.getElementById(
+                    "editAcquisitionMethod"
+                ).value;
+
+
+            const breedingStatus =
+                document.getElementById(
+                    "editBreedingStatus"
+                ).value;
+
+
+            if (!horseId) {
+
+                alert(
+                    "The horse ID is missing. Close the Edit Horse window and try again."
+                );
+
+                return;
+            }
+
+
+            if (!horseName) {
+
+                alert(
+                    "Please enter a registered name."
+                );
+
+                document.getElementById(
+                    "editHorseName"
+                ).focus();
+
+                return;
+            }
+
+
+            if (!breed) {
+
+                alert(
+                    "Please select a breed."
+                );
+
+                document.getElementById(
+                    "editBreed"
+                ).focus();
+
+                return;
+            }
+
+
+            if (!owner) {
+
+                alert(
+                    "Please enter an owner."
+                );
+
+                document.getElementById(
+                    "editOwner"
+                ).focus();
+
+                return;
+            }
+
+
+            const age =
+                ageValue === ""
+                    ? null
+                    : Number(ageValue);
+
+
+            if (
+                age !== null &&
+                (
+                    Number.isNaN(age) ||
+                    age < 0
+                )
+            ) {
+
+                alert(
+                    "Please enter a valid age."
+                );
+
+                document.getElementById(
+                    "editAge"
+                ).focus();
+
+                return;
+            }
+
+
+            const saveButton =
+                editHorseForm.querySelector(
+                    "button[type='submit']"
+                );
+
+
+            if (saveButton) {
+
+                saveButton.disabled = true;
+
+                saveButton.textContent =
+                    "Saving...";
+            }
+
+
+            const {
+                data: existingHorse,
+                error: existingHorseError
+            } =
+                await supabaseClient
+                    .from("horses")
+                    .select(
+                        "id, registered_name, owner_name"
+                    )
+                    .eq("id", horseId)
+                    .single();
+
+
+            if (
+                existingHorseError ||
+                !existingHorse
+            ) {
+
+                console.error(
+                    "Existing horse loading error:",
+                    existingHorseError
+                );
+
+                alert(
+                    "The existing horse record could not be loaded."
+                );
+
+
+                if (saveButton) {
+
+                    saveButton.disabled = false;
+
+                    saveButton.textContent =
+                        "Save Changes";
+                }
+
+                return;
+            }
+
+
+            const previousOwner =
+                existingHorse.owner_name || "";
+
+
+            const previousHorseName =
+                existingHorse.registered_name ||
+                horseName;
+
+
+            const { error: updateError } =
+                await supabaseClient
+                    .from("horses")
+                    .update({
+                        registered_name:
+                            horseName,
+
+                        breed:
+                            breed,
+
+                        gender:
+                            gender,
+
+                        age:
+                            age,
+
+                        owner_name:
+                            owner,
+
+                        horse_status:
+                            horseStatus,
+
+                        horse_origin:
+                            horseOrigin,
+
+                        brand:
+                            brand,
+
+                        sire:
+                            sire,
+
+                        dam:
+                            dam,
+
+                        acquisition_method:
+                            acquisitionMethod,
+
+                        breeding_status:
+                            breedingStatus
+                    })
+                    .eq("id", horseId);
+
+
+            if (updateError) {
+
+                console.error(
+                    "Edit Horse update error:",
+                    updateError
+                );
+
+                alert(
+                    "The horse could not be updated."
+                );
+
+
+                if (saveButton) {
+
+                    saveButton.disabled = false;
+
+                    saveButton.textContent =
+                        "Save Changes";
+                }
+
+                return;
+            }
+
+
+            if (
+                previousOwner &&
+                previousOwner !== owner
+            ) {
+
+                const {
+                    error: historyError
+                } =
+                    await supabaseClient
+                        .from(
+                            "ownership_history"
+                        )
+                        .insert([
+                            {
+                                horse_id:
+                                    horseId,
+
+                                horse_name:
+                                    horseName ||
+                                    previousHorseName,
+
+                                previous_owner:
+                                    previousOwner,
+
+                                new_owner:
+                                    owner,
+
+                                transfer_date:
+                                    new Date()
+                                        .toISOString()
+                            }
+                        ]);
+
+
+                if (historyError) {
+
+                    console.error(
+                        "Ownership history error:",
+                        historyError
+                    );
+
+                    alert(
+                        "The horse was updated, but the ownership change could not be added to Ownership History."
+                    );
+                }
+
+            }
+
+
+            if (saveButton) {
+
+                saveButton.disabled = false;
+
+                saveButton.textContent =
+                    "Save Changes";
+            }
+
+
+            closeEditHorseDialog();
+
+
+            await loadHorses();
+
+            await loadHorseDropdown();
+
+            await loadParentDropdowns();
+
+            await loadBrandDropdown();
+
+            await loadOwnerDropdown();
+
+            await loadBreedingHistory();
+
+            await loadMarketplace();
+
+            await loadDashboard();
+
+
+            alert(
+                horseName +
+                " was updated successfully."
+            );
+
+        }
+    );
+
+}
