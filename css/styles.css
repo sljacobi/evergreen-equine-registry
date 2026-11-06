@@ -683,3 +683,258 @@ select:focus {
     min-width: 190px;
     margin: 0;
 }
+
+/* ========================================
+   EDIT HORSE DIALOG
+======================================== */
+
+.edit-horse-dialog {
+    width: min(900px, 92vw);
+    max-height: 88vh;
+
+    padding: 0;
+
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+
+    border: 1px solid var(--border-color);
+    border-radius: 14px;
+
+    box-shadow:
+        0 20px 60px
+        rgba(0, 0, 0, 0.55);
+
+    overflow: hidden;
+}
+
+
+/* Darken the website behind the edit window */
+.edit-horse-dialog::backdrop {
+    background:
+        rgba(10, 15, 11, 0.78);
+
+    backdrop-filter: blur(3px);
+}
+
+
+/* ========================================
+   EDIT DIALOG HEADER
+======================================== */
+
+.edit-dialog-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 20px;
+
+    padding: 22px 24px;
+
+    background: #253128;
+
+    border-bottom:
+        1px solid var(--border-color);
+}
+
+
+.edit-dialog-header h2 {
+    margin: 0;
+
+    color: var(--green-light);
+
+    font-size: 26px;
+}
+
+
+.edit-dialog-header p {
+    margin: 6px 0 0;
+
+    color: #cbd6cd;
+
+    font-size: 14px;
+}
+
+
+/* X button in upper-right corner */
+.edit-dialog-close {
+    width: 38px;
+    height: 38px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0;
+    margin: 0;
+
+    flex-shrink: 0;
+
+    background: transparent;
+    color: var(--text-primary);
+
+    border:
+        1px solid var(--border-color);
+
+    border-radius: 8px;
+
+    font-size: 18px;
+}
+
+
+.edit-dialog-close:hover {
+    background: #354438;
+    color: white;
+
+    transform: none;
+}
+
+
+/* ========================================
+   EDIT HORSE FORM
+======================================== */
+
+#editHorseForm {
+    padding: 24px;
+
+    max-height:
+        calc(88vh - 100px);
+
+    overflow-y: auto;
+}
+
+
+.edit-form-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 18px;
+}
+
+
+/* Individual label + field group */
+.edit-form-field {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+
+    min-width: 0;
+}
+
+
+.edit-form-field span {
+    color: #dce6de;
+
+    font-size: 14px;
+    font-weight: 700;
+}
+
+
+/* Inputs and dropdowns inside edit window */
+.edit-form-field input,
+.edit-form-field select {
+    width: 100%;
+
+    margin: 0;
+    padding: 11px 12px;
+
+    border:
+        1px solid #637668;
+
+    border-radius: 7px;
+
+    background: #F4F4F4;
+    color: #1E2520;
+
+    font-size: 15px;
+}
+
+
+.edit-form-field input:focus,
+.edit-form-field select:focus {
+    outline:
+        2px solid var(--green-light);
+
+    border-color:
+        var(--green-light);
+}
+
+
+/* ========================================
+   EDIT DIALOG BUTTONS
+======================================== */
+
+.edit-dialog-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    gap: 10px;
+
+    margin-top: 26px;
+    padding-top: 18px;
+
+    border-top:
+        1px solid var(--border-color);
+}
+
+
+.edit-dialog-actions button {
+    min-width: 130px;
+
+    padding: 10px 16px;
+}
+
+
+.secondary-button {
+    background: #4B5650;
+}
+
+
+.secondary-button:hover {
+    background: #626E67;
+}
+
+
+/* ========================================
+   EDIT DIALOG MOBILE
+======================================== */
+
+@media (max-width: 700px) {
+
+    .edit-horse-dialog {
+        width: 94vw;
+
+        max-height: 92vh;
+    }
+
+
+    #editHorseForm {
+        padding: 18px;
+
+        max-height:
+            calc(92vh - 100px);
+    }
+
+
+    .edit-form-grid {
+        grid-template-columns: 1fr;
+
+        gap: 14px;
+    }
+
+
+    .edit-dialog-header {
+        padding: 18px;
+    }
+
+
+    .edit-dialog-actions {
+        flex-direction: column-reverse;
+    }
+
+
+    .edit-dialog-actions button {
+        width: 100%;
+    }
+}
