@@ -938,3 +938,31 @@ select:focus {
         width: 100%;
     }
 }
+
+/* ========================================
+   EDIT HORSE SMART OWNER
+======================================== */
+
+#editHorseForm .edit-form-field > label {
+    color: #dce6de;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+#editOwnerSelect,
+#editOwner {
+    width: 100%;
+    margin: 0;
+    padding: 11px 12px;
+    border: 1px solid #637668;
+    border-radius: 7px;
+    background: #F4F4F4;
+    color: #1E2520;
+    font-size: 15px;
+}
+
+#editOwnerSelect:focus,
+#editOwner:focus {
+    outline: 2px solid var(--green-light);
+    border-color: var(--green-light);
+}

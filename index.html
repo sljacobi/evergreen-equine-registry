@@ -610,17 +610,32 @@
 
             </label>
 
-            <label class="edit-form-field">
-                <span>Owner</span>
+            <div class="edit-form-field">
 
-                <input
-                    type="text"
-                    id="editOwner"
-                    required
-                >
+    <label for="editOwnerSelect">
+        Owner
+    </label>
 
-            </label>
+    <select id="editOwnerSelect">
 
+        <option value="">
+            Select Owner
+        </option>
+
+        <option value="new">
+            Other / New Owner
+        </option>
+
+    </select>
+
+    <input
+        type="text"
+        id="editOwner"
+        placeholder="Enter Owner Name"
+        style="display:none;"
+    >
+
+</div>
 
             <label class="edit-form-field">
                 <span>Brand</span>

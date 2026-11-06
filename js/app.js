@@ -607,11 +607,64 @@ async function editHorse(id) {
     ).value =
         data.gender || "Stallion";
 
-    document.getElementById(
-        "editOwner"
-    ).value =
-        data.owner_name || "";
+        await loadEditOwnerDropdown();
 
+
+    const editOwnerSelect =
+        document.getElementById(
+            "editOwnerSelect"
+        );
+
+    const editOwnerInput =
+        document.getElementById(
+            "editOwner"
+        );
+
+
+    const editOwnerExists =
+        Array.from(
+            editOwnerSelect.options
+        ).some(
+            option =>
+                option.value ===
+                data.owner_name
+        );
+
+
+    if (
+        data.owner_name &&
+        editOwnerExists
+    ) {
+
+        editOwnerSelect.value =
+            data.owner_name;
+
+        editOwnerInput.value =
+            data.owner_name;
+
+        editOwnerInput.style.display =
+            "none";
+
+    } else if (data.owner_name) {
+
+        editOwnerSelect.value =
+            "new";
+
+        editOwnerInput.value =
+            data.owner_name;
+
+        editOwnerInput.style.display =
+            "block";
+
+    } else {
+
+        editOwnerSelect.value = "";
+
+        editOwnerInput.value = "";
+
+        editOwnerInput.style.display =
+            "none";
+    }
 
     document.getElementById(
         "editBrand"
@@ -2594,6 +2647,8 @@ if (editHorseForm) {
 
             await loadOwnerDropdown();
 
+            await loadEditOwnerDropdown();
+
             await loadBreedingHistory();
 
             await loadMarketplace();
@@ -2610,3 +2665,133 @@ if (editHorseForm) {
     );
 
 }
+
+// ========================================
+// EDIT HORSE SMART OWNER
+// ========================================
+
+async function loadEditOwnerDropdown() {
+
+    const ownerSelect =
+        document.getElementById(
+            "editOwnerSelect"
+        );
+
+    if (!ownerSelect) {
+        return;
+    }
+
+
+    const { data, error } =
+        await supabaseClient
+            .from("horses")
+            .select("owner_name")
+            .eq("archived", false);
+
+
+    if (error) {
+
+        console.error(
+            "Edit Owner dropdown error:",
+            error
+        );
+
+        return;
+    }
+
+
+    const uniqueOwners =
+        [...new Set(
+            (data || [])
+                .map(horse =>
+                    horse.owner_name?.trim()
+                )
+                .filter(Boolean)
+        )]
+        .sort((a, b) =>
+            a.localeCompare(b)
+        );
+
+
+    ownerSelect.innerHTML = `
+        <option value="">
+            Select Owner
+        </option>
+
+        <option value="new">
+            Other / New Owner
+        </option>
+    `;
+
+
+    uniqueOwners.forEach(owner => {
+
+        const option =
+            document.createElement(
+                "option"
+            );
+
+        option.value = owner;
+        option.textContent = owner;
+
+        ownerSelect.appendChild(
+            option
+        );
+
+    });
+
+}
+
+function setupEditOwnerDropdown() {
+
+    const ownerSelect =
+        document.getElementById(
+            "editOwnerSelect"
+        );
+
+    const ownerInput =
+        document.getElementById(
+            "editOwner"
+        );
+
+
+    if (
+        !ownerSelect ||
+        !ownerInput
+    ) {
+        return;
+    }
+
+
+    ownerSelect.addEventListener(
+        "change",
+        function() {
+
+            if (
+                ownerSelect.value ===
+                "new"
+            ) {
+
+                ownerInput.style.display =
+                    "block";
+
+                ownerInput.value = "";
+
+                ownerInput.focus();
+
+            } else {
+
+                ownerInput.style.display =
+                    "none";
+
+                ownerInput.value =
+                    ownerSelect.value;
+            }
+
+        }
+    );
+
+}
+
+setupEditOwnerDropdown();
+loadEditOwnerDropdown();
