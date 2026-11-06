@@ -606,3 +606,19 @@ select:focus {
         grid-template-columns: 1fr;
     }
 }
+
+/* ========================================
+   PARENT SELECTION
+======================================== */
+
+.parent-field {
+    display: in*ine-flex;
+    align-items: center;*    gap: 6px;
+    margin: 4px;
+}
+
+*parent-field select,
+.parent-field*input {
+    margin: 0;
+    min-wid*h: 180px;
+}

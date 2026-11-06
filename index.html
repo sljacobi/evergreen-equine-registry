@@ -230,13 +230,48 @@
        id="brand"
        placeholder="Brand">
        
-    <input type="text"
-       id="sire"
-       placeholder="Sire">
-       
-    <input type="text"
-       id="dam"
-       placeholder="Dam">
+    <div class="parent-field">
+
+    <select id="sireSelect">
+        <option value="">
+            Select Sire
+        </option>
+
+        <option value="unregistered">
+            Other / Unregistered Sire
+        </option>
+    </select>
+
+    <input
+        type="text"
+        id="sire"
+        placeholder="Enter Sire Name"
+        style="display:none;"
+    >
+
+</div>
+
+
+<div class="parent-field">
+
+    <select id="damSelect">
+        <option value="">
+            Select Dam
+        </option>
+
+        <option value="unregistered">
+            Other / Unregistered Dam
+        </option>
+    </select>
+
+    <input
+        type="text"
+        id="dam"
+        placeholder="Enter Dam Name"
+        style="display:none;"
+    >
+
+</div>
 
 <select id="acquisitionMethod">
 
