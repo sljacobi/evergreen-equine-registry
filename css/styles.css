@@ -360,3 +360,54 @@ select:focus {
         height: 220px;
     }
 }
+
+/* ========================================
+   REGISTRY GRID FINAL LAYOUT
+======================================== */
+
+.registry-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+    margin: 10px;
+}
+
+.registry-grid > .card {
+    margin: 0;
+    min-width: 0;
+}
+
+/* Marketplace Archive spans both columns */
+.registry-grid > .card:last-child {
+    grid-column: 1 / -1;
+}
+
+/* Keep archive records reasonably compact */
+#marketplaceList {
+    display: grid;
+    grid-template-columns: repeat(
+        auto-fit,
+        minmax(280px, 1fr)
+    );
+    gap: 12px;
+}
+
+#marketplaceList .card {
+    margin: 0;
+}
+
+/* Mobile */
+@media (max-width: 800px) {
+
+    .registry-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .registry-grid > .card:last-child {
+        grid-column: auto;
+    }
+
+    #marketplaceList {
+        grid-template-columns: 1fr;
+    }
+}

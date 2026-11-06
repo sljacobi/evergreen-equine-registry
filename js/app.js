@@ -1031,10 +1031,36 @@ async function(id) {
     profile.style.display =
         "block";
 
-    document.getElementById(
-    "horseRegistry"
-).style.display =
-    "none";
+    // Hide every main website section
+const mainSections = [
+    "dashboardSection",
+    "registrySection",
+    "breedingsSection",
+    "pedigreesSection",
+    "marketplaceSection",
+    "brandsSection",
+    "guideSection"
+];
+
+mainSections.forEach(sectionId => {
+
+    const section =
+        document.getElementById(sectionId);
+
+    if (section) {
+        section.style.display = "none";
+    }
+
+});
+
+// Show only the horse profile
+profile.style.display = "block";
+
+// Move back to the top of the page
+window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+});
 
     const { data: ownershipHistory } =
     await supabaseClient
@@ -1285,17 +1311,23 @@ async function(name) {
 window.closeHorseProfile =
 function() {
 
-    document.getElementById(
-        "horseProfile"
-    ).style.display =
-        "none";
+    const profile =
+        document.getElementById(
+            "horseProfile"
+        );
 
-    document.getElementById(
-        "horseRegistry"
-    ).style.display =
-        "block";
+    if (profile) {
+        profile.style.display = "none";
+    }
 
-}
+    showSection("registrySection");
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+
+};
 
 window.showSection =
 function(sectionId) {
@@ -1494,6 +1526,16 @@ loadBreedingHistory();
 // ========================================
 
 window.showSection = function(sectionId) {
+
+    const horseProfile =
+        document.getElementById(
+            "horseProfile"
+        );
+
+    if (horseProfile) {
+        horseProfile.style.display =
+            "none";
+    }
 
     const sections = [
         "dashboardSection",
