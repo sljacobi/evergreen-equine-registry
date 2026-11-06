@@ -499,6 +499,264 @@
 
 </section>
 
+<dialog
+    id="editHorseDialog"
+    class="edit-horse-dialog"
+>
+
+    <div class="edit-dialog-header">
+
+        <div>
+            <h2>Edit Horse</h2>
+
+            <p>
+                Update this horse's registry information.
+            </p>
+        </div>
+
+        <button
+            type="button"
+            class="edit-dialog-close"
+            onclick="closeEditHorseDialog()"
+            aria-label="Close edit window"
+        >
+            ✕
+        </button>
+
+    </div>
+
+
+    <form id="editHorseForm">
+
+        <input
+            type="hidden"
+            id="editHorseId"
+        >
+
+
+        <div class="edit-form-grid">
+
+            <label class="edit-form-field">
+                <span>Registered Name</span>
+
+                <input
+                    type="text"
+                    id="editHorseName"
+                    required
+                >
+            </label>
+
+
+            <label class="edit-form-field">
+                <span>Breed</span>
+
+                <select
+                    id="editBreed"
+                    required
+                >
+                    <option value="">
+                        Select Breed
+                    </option>
+
+                    <option>American Paint Horse</option>
+                    <option>American Quarter Horse</option>
+                    <option>American Standardbred</option>
+                    <option>Andalusian</option>
+                    <option>Appaloosa</option>
+                    <option>Arabian</option>
+                    <option>Ardennes</option>
+                    <option>Belgian</option>
+                    <option>Breton</option>
+                    <option>Criollo</option>
+                    <option>Donkey</option>
+                    <option>Dutch Warmblood</option>
+                    <option>Friesian</option>
+                    <option>Hanoverian</option>
+                    <option>Holsteiner</option>
+                    <option>Hungarian Halfbred</option>
+                    <option>Irish Cob</option>
+                    <option>Irish Draught</option>
+                    <option>Kentucky Saddler</option>
+                    <option>Kladruber</option>
+                    <option>Knabstrupper</option>
+                    <option>Lipizzaner</option>
+                    <option>Marwari</option>
+                    <option>Missouri Fox Trotter</option>
+                    <option>Morgan</option>
+                    <option>Mule</option>
+                    <option>Mustang</option>
+                    <option>Nokota</option>
+                    <option>Norfolk Roadster</option>
+                    <option>Pintabian</option>
+                    <option>Shire</option>
+                    <option>Suffolk Punch</option>
+                    <option>Tennessee Walker</option>
+                    <option>Thoroughbred</option>
+                    <option>Turkoman</option>
+                    <option>Welsh Section D</option>
+                    <option>Zebra</option>
+                </select>
+
+            </label>
+
+
+            <label class="edit-form-field">
+                <span>Gender</span>
+
+                <select id="editGender">
+                    <option>Stallion</option>
+                    <option>Mare</option>
+                </select>
+
+            </label>
+
+
+            <label class="edit-form-field">
+                <span>Age</span>
+
+                <input
+                    type="number"
+                    id="editAge"
+                    min="0"
+                >
+
+            </label>
+
+
+            <label class="edit-form-field">
+                <span>Owner</span>
+
+                <input
+                    type="text"
+                    id="editOwner"
+                    required
+                >
+
+            </label>
+
+
+            <label class="edit-form-field">
+                <span>Brand</span>
+
+                <input
+                    type="text"
+                    id="editBrand"
+                >
+
+            </label>
+
+
+            <label class="edit-form-field">
+                <span>Horse Status</span>
+
+                <select id="editStatus">
+                    <option>Active</option>
+                    <option>Personal</option>
+                    <option>Retired</option>
+                    <option>Sold</option>
+                </select>
+
+            </label>
+
+
+            <label class="edit-form-field">
+                <span>Origin</span>
+
+                <select id="editOrigin">
+                    <option>Wild Caught</option>
+                    <option>Bred</option>
+                    <option>Purchased</option>
+                    <option>Event Horse</option>
+                </select>
+
+            </label>
+
+
+            <label class="edit-form-field">
+                <span>Sire</span>
+
+                <input
+                    type="text"
+                    id="editSire"
+                    placeholder="Sire name"
+                >
+
+            </label>
+
+
+            <label class="edit-form-field">
+                <span>Dam</span>
+
+                <input
+                    type="text"
+                    id="editDam"
+                    placeholder="Dam name"
+                >
+
+            </label>
+
+
+            <label class="edit-form-field">
+                <span>Acquisition Method</span>
+
+                <select id="editAcquisitionMethod">
+
+                    <option>Wild Capture</option>
+                    <option>Auction Purchase</option>
+                    <option>Private Sale</option>
+                    <option>Gift</option>
+                    <option>Trade</option>
+                    <option>Homebred</option>
+                    <option>Imported</option>
+                    <option>Event Reward</option>
+
+                </select>
+
+            </label>
+
+
+            <label class="edit-form-field">
+                <span>Breeding Status</span>
+
+                <select id="editBreedingStatus">
+
+                    <option>Available</option>
+                    <option>Waiting To Breed</option>
+                    <option>Bred</option>
+                    <option>Pregnant</option>
+                    <option>Foaled</option>
+                    <option>Retired</option>
+                    <option>Not Breeding</option>
+
+                </select>
+
+            </label>
+
+        </div>
+
+
+        <div class="edit-dialog-actions">
+
+            <button
+                type="button"
+                class="secondary-button"
+                onclick="closeEditHorseDialog()"
+            >
+                Cancel
+            </button>
+
+            <button
+                type="submit"
+            >
+                Save Changes
+            </button>
+
+        </div>
+
+    </form>
+
+</dialog>
+
 <section
     class="card"
     id="breedingsSection"
