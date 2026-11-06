@@ -1485,3 +1485,168 @@ loadBreedingHistory();
 
     }
 );
+
+// ========================================
+// SITE NAVIGATION
+// ========================================
+
+window.showSection = function(sectionId) {
+
+    const sections = [
+        "dashboardSection",
+        "registrySection",
+        "breedingsSection",
+        "pedigreesSection",
+        "marketplaceSection",
+        "brandsSection",
+        "guideSection"
+    ];
+
+    sections.forEach(id => {
+
+        const section =
+            document.getElementById(id);
+
+        if (section) {
+            section.style.display = "none";
+        }
+
+    });
+
+    const selectedSection =
+        document.getElementById(sectionId);
+
+    if (selectedSection) {
+        selectedSection.style.display = "block";
+    }
+
+    document
+        .querySelectorAll("nav button")
+        .forEach(button => {
+
+            button.classList.remove(
+                "active-nav"
+            );
+
+            if (
+                button
+                    .getAttribute("onclick")
+                    ?.includes(sectionId)
+            ) {
+                button.classList.add(
+                    "active-nav"
+                );
+            }
+
+        });
+
+    if (sectionId === "dashboardSection") {
+        loadDashboard();
+    }
+
+    if (sectionId === "registrySection") {
+        loadHorses();
+    }
+
+    if (sectionId === "breedingsSection") {
+        loadBreedingHistory();
+        loadHorseDropdown();
+    }
+
+};
+
+// ========================================
+// DASHBOARD
+// ========================================
+
+async function loadDashboard() {
+
+    const {
+        data: horses,
+        error: horseError
+    } =
+        await supabaseClient
+            .from("horses")
+            .select("*")
+            .eq("archived", false);
+
+    if (horseError) {
+        console.error(
+            "Dashboard horse error:",
+            horseError
+        );
+        return;
+    }
+
+    const {
+        data: breedings,
+        error: breedingError
+    } =
+        await supabaseClient
+            .from("breeding_logs")
+            .select("*");
+
+    if (breedingError) {
+        console.error(
+            "Dashboard breeding error:",
+            breedingError
+        );
+    }
+
+    const safeHorses = horses || [];
+    const safeBreedings = breedings || [];
+
+    const brands =
+        new Set(
+            safeHorses
+                .map(horse => horse.brand)
+                .filter(Boolean)
+        );
+
+    const horseCount =
+        document.getElementById(
+            "dashboardHorseCount"
+        );
+
+    const activeCount =
+        document.getElementById(
+            "dashboardActiveCount"
+        );
+
+    const breedingCount =
+        document.getElementById(
+            "dashboardBreedingCount"
+        );
+
+    const brandCount =
+        document.getElementById(
+            "dashboardBrandCount"
+        );
+
+    if (horseCount) {
+        horseCount.textContent =
+            safeHorses.length;
+    }
+
+    if (activeCount) {
+        activeCount.textContent =
+            safeHorses.filter(
+                horse =>
+                    horse.horse_status ===
+                    "Active"
+            ).length;
+    }
+
+    if (breedingCount) {
+        breedingCount.textContent =
+            safeBreedings.length;
+    }
+
+    if (brandCount) {
+        brandCount.textContent =
+            brands.size;
+    }
+
+}
+
+showSection("dashboardSection");
