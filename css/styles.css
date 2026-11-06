@@ -966,3 +966,33 @@ select:focus {
     outline: 2px solid var(--green-light);
     border-color: var(--green-light);
 }
+
+/* ========================================
+   EDIT HORSE SMART BRAND
+======================================== */
+
+#editBrandSelect,
+#editBrand {
+    width: 100%;
+    margin: 0;
+    padding: 11px 12px;
+
+    border:
+        1px solid #637668;
+
+    border-radius: 7px;
+
+    background: #F4F4F4;
+    color: #1E2520;
+
+    font-size: 15px;
+}
+
+#editBrandSelect:focus,
+#editBrand:focus {
+    outline:
+        2px solid var(--green-light);
+
+    border-color:
+        var(--green-light);
+}

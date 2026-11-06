@@ -666,11 +666,64 @@ async function editHorse(id) {
             "none";
     }
 
-    document.getElementById(
-        "editBrand"
-    ).value =
-        data.brand || "";
+        await loadEditBrandDropdown();
 
+
+    const editBrandSelect =
+        document.getElementById(
+            "editBrandSelect"
+        );
+
+    const editBrandInput =
+        document.getElementById(
+            "editBrand"
+        );
+
+
+    const editBrandExists =
+        Array.from(
+            editBrandSelect.options
+        ).some(
+            option =>
+                option.value ===
+                data.brand
+        );
+
+
+    if (
+        data.brand &&
+        editBrandExists
+    ) {
+
+        editBrandSelect.value =
+            data.brand;
+
+        editBrandInput.value =
+            data.brand;
+
+        editBrandInput.style.display =
+            "none";
+
+    } else if (data.brand) {
+
+        editBrandSelect.value =
+            "new";
+
+        editBrandInput.value =
+            data.brand;
+
+        editBrandInput.style.display =
+            "block";
+
+    } else {
+
+        editBrandSelect.value = "";
+
+        editBrandInput.value = "";
+
+        editBrandInput.style.display =
+            "none";
+    }
 
     document.getElementById(
         "editStatus"
@@ -2649,6 +2702,8 @@ if (editHorseForm) {
 
             await loadEditOwnerDropdown();
 
+            await loadEditBrandDropdown();
+
             await loadBreedingHistory();
 
             await loadMarketplace();
@@ -2795,3 +2850,133 @@ function setupEditOwnerDropdown() {
 
 setupEditOwnerDropdown();
 loadEditOwnerDropdown();
+
+// ========================================
+// EDIT HORSE SMART BRAND
+// ========================================
+
+async function loadEditBrandDropdown() {
+
+    const brandSelect =
+        document.getElementById(
+            "editBrandSelect"
+        );
+
+    if (!brandSelect) {
+        return;
+    }
+
+
+    const { data, error } =
+        await supabaseClient
+            .from("horses")
+            .select("brand")
+            .eq("archived", false);
+
+
+    if (error) {
+
+        console.error(
+            "Edit Brand dropdown error:",
+            error
+        );
+
+        return;
+    }
+
+
+    const uniqueBrands =
+        [...new Set(
+            (data || [])
+                .map(horse =>
+                    horse.brand?.trim()
+                )
+                .filter(Boolean)
+        )]
+        .sort((a, b) =>
+            a.localeCompare(b)
+        );
+
+
+    brandSelect.innerHTML = `
+        <option value="">
+            Select Brand
+        </option>
+
+        <option value="new">
+            Other / New Brand
+        </option>
+    `;
+
+
+    uniqueBrands.forEach(brand => {
+
+        const option =
+            document.createElement(
+                "option"
+            );
+
+        option.value = brand;
+        option.textContent = brand;
+
+        brandSelect.appendChild(
+            option
+        );
+
+    });
+
+}
+
+function setupEditBrandDropdown() {
+
+    const brandSelect =
+        document.getElementById(
+            "editBrandSelect"
+        );
+
+    const brandInput =
+        document.getElementById(
+            "editBrand"
+        );
+
+
+    if (
+        !brandSelect ||
+        !brandInput
+    ) {
+        return;
+    }
+
+
+    brandSelect.addEventListener(
+        "change",
+        function() {
+
+            if (
+                brandSelect.value ===
+                "new"
+            ) {
+
+                brandInput.style.display =
+                    "block";
+
+                brandInput.value = "";
+
+                brandInput.focus();
+
+            } else {
+
+                brandInput.style.display =
+                    "none";
+
+                brandInput.value =
+                    brandSelect.value;
+            }
+
+        }
+    );
+
+}
+
+setupEditBrandDropdown();
+loadEditBrandDropdown();

@@ -637,15 +637,32 @@
 
 </div>
 
-            <label class="edit-form-field">
-                <span>Brand</span>
+<div class="edit-form-field">
 
-                <input
-                    type="text"
-                    id="editBrand"
-                >
+    <label for="editBrandSelect">
+        Brand
+    </label>
 
-            </label>
+    <select id="editBrandSelect">
+
+        <option value="">
+            Select Brand
+        </option>
+
+        <option value="new">
+            Other / New Brand
+        </option>
+
+    </select>
+
+    <input
+        type="text"
+        id="editBrand"
+        placeholder="Enter Brand Name"
+        style="display:none;"
+    >
+
+</div>
 
 
             <label class="edit-form-field">
