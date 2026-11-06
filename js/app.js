@@ -300,6 +300,7 @@ horseForm.querySelector(
 loadHorses();
 loadHorseDropdown();
 loadParentDropdowns();
+loadBrandDropdown();
 
 });
 
@@ -638,8 +639,59 @@ async function editHorse(id) {
     document.getElementById("origin").value =
         data.horse_origin || "Wild Caught";
 
-    document.getElementById("brand").value =
-        data.brand || "";
+    const brandSelect =
+    document.getElementById(
+        "brandSelect"
+    );
+
+const brandInput =
+    document.getElementById(
+        "brand"
+    );
+
+const brandExists =
+    Array.from(
+        brandSelect.options
+    ).some(
+        option =>
+            option.value ===
+            data.brand
+    );
+
+if (
+    data.brand &&
+    brandExists
+) {
+
+    brandSelect.value =
+        data.brand;
+
+    brandInput.value =
+        data.brand;
+
+    brandInput.style.display =
+        "none";
+
+} else if (data.brand) {
+
+    brandSelect.value =
+        "new";
+
+    brandInput.value =
+        data.brand;
+
+    brandInput.style.display =
+        "inline-block";
+
+} else {
+
+    brandSelect.value = "";
+
+    brandInput.value = "";
+
+    brandInput.style.display =
+        "none";
+}
 
         const sireSelect =
         document.getElementById(
@@ -1998,3 +2050,151 @@ function setupParentDropdowns() {
 
 setupParentDropdowns();
 loadParentDropdowns();
+
+// ========================================
+// SMART BRAND DROPDOWN
+// ========================================
+
+async function loadBrandDropdown() {
+
+    const { data, error } =
+        await supabaseClient
+            .from("horses")
+            .select("brand")
+            .eq("archived", false);
+
+    if (error) {
+
+        console.error(
+            "Brand dropdown error:",
+            error
+        );
+
+        return;
+    }
+
+
+    const brandSelect =
+        document.getElementById(
+            "brandSelect"
+        );
+
+    if (!brandSelect) {
+        return;
+    }
+
+
+    const currentValue =
+        brandSelect.value;
+
+
+    const uniqueBrands =
+        [...new Set(
+            (data || [])
+                .map(horse =>
+                    horse.brand?.trim()
+                )
+                .filter(Boolean)
+        )]
+        .sort((a, b) =>
+            a.localeCompare(b)
+        );
+
+
+    brandSelect.innerHTML = `
+        <option value="">
+            Select Brand
+        </option>
+
+        <option value="new">
+            Other / New Brand
+        </option>
+    `;
+
+
+    uniqueBrands.forEach(brand => {
+
+        const option =
+            document.createElement(
+                "option"
+            );
+
+        option.value = brand;
+        option.textContent = brand;
+
+        brandSelect.appendChild(
+            option
+        );
+
+    });
+
+
+    if (
+        currentValue &&
+        Array.from(
+            brandSelect.options
+        ).some(
+            option =>
+                option.value ===
+                currentValue
+        )
+    ) {
+
+        brandSelect.value =
+            currentValue;
+
+    }
+
+}
+
+function setupBrandDropdown() {
+
+    const brandSelect =
+        document.getElementById(
+            "brandSelect"
+        );
+
+    const brandInput =
+        document.getElementById(
+            "brand"
+        );
+
+    if (
+        !brandSelect ||
+        !brandInput
+    ) {
+        return;
+    }
+
+    brandSelect.addEventListener(
+        "change",
+        function() {
+
+            if (
+                brandSelect.value ===
+                "new"
+            ) {
+
+                brandInput.style.display =
+                    "inline-block";
+
+                brandInput.value = "";
+
+                brandInput.focus();
+
+            } else {
+
+                brandInput.style.display =
+                    "none";
+
+                brandInput.value =
+                    brandSelect.value;
+            }
+
+        }
+    );
+
+}
+
+setupBrandDropdown();
+loadBrandDropdown();
