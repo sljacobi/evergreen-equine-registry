@@ -622,3 +622,38 @@ select:focus {
     margin: 0;
     min-wid*h: 180px;
 }
+
+/* ========================================
+   PARENT FIELD LAYOUT POLISH
+======================================== */
+
+/* Keep Sire and Dam beside each other */
+#horseForm .parent-field {
+    display: inline-flex;
+    vertical-align: top;
+    align-items: center;
+    gap: 8px;
+
+    width: auto;
+    margin: 4px;
+}
+
+/* Parent dropdown size */
+#horseForm .parent-field select {
+    width: 190px;
+    min-width: 190px;
+}
+
+/* Manual parent name box */
+#horseForm .parent-field input {
+    width: 190px;
+    min-width: 190px;
+}
+
+/* Keep the two parent groups together */
+#horseForm {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 4px;
+}
