@@ -1031,3 +1031,132 @@ select:focus {
     border-color:
         var(--green-light);
 }
+
+/* ========================================
+   EDIT HORSE FINAL FIELD LAYOUT
+======================================== */
+
+/*
+    Two-column modal layout:
+
+    LEFT                    RIGHT
+
+    Registered Name         Breed
+    Gender                  Owner
+    Brand                   Horse Status
+    Origin                  Sire
+    Acquisition Method      Dam
+    Breeding Status
+*/
+
+#editHorseForm .edit-form-grid {
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1fr)
+        minmax(0, 1fr);
+
+    grid-template-areas:
+        "name breed"
+        "gender owner"
+        "brand status"
+        "origin sire"
+        "acquisition dam"
+        "breeding .";
+
+    column-gap: 18px;
+    row-gap: 18px;
+
+    align-items: start;
+}
+
+
+/* Registered Name */
+#editHorseName {
+    grid-area: auto;
+}
+
+#editHorseForm .edit-form-field:has(#editHorseName) {
+    grid-area: name;
+}
+
+
+/* Breed */
+#editHorseForm .edit-form-field:has(#editBreed) {
+    grid-area: breed;
+}
+
+
+/* Gender */
+#editHorseForm .edit-form-field:has(#editGender) {
+    grid-area: gender;
+}
+
+
+/* Owner */
+#editHorseForm .edit-form-field:has(#editOwnerSelect) {
+    grid-area: owner;
+}
+
+
+/* Brand */
+#editHorseForm .edit-form-field:has(#editBrandSelect) {
+    grid-area: brand;
+}
+
+
+/* Horse Status */
+#editHorseForm .edit-form-field:has(#editStatus) {
+    grid-area: status;
+}
+
+
+/* Origin */
+#editHorseForm .edit-form-field:has(#editOrigin) {
+    grid-area: origin;
+}
+
+
+/* Sire */
+#editHorseForm .edit-form-field:has(#editSireSelect) {
+    grid-area: sire;
+}
+
+
+/* Acquisition Method */
+#editHorseForm .edit-form-field:has(#editAcquisitionMethod) {
+    grid-area: acquisition;
+}
+
+
+/* Dam */
+#editHorseForm .edit-form-field:has(#editDamSelect) {
+    grid-area: dam;
+}
+
+
+/* Breeding Status */
+#editHorseForm .edit-form-field:has(#editBreedingStatus) {
+    grid-area: breeding;
+}
+
+@media (max-width: 700px) {
+
+    #editHorseForm .edit-form-grid {
+        grid-template-columns: 1fr;
+
+        grid-template-areas:
+            "name"
+            "breed"
+            "gender"
+            "owner"
+            "brand"
+            "status"
+            "origin"
+            "acquisition"
+            "breeding"
+            "sire"
+            "dam";
+    }
+
+}
