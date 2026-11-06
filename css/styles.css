@@ -165,3 +165,198 @@ select:focus {
     gap: 16px;
     margin: 10px;
 }
+
+/* ================================
+   COMPACT OWNER & BRAND REGISTRIES
+================================ */
+
+#ownersList,
+#brandsList {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.registry-list-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    min-height: 42px;
+    padding: 8px 12px;
+
+    background: #253128;
+    border: 1px solid var(--border-color);
+    border-radius: 7px;
+}
+
+.registry-text-link {
+    padding: 0;
+    margin: 0;
+
+    background: transparent;
+    color: var(--green-light);
+
+    font-size: 16px;
+    font-weight: 700;
+
+    border: none;
+    box-shadow: none;
+}
+
+.registry-text-link:hover {
+    background: transparent;
+    color: #a5d4aa;
+    text-decoration: underline;
+    transform: none;
+}
+
+.registry-count {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    min-width: 32px;
+    height: 28px;
+    padding: 0 9px;
+
+    background: var(--green-primary);
+    color: white;
+
+    border-radius: 20px;
+    font-weight: 700;
+}
+
+/* ========================================
+   REGISTRY POLISH OVERRIDES
+======================================== */
+
+/* Owners and Brands side-by-side */
+.registry-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+    align-items: start;
+}
+
+/* Compact owner and brand lists */
+#ownersList,
+#brandsList {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.registry-list-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 42px;
+    padding: 8px 12px;
+    background: #253128;
+    border: 1px solid var(--border-color);
+    border-radius: 7px;
+}
+
+.registry-text-link {
+    padding: 0;
+    margin: 0;
+    background: transparent;
+    color: var(--green-light);
+    border: none;
+    box-shadow: none;
+    font-size: 16px;
+    font-weight: 700;
+    text-align: left;
+}
+
+.registry-text-link:hover {
+    background: transparent;
+    color: #A5D4AA;
+    text-decoration: underline;
+    transform: none;
+}
+
+.registry-count {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 34px;
+    height: 28px;
+    padding: 0 9px;
+    background: var(--green-primary);
+    color: white;
+    border-radius: 20px;
+    font-weight: 700;
+}
+
+/* Horse registry cards */
+#horseList .card {
+    width: 100%;
+    max-width: none;
+}
+
+.horse-card-layout {
+    display: grid;
+    grid-template-columns: 220px minmax(0, 1fr);
+    gap: 20px;
+    align-items: start;
+}
+
+.horse-preview-image,
+.horse-preview-placeholder {
+    display: block;
+    width: 220px;
+    height: 150px;
+    border-radius: 10px;
+    flex-shrink: 0;
+}
+
+.horse-preview-image {
+    object-fit: cover;
+    object-position: center;
+}
+
+.horse-preview-placeholder {
+    background: #3B4940;
+    border: 1px solid var(--border-color);
+}
+
+.horse-card-info {
+    min-width: 0;
+}
+
+/* All clickable horse names */
+.horse-link {
+    cursor: pointer;
+    color: var(--green-light) !important;
+    font-weight: 700;
+    text-decoration: underline;
+    text-decoration-color: rgba(125, 183, 132, 0.55);
+    text-underline-offset: 4px;
+    transition:
+        color 0.2s ease,
+        text-decoration-color 0.2s ease;
+}
+
+.horse-link:hover {
+    color: #A5D4AA !important;
+    text-decoration-color: #A5D4AA;
+}
+
+/* Mobile layout */
+@media (max-width: 800px) {
+    .registry-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .horse-card-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .horse-preview-image,
+    .horse-preview-placeholder {
+        width: 100%;
+        height: 220px;
+    }
+}

@@ -520,20 +520,21 @@ Object.entries(ownerCounts)
     .forEach(([owner,count]) => {
 
         ownersList.innerHTML += `
-    <div class="card">
+    <div class="registry-list-item">
 
-        <h3
+        <button
+            class="registry-text-link"
             onclick="filterOwner('${owner}')"
-            style="cursor:pointer;"
         >
             ${owner}
-        </h3>
+        </button>
 
-        <p>${count} horse(s)</p>
+        <span class="registry-count">
+            ${count}
+        </span>
 
     </div>
 `;
-
 });
 
 const brandCounts = {};
@@ -553,19 +554,21 @@ Object.entries(brandCounts)
     .forEach(([brand,count]) => {
 
         brandsList.innerHTML += `
-            <div class="card">
+    <div class="registry-list-item">
 
-                <h3
-                    onclick="filterBrand('${brand}')"
-                    style="cursor:pointer;"
-                >
-                    ${brand}
-                </h3>
+        <button
+            class="registry-text-link"
+            onclick="filterBrand('${brand}')"
+        >
+            ${brand}
+        </button>
 
-                <p>${count} horse(s)</p>
+        <span class="registry-count">
+            ${count}
+        </span>
 
-            </div>
-        `;
+    </div>
+`;
 
     });
 
