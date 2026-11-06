@@ -605,6 +605,33 @@ async function archiveHorse(id) {
 
 async function editHorse(id) {
 
+    const dialog =
+        document.getElementById(
+            "editHorseDialog"
+        );
+
+    const editForm =
+        document.getElementById(
+            "editHorseForm"
+        );
+
+    if (
+        !dialog ||
+        !editForm
+    ) {
+
+        console.error(
+            "Edit Horse dialog or form was not found."
+        );
+
+        alert(
+            "The Edit Horse window could not be opened."
+        );
+
+        return;
+    }
+
+
     const { data, error } =
         await supabaseClient
             .from("horses")
@@ -612,247 +639,120 @@ async function editHorse(id) {
             .eq("id", id)
             .single();
 
+
     if (error) {
-        console.error(error);
+
+        console.error(
+            "Edit Horse loading error:",
+            error
+        );
+
+        alert(
+            "The horse information could not be loaded."
+        );
+
         return;
     }
 
-    editingHorseId = id;
 
-    document.getElementById("horseName").value =
+    if (!data) {
+
+        alert(
+            "The selected horse could not be found."
+        );
+
+        return;
+    }
+
+
+    document.getElementById(
+        "editHorseId"
+    ).value =
+        data.id || "";
+
+
+    document.getElementById(
+        "editHorseName"
+    ).value =
         data.registered_name || "";
 
-    document.getElementById("breed").value =
+
+    document.getElementById(
+        "editBreed"
+    ).value =
         data.breed || "";
 
-    document.getElementById("gender").value =
-        data.gender || "";
 
-    document.getElementById("age").value =
-        data.age || "";
-
-    const ownerSelect =
     document.getElementById(
-        "ownerSelect"
-    );
+        "editGender"
+    ).value =
+        data.gender || "Stallion";
 
-const ownerInput =
+
     document.getElementById(
-        "owner"
-    );
+        "editAge"
+    ).value =
+        data.age ?? "";
 
-const ownerExists =
-    Array.from(
-        ownerSelect.options
-    ).some(
-        option =>
-            option.value ===
-            data.owner_name
-    );
 
-if (
-    data.owner_name &&
-    ownerExists
-) {
+    document.getElementById(
+        "editOwner"
+    ).value =
+        data.owner_name || "";
 
-    ownerSelect.value =
-        data.owner_name;
 
-    ownerInput.value =
-        data.owner_name;
+    document.getElementById(
+        "editBrand"
+    ).value =
+        data.brand || "";
 
-    ownerInput.style.display =
-        "none";
 
-} else if (data.owner_name) {
-
-    ownerSelect.value =
-        "new";
-
-    ownerInput.value =
-        data.owner_name;
-
-    ownerInput.style.display =
-        "inline-block";
-
-} else {
-
-    ownerSelect.value = "";
-
-    ownerInput.value = "";
-
-    ownerInput.style.display =
-        "none";
-}
-
-    document.getElementById("status").value =
+    document.getElementById(
+        "editStatus"
+    ).value =
         data.horse_status || "Active";
 
-    document.getElementById("origin").value =
+
+    document.getElementById(
+        "editOrigin"
+    ).value =
         data.horse_origin || "Wild Caught";
 
-    const brandSelect =
+
     document.getElementById(
-        "brandSelect"
-    );
+        "editSire"
+    ).value =
+        data.sire || "";
 
-const brandInput =
+
     document.getElementById(
-        "brand"
-    );
-
-const brandExists =
-    Array.from(
-        brandSelect.options
-    ).some(
-        option =>
-            option.value ===
-            data.brand
-    );
-
-if (
-    data.brand &&
-    brandExists
-) {
-
-    brandSelect.value =
-        data.brand;
-
-    brandInput.value =
-        data.brand;
-
-    brandInput.style.display =
-        "none";
-
-} else if (data.brand) {
-
-    brandSelect.value =
-        "new";
-
-    brandInput.value =
-        data.brand;
-
-    brandInput.style.display =
-        "inline-block";
-
-} else {
-
-    brandSelect.value = "";
-
-    brandInput.value = "";
-
-    brandInput.style.display =
-        "none";
-}
-
-        const sireSelect =
-        document.getElementById(
-            "sireSelect"
-        );
-
-    const damSelect =
-        document.getElementById(
-            "damSelect"
-        );
-
-    const sireInput =
-        document.getElementById(
-            "sire"
-        );
-
-    const damInput =
-        document.getElementById(
-            "dam"
-        );
+        "editDam"
+    ).value =
+        data.dam || "";
 
 
-    const sireExists =
-        Array.from(
-            sireSelect.options
-        ).some(
-            option =>
-                option.value === data.sire
-        );
+    document.getElementById(
+        "editAcquisitionMethod"
+    ).value =
+        data.acquisition_method ||
+        "Wild Capture";
 
 
-    if (data.sire && sireExists) {
+    document.getElementById(
+        "editBreedingStatus"
+    ).value =
+        data.breeding_status ||
+        "Available";
 
-        sireSelect.value =
-            data.sire;
 
-        sireInput.value =
-            data.sire;
-
-        sireInput.style.display =
-            "none";
-
-    } else if (data.sire) {
-
-        sireSelect.value =
-            "unregistered";
-
-        sireInput.value =
-            data.sire;
-
-        sireInput.style.display =
-            "inline-block";
-
-    } else {
-
-        sireSelect.value = "";
-
-        sireInput.value = "";
-
-        sireInput.style.display =
-            "none";
+    if (!dialog.open) {
+        dialog.showModal();
     }
 
 
-    const damExists =
-        Array.from(
-            damSelect.options
-        ).some(
-            option =>
-                option.value === data.dam
-        );
-
-
-    if (data.dam && damExists) {
-
-        damSelect.value =
-            data.dam;
-
-        damInput.value =
-            data.dam;
-
-        damInput.style.display =
-            "none";
-
-    } else if (data.dam) {
-
-        damSelect.value =
-            "unregistered";
-
-        damInput.value =
-            data.dam;
-
-        damInput.style.display =
-            "inline-block";
-
-    } else {
-
-        damSelect.value = "";
-
-        damInput.value = "";
-
-        damInput.style.display =
-            "none";
-    }
-
-    horseForm.querySelector(
-        "button[type='submit']"
-    ).textContent =
-        "Save Changes";
+    document.getElementById(
+        "editHorseName"
+    ).focus();
 
 }
 
@@ -2388,3 +2288,61 @@ function setupOwnerDropdown() {
 
 setupOwnerDropdown();
 loadOwnerDropdown();
+
+// =====*==================================*// EDIT HORSE DIALOG CONTROLS
+// =*======================================
+
+window.closeEditHorseDialog =
+function() {
+
+    const dialog =
+        document.getElementById(
+            "editHorseDialog"
+        );
+
+    const editForm =
+        document.getElementById(
+            "editHorseForm"
+        );
+
+
+    if (
+        dialog &&
+        dialog.open
+    ) {
+
+        dialog.close();
+    }
+
+
+    if (editForm) {
+        editForm.reset();
+    }
+
+};
+
+const editHorseDialog =
+    document.getElementById(
+        "editHorseDialog"
+    );
+
+
+if (editHorseDialog) {
+
+    editHorseDialog.addEventListener(
+        "close",
+        function() {
+
+            const editForm =
+                document.getElementById(
+                    "editHorseForm"
+                );
+
+            if (editForm) {
+                editForm.reset();
+            }
+
+        }
+    );
+
+}
