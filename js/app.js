@@ -737,17 +737,122 @@ async function editHorse(id) {
         data.horse_origin || "Wild Caught";
 
 
-    document.getElementById(
-        "editSire"
-    ).value =
-        data.sire || "";
+        await loadEditParentDropdowns(
+        data.id
+    );
 
 
-    document.getElementById(
-        "editDam"
-    ).value =
-        data.dam || "";
+    const editSireSelect =
+        document.getElementById(
+            "editSireSelect"
+        );
 
+    const editDamSelect =
+        document.getElementById(
+            "editDamSelect"
+        );
+
+    const editSireInput =
+        document.getElementById(
+            "editSire"
+        );
+
+    const editDamInput =
+        document.getElementById(
+            "editDam"
+        );
+
+
+    const editSireExists =
+        Array.from(
+            editSireSelect.options
+        ).some(
+            option =>
+                option.value ===
+                data.sire
+        );
+
+
+    if (
+        data.sire &&
+        editSireExists
+    ) {
+
+        editSireSelect.value =
+            data.sire;
+
+        editSireInput.value =
+            data.sire;
+
+        editSireInput.style.display =
+            "none";
+
+    } else if (data.sire) {
+
+        editSireSelect.value =
+            "unregistered";
+
+        editSireInput.value =
+            data.sire;
+
+        editSireInput.style.display =
+            "block";
+
+    } else {
+
+        editSireSelect.value = "";
+
+        editSireInput.value = "";
+
+        editSireInput.style.display =
+            "none";
+    }
+
+
+    const editDamExists =
+        Array.from(
+            editDamSelect.options
+        ).some(
+            option =>
+                option.value ===
+                data.dam
+        );
+
+
+    if (
+        data.dam &&
+        editDamExists
+    ) {
+
+        editDamSelect.value =
+            data.dam;
+
+        editDamInput.value =
+            data.dam;
+
+        editDamInput.style.display =
+            "none";
+
+    } else if (data.dam) {
+
+        editDamSelect.value =
+            "unregistered";
+
+        editDamInput.value =
+            data.dam;
+
+        editDamInput.style.display =
+            "block";
+
+    } else {
+
+        editDamSelect.value = "";
+
+        editDamInput.value = "";
+
+        editDamInput.style.display =
+            "none";
+    }
 
     document.getElementById(
         "editAcquisitionMethod"
@@ -2704,6 +2809,8 @@ if (editHorseForm) {
 
             await loadEditBrandDropdown();
 
+            await loadEditParentDropdowns();
+
             await loadBreedingHistory();
 
             await loadMarketplace();
@@ -2980,3 +3087,225 @@ function setupEditBrandDropdown() {
 
 setupEditBrandDropdown();
 loadEditBrandDropdown();
+
+// ========================================
+// EDIT HORSE SMART SIRE + DAM
+// ========================================
+
+async function loadEditParentDropdowns(
+    currentHorseId = ""
+) {
+
+    const sireSelect =
+        document.getElementById(
+            "editSireSelect"
+        );
+
+    const damSelect =
+        document.getElementById(
+            "editDamSelect"
+        );
+
+
+    if (
+        !sireSelect ||
+        !damSelect
+    ) {
+        return;
+    }
+
+
+    const { data, error } =
+        await supabaseClient
+            .from("horses")
+            .select(
+                "id, registered_name, gender, archived"
+            )
+            .eq("archived", false)
+            .order("registered_name");
+
+
+    if (error) {
+
+        console.error(
+            "Edit Parent dropdown error:",
+            error
+        );
+
+        return;
+    }
+
+
+    sireSelect.innerHTML = `
+        <option value="">
+            Select Sire
+        </option>
+
+        <option value="unregistered">
+            Other / Unregistered Sire
+        </option>
+    `;
+
+
+    damSelect.innerHTML = `
+        <option value="">
+            Select Dam
+        </option>
+
+        <option value="unregistered">
+            Other / Unregistered Dam
+        </option>
+    `;
+
+
+    (data || []).forEach(horse => {
+
+        if (
+            String(horse.id) ===
+            String(currentHorseId)
+        ) {
+            return;
+        }
+
+
+        if (
+            horse.gender === "Stallion" &&
+            horse.registered_name
+        ) {
+
+            const sireOption =
+                document.createElement(
+                    "option"
+                );
+
+            sireOption.value =
+                horse.registered_name;
+
+            sireOption.textContent =
+                horse.registered_name;
+
+            sireSelect.appendChild(
+                sireOption
+            );
+        }
+
+
+        if (
+            horse.gender === "Mare" &&
+            horse.registered_name
+        ) {
+
+            const damOption =
+                document.createElement(
+                    "option"
+                );
+
+            damOption.value =
+                horse.registered_name;
+
+            damOption.textContent =
+                horse.registered_name;
+
+            damSelect.appendChild(
+                damOption
+            );
+        }
+
+    });
+
+}
+
+function setupEditParentDropdowns() {
+
+    const sireSelect =
+        document.getElementById(
+            "editSireSelect"
+        );
+
+    const damSelect =
+        document.getElementById(
+            "editDamSelect"
+        );
+
+    const sireInput =
+        document.getElementById(
+            "editSire"
+        );
+
+    const damInput =
+        document.getElementById(
+            "editDam"
+        );
+
+
+    if (
+        !sireSelect ||
+        !damSelect ||
+        !sireInput ||
+        !damInput
+    ) {
+        return;
+    }
+
+
+    sireSelect.addEventListener(
+        "change",
+        function() {
+
+            if (
+                sireSelect.value ===
+                "unregistered"
+            ) {
+
+                sireInput.style.display =
+                    "block";
+
+                sireInput.value = "";
+
+                sireInput.focus();
+
+            } else {
+
+                sireInput.style.display =
+                    "none";
+
+                sireInput.value =
+                    sireSelect.value;
+            }
+
+        }
+    );
+
+
+    damSelect.addEventListener(
+        "change",
+        function() {
+
+            if (
+                damSelect.value ===
+                "unregistered"
+            ) {
+
+                damInput.style.display =
+                    "block";
+
+                damInput.value = "";
+
+                damInput.focus();
+
+            } else {
+
+                damInput.style.display =
+                    "none";
+
+                damInput.value =
+                    damSelect.value;
+            }
+
+        }
+    );
+
+}
+
+setupEditParentDropdowns();
+loadEditParentDropdowns();

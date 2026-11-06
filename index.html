@@ -691,28 +691,59 @@
             </label>
 
 
-            <label class="edit-form-field">
-                <span>Sire</span>
+            <div class="edit-form-field">
 
-                <input
-                    type="text"
-                    id="editSire"
-                    placeholder="Sire name"
-                >
+    <label for="editSireSelect">
+        Sire
+    </label>
 
-            </label>
+    <select id="editSireSelect">
 
+        <option value="">
+            Select Sire
+        </option>
 
-            <label class="edit-form-field">
-                <span>Dam</span>
+        <option value="unregistered">
+            Other / Unregistered Sire
+        </option>
 
-                <input
-                    type="text"
-                    id="editDam"
-                    placeholder="Dam name"
-                >
+    </select>
 
-            </label>
+    <input
+        type="text"
+        id="editSire"
+        placeholder="Enter Sire Name"
+        style="display:none;"
+    >
+
+</div>
+
+            <div class="edit-form-field">
+
+    <label for="editDamSelect">
+        Dam
+    </label>
+
+    <select id="editDamSelect">
+
+        <option value="">
+            Select Dam
+        </option>
+
+        <option value="unregistered">
+            Other / Unregistered Dam
+        </option>
+
+    </select>
+
+    <input
+        type="text"
+        id="editDam"
+        placeholder="Enter Dam Name"
+        style="display:none;"
+    >
+
+</div>
 
 
             <label class="edit-form-field">
