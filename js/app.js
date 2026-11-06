@@ -143,7 +143,7 @@ horseForm.addEventListener("submit", async (e) => {
     const horseName = document.getElementById("horseName").value;
     const breed = document.getElementById("breed").value;
     const gender = document.getElementById("gender").value;
-    const age = Number(document.getElementById("age").value);
+
     const owner =
     document.getElementById("owner").value;
 
@@ -192,7 +192,6 @@ const previousOwner =
     registered_name: horseName,
     breed: breed,
     gender: gender,
-    age: age,
 
     owner_name: owner,
 
@@ -259,7 +258,6 @@ console.log("History Error:", historyError);
     registered_name: horseName,
     breed: breed,
     gender: gender,
-    age: age,
 
     owner_name: owner,
 
@@ -418,8 +416,6 @@ horseList.innerHTML += `
             ${horse.breed || "Unknown"}
             |
             ${horse.gender || "Unknown"}
-            |
-            Age ${horse.age || "?"}
         </p>
 
         <p>
@@ -687,13 +683,6 @@ async function editHorse(id) {
         "editGender"
     ).value =
         data.gender || "Stallion";
-
-
-    document.getElementById(
-        "editAge"
-    ).value =
-        data.age ?? "";
-
 
     document.getElementById(
         "editOwner"
@@ -1259,11 +1248,6 @@ ${
         <p>
             Gender:
             ${data.gender || "Unknown"}
-        </p>
-
-        <p>
-            Age:
-            ${data.age || "Unknown"}
         </p>
 
         <p>
@@ -2389,13 +2373,6 @@ if (editHorseForm) {
                     "editGender"
                 ).value;
 
-
-            const ageValue =
-                document.getElementById(
-                    "editAge"
-                ).value;
-
-
             const owner =
                 document.getElementById(
                     "editOwner"
@@ -2495,33 +2472,6 @@ if (editHorseForm) {
                 return;
             }
 
-
-            const age =
-                ageValue === ""
-                    ? null
-                    : Number(ageValue);
-
-
-            if (
-                age !== null &&
-                (
-                    Number.isNaN(age) ||
-                    age < 0
-                )
-            ) {
-
-                alert(
-                    "Please enter a valid age."
-                );
-
-                document.getElementById(
-                    "editAge"
-                ).focus();
-
-                return;
-            }
-
-
             const saveButton =
                 editHorseForm.querySelector(
                     "button[type='submit']"
@@ -2598,9 +2548,6 @@ if (editHorseForm) {
 
                         gender:
                             gender,
-
-                        age:
-                            age,
 
                         owner_name:
                             owner,
