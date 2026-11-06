@@ -6,8 +6,6 @@ const horseList = document.getElementById("horseList");
 let ownerFilter = "";
 let brandFilter = "";
 
-let editingHorseId = null;
-
 const saleForm =
     document.getElementById("saleForm");
 
@@ -172,114 +170,45 @@ const breedingStatus =
         "breedingStatus"
     ).value;
 
-  let error;
-
-if (editingHorseId) {
-
-const { data: existingHorse } =
+const { error } =
     await supabaseClient
-        .from("horses")
-        .select("*")
-        .eq("id", editingHorseId)
-        .single();
-
-const previousOwner =
-    existingHorse?.owner_name || "";
-
-    ({ error } = await supabaseClient
-        .from("horses")
-       .update({
-    registered_name: horseName,
-    breed: breed,
-    gender: gender,
-
-    owner_name: owner,
-
-    horse_status: horseStatus,
-
-    horse_origin: horseOrigin,
-
-    brand: brand,
-
-    sire: sire,
-
-    dam: dam,
-
-    acquisition_method:
-        acquisitionMethod,
-
-    breeding_status:
-        breedingStatus,
-
-}) 
-        .eq("id", editingHorseId));     
-
-if (
-    previousOwner &&
-    previousOwner !== owner
-) {
-
-    console.log(
-        "TRANSFER DETECTED",
-        previousOwner,
-        "->",
-        owner
-    );
-
-    const { error: historyError } =
-    await supabaseClient
-        .from("ownership_history")
-
-.insert([
-{
-    horse_id: editingHorseId,
-    horse_name: horseName,
-    previous_owner: previousOwner,
-    new_owner: owner,
-    transfer_date: new Date()
-}
-]);
-
-console.log("History Error:", historyError);
-
-    console.log(
-        "History Error:",
-        historyError
-    );
-
-}
-
-} else {
-
-    ({ error } = await supabaseClient
         .from("horses")
         .insert([
             {
-    registered_name: horseName,
-    breed: breed,
-    gender: gender,
+                registered_name:
+                    horseName,
 
-    owner_name: owner,
+                breed:
+                    breed,
 
-    horse_status: horseStatus,
+                gender:
+                    gender,
 
-    horse_origin: horseOrigin,
+                owner_name:
+                    owner,
 
-    brand: brand,
+                horse_status:
+                    horseStatus,
 
-    sire: sire,
+                horse_origin:
+                    horseOrigin,
 
-    dam: dam,
+                brand:
+                    brand,
 
-    acquisition_method:
-        acquisitionMethod,
+                sire:
+                    sire,
 
-    breeding_status:
-        breedingStatus,
-}
-        ]));
+                dam:
+                    dam,
 
-}
+                acquisition_method:
+                    acquisitionMethod,
+
+                breeding_status:
+                    breedingStatus
+            }
+        ]);
 
     if (error) {
         console.error(error);
@@ -288,12 +217,6 @@ console.log("History Error:", historyError);
     }
 
     horseForm.reset();
-
-    editingHorseId = null;
-
-horseForm.querySelector(
-    "button[type='submit']"
-).textContent = "Add Horse";
 
 loadHorses();
 loadHorseDropdown();
