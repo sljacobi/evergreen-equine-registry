@@ -1241,3 +1241,18 @@ select:focus {
 #horseList::-webkit-scrollbar-thumb:hover {
     background: var(--green-light);
 }
+
+/* ========================================
+   DISABLED / SAVING BUTTONS
+======================================== */
+
+button:disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
+    transform: none;
+}
+
+button:disabled:hover {
+    background: var(--green-primary);
+    transform: none;
+}

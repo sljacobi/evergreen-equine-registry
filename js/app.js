@@ -368,6 +368,25 @@ if (
     return;
 }
 
+// ========================================
+// ADD HORSE SUBMIT PROTECTION
+// ========================================
+
+const addHorseButton =
+    horseForm.querySelector(
+        "button[type='submit']"
+    );
+
+
+if (addHorseButton.disabled) {
+    return;
+}
+
+
+addHorseButton.disabled = true;
+
+addHorseButton.textContent =
+    "Adding Horse...";
 
 const { error } =
     await supabaseClient
@@ -410,12 +429,33 @@ const { error } =
         ]);
 
     if (error) {
-        console.error(error);
-        alert("Error saving horse.");
-        return;
-    }
+
+    console.error(
+        "Add Horse error:",
+        error
+    );
+
+    addHorseButton.disabled =
+        false;
+
+    addHorseButton.textContent =
+        "Add Horse";
+
+    alert(
+        "Error saving horse."
+    );
+
+    return;
+}
 
     horseForm.reset();
+
+addHorseButton.disabled =
+    false;
+
+addHorseButton.textContent =
+    "Add Horse";
+
 
 loadHorses();
 loadHorseDropdown();
