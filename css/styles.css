@@ -1160,3 +1160,114 @@ select:focus {
     }
 
 }
+
+/* ========================================
+   EDIT HORSE EXPLICIT FIELD PLACEMENT
+======================================== */
+
+#editHorseForm .edit-form-grid {
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1fr)
+        minmax(0, 1fr);
+
+    grid-template-areas:
+        "name breed"
+        "gender owner"
+        "brand status"
+        "origin sire"
+        "acquisition sire"
+        "breeding dam"
+        ". dam";
+
+    column-gap: 18px;
+    row-gap: 18px;
+
+    align-items: start;
+}
+
+
+#editHorseForm .edit-area-name {
+    grid-area: name;
+}
+
+
+#editHorseForm .edit-area-breed {
+    grid-area: breed;
+}
+
+
+#editHorseForm .edit-area-gender {
+    grid-area: gender;
+}
+
+
+#editHorseForm .edit-area-owner {
+    grid-area: owner;
+}
+
+
+#editHorseForm .edit-area-brand {
+    grid-area: brand;
+}
+
+
+#editHorseForm .edit-area-status {
+    grid-area: status;
+}
+
+
+#editHorseForm .edit-area-origin {
+    grid-area: origin;
+}
+
+
+#editHorseForm .edit-area-sire {
+    grid-area: sire;
+}
+
+
+#editHorseForm .edit-area-dam {
+    grid-area: dam;
+}
+
+
+#editHorseForm .edit-area-acquisition {
+    grid-area: acquisition;
+}
+
+
+#editHorseForm .edit-area-breeding {
+    grid-area: breeding;
+}
+
+
+/* Keep expanding parent controls together */
+#editHorseForm .edit-area-sire,
+#editHorseForm .edit-area-dam {
+    align-self: start;
+}
+
+
+/* Mobile layout */
+@media (max-width: 700px) {
+
+    #editHorseForm .edit-form-grid {
+        grid-template-columns: 1fr;
+
+        grid-template-areas:
+            "name"
+            "breed"
+            "gender"
+            "owner"
+            "brand"
+            "status"
+            "origin"
+            "acquisition"
+            "breeding"
+            "sire"
+            "dam";
+    }
+
+}
