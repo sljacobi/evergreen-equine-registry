@@ -1033,136 +1033,7 @@ select:focus {
 }
 
 /* ========================================
-   EDIT HORSE FINAL FIELD LAYOUT
-======================================== */
-
-/*
-    Two-column modal layout:
-
-    LEFT                    RIGHT
-
-    Registered Name         Breed
-    Gender                  Owner
-    Brand                   Horse Status
-    Origin                  Sire
-    Acquisition Method      Dam
-    Breeding Status
-*/
-
-#editHorseForm .edit-form-grid {
-    display: grid;
-
-    grid-template-columns:
-        minmax(0, 1fr)
-        minmax(0, 1fr);
-
-    grid-template-areas:
-        "name breed"
-        "gender owner"
-        "brand status"
-        "origin sire"
-        "acquisition dam"
-        "breeding .";
-
-    column-gap: 18px;
-    row-gap: 18px;
-
-    align-items: start;
-}
-
-
-/* Registered Name */
-#editHorseName {
-    grid-area: auto;
-}
-
-#editHorseForm .edit-form-field:has(#editHorseName) {
-    grid-area: name;
-}
-
-
-/* Breed */
-#editHorseForm .edit-form-field:has(#editBreed) {
-    grid-area: breed;
-}
-
-
-/* Gender */
-#editHorseForm .edit-form-field:has(#editGender) {
-    grid-area: gender;
-}
-
-
-/* Owner */
-#editHorseForm .edit-form-field:has(#editOwnerSelect) {
-    grid-area: owner;
-}
-
-
-/* Brand */
-#editHorseForm .edit-form-field:has(#editBrandSelect) {
-    grid-area: brand;
-}
-
-
-/* Horse Status */
-#editHorseForm .edit-form-field:has(#editStatus) {
-    grid-area: status;
-}
-
-
-/* Origin */
-#editHorseForm .edit-form-field:has(#editOrigin) {
-    grid-area: origin;
-}
-
-
-/* Sire */
-#editHorseForm .edit-form-field:has(#editSireSelect) {
-    grid-area: sire;
-}
-
-
-/* Acquisition Method */
-#editHorseForm .edit-form-field:has(#editAcquisitionMethod) {
-    grid-area: acquisition;
-}
-
-
-/* Dam */
-#editHorseForm .edit-form-field:has(#editDamSelect) {
-    grid-area: dam;
-}
-
-
-/* Breeding Status */
-#editHorseForm .edit-form-field:has(#editBreedingStatus) {
-    grid-area: breeding;
-}
-
-@media (max-width: 700px) {
-
-    #editHorseForm .edit-form-grid {
-        grid-template-columns: 1fr;
-
-        grid-template-areas:
-            "name"
-            "breed"
-            "gender"
-            "owner"
-            "brand"
-            "status"
-            "origin"
-            "acquisition"
-            "breeding"
-            "sire"
-            "dam";
-    }
-
-}
-
-/* ========================================
-   EDIT HORSE EXPLICIT FIELD PLACEMENT
+   EDIT HORSE CLEAN TWO-COLUMN LAYOUT
 ======================================== */
 
 #editHorseForm .edit-form-grid {
@@ -1188,64 +1059,75 @@ select:focus {
 }
 
 
-#editHorseForm .edit-area-name {
+/* 1. Registered Name */
+#editHorseForm .edit-form-grid > :nth-child(1) {
     grid-area: name;
 }
 
 
-#editHorseForm .edit-area-breed {
+/* 2. Breed */
+#editHorseForm .edit-form-grid > :nth-child(2) {
     grid-area: breed;
 }
 
 
-#editHorseForm .edit-area-gender {
+/* 3. Gender */
+#editHorseForm .edit-form-grid > :nth-child(3) {
     grid-area: gender;
 }
 
 
-#editHorseForm .edit-area-owner {
+/* 4. Owner */
+#editHorseForm .edit-form-grid > :nth-child(4) {
     grid-area: owner;
 }
 
 
-#editHorseForm .edit-area-brand {
+/* 5. Brand */
+#editHorseForm .edit-form-grid > :nth-child(5) {
     grid-area: brand;
 }
 
 
-#editHorseForm .edit-area-status {
+/* 6. Horse Status */
+#editHorseForm .edit-form-grid > :nth-child(6) {
     grid-area: status;
 }
 
 
-#editHorseForm .edit-area-origin {
+/* 7. Origin */
+#editHorseForm .edit-form-grid > :nth-child(7) {
     grid-area: origin;
 }
 
 
-#editHorseForm .edit-area-sire {
+/* 8. Sire */
+#editHorseForm .edit-form-grid > :nth-child(8) {
     grid-area: sire;
 }
 
 
-#editHorseForm .edit-area-dam {
+/* 9. Dam */
+#editHorseForm .edit-form-grid > :nth-child(9) {
     grid-area: dam;
 }
 
 
-#editHorseForm .edit-area-acquisition {
+/* 10. Acquisition Method */
+#editHorseForm .edit-form-grid > :nth-child(10) {
     grid-area: acquisition;
 }
 
 
-#editHorseForm .edit-area-breeding {
+/* 11. Breeding Status */
+#editHorseForm .edit-form-grid > :nth-child(11) {
     grid-area: breeding;
 }
 
 
-/* Keep expanding parent controls together */
-#editHorseForm .edit-area-sire,
-#editHorseForm .edit-area-dam {
+/* Keep expanding parent fields together */
+#editHorseForm .edit-form-grid > :nth-child(8),
+#editHorseForm .edit-form-grid > :nth-child(9) {
     align-self: start;
 }
 
