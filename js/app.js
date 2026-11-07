@@ -138,12 +138,17 @@ loadHorseDropdown();
 horseForm.addEventListener("submit", async (e) => {
     e.preventDefault();
 
-    const horseName = document.getElementById("horseName").value;
+    const horseName =
+    document.getElementById(
+        "horseName"
+    ).value.trim();
     const breed = document.getElementById("breed").value;
     const gender = document.getElementById("gender").value;
 
     const owner =
-    document.getElementById("owner").value;
+    document.getElementById(
+        "owner"
+    ).value.trim();
 
 const horseStatus =
     document.getElementById("status").value;
@@ -152,13 +157,19 @@ const horseOrigin =
     document.getElementById("origin").value;
 
 const brand =
-    document.getElementById("brand").value;
+    document.getElementById(
+        "brand"
+    ).value.trim();
 
 const sire =
-    document.getElementById("sire").value;
+    document.getElementById(
+        "sire"
+    ).value.trim();
 
 const dam =
-    document.getElementById("dam").value;
+    document.getElementById(
+        "dam"
+    ).value.trim();
 
 const acquisitionMethod =
     document.getElementById(
@@ -169,6 +180,104 @@ const breedingStatus =
     document.getElementById(
         "breedingStatus"
     ).value;
+
+// ========================================
+// ADD HORSE VALIDATION
+// ========================================
+
+if (!horseName) {
+
+    alert(
+        "Please enter a Registered Name."
+    );
+
+    document.getElementById(
+        "horseName"
+    ).focus();
+
+    return;
+}
+
+
+if (!breed) {
+
+    alert(
+        "Please select a Breed."
+    );
+
+    document.getElementById(
+        "breed"
+    ).focus();
+
+    return;
+}
+
+
+if (!owner) {
+
+    alert(
+        "Please select or enter an Owner."
+    );
+
+    document.getElementById(
+        "ownerSelect"
+    ).focus();
+
+    return;
+}
+
+// ========================================
+// DUPLICATE HORSE NAME CHECK
+// ========================================
+
+const {
+    data: duplicateHorses,
+    error: duplicateCheckError
+} =
+    await supabaseClient
+        .from("horses")
+        .select(
+            "id, registered_name"
+        )
+        .ilike(
+            "registered_name",
+            horseName
+        );
+
+
+if (duplicateCheckError) {
+
+    console.error(
+        "Duplicate horse check error:",
+        duplicateCheckError
+    );
+
+    alert(
+        "The Registry could not check whether this horse already exists. Please try again."
+    );
+
+    return;
+}
+
+
+if (
+    duplicateHorses &&
+    duplicateHorses.length > 0
+) {
+
+    alert(
+        'A horse named "' +
+        horseName +
+        '" already exists in the Registry.'
+    );
+
+    document.getElementById(
+        "horseName"
+    ).focus();
+
+    return;
+}
+
 
 const { error } =
     await supabaseClient
