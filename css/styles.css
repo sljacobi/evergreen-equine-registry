@@ -2003,3 +2003,206 @@ button:disabled:hover {
 .compact-text-stat strong {
     color: var(--green-light);
 }
+
+/* ========================================
+   FULL HORSE PROFILE STATS
+======================================== */
+
+.profile-horse-stats {
+    margin:
+        24px 0;
+
+    padding:
+        18px;
+
+    background:
+        #253128;
+
+    border:
+        1px solid
+        var(--border-color);
+
+    border-radius:
+        10px;
+}
+
+
+.profile-stats-header {
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        space-between;
+
+    gap:
+        16px;
+
+    margin-bottom:
+        16px;
+}
+
+
+.profile-stats-header .profile-section-title {
+    margin:
+        0;
+}
+
+
+.profile-edit-stats-button {
+    flex-shrink:
+        0;
+}
+
+
+/* ========================================
+   PROFILE STAT GRID
+======================================== */
+
+.profile-stats-grid {
+    display:
+        grid;
+
+    grid-template-columns:
+        repeat(
+            3,
+            minmax(0, 1fr)
+        );
+
+    gap:
+        10px;
+}
+
+
+.profile-stat-item {
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    gap:
+        5px;
+
+    padding:
+        12px 14px;
+
+    background:
+        #2E3A31;
+
+    border:
+        1px solid
+        rgba(125, 183, 132, 0.18);
+
+    border-radius:
+        8px;
+}
+
+
+.profile-stat-item span {
+    color:
+        #AFC3B3;
+
+    font-size:
+        12px;
+
+    font-weight:
+        700;
+
+    text-transform:
+        uppercase;
+
+    letter-spacing:
+        0.4px;
+}
+
+
+.profile-stat-item strong {
+    color:
+        #F4F4F4;
+
+    font-size:
+        17px;
+}
+
+
+/* Make text stats stand out slightly */
+
+.profile-stat-item:nth-child(5) strong,
+.profile-stat-item:nth-child(8) strong,
+.profile-stat-item:nth-child(9) strong {
+    color:
+        var(--green-light);
+}
+
+
+/* ========================================
+   NO PROFILE STATS YET
+======================================== */
+
+.profile-stats-empty {
+    padding:
+        18px;
+
+    background:
+        rgba(30, 37, 32, 0.45);
+
+    border-radius:
+        8px;
+
+    text-align:
+        center;
+}
+
+
+.profile-stats-empty p {
+    margin:
+        0;
+
+    color:
+        #AFC3B3;
+}
+
+
+/* ========================================
+   PROFILE STATS RESPONSIVE
+======================================== */
+
+@media (max-width: 900px) {
+
+    .profile-stats-grid {
+        grid-template-columns:
+            repeat(
+                2,
+                minmax(0, 1fr)
+            );
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .profile-stats-header {
+        align-items:
+            stretch;
+
+        flex-direction:
+            column;
+    }
+
+
+    .profile-edit-stats-button {
+        width:
+            100%;
+    }
+
+
+    .profile-stats-grid {
+        grid-template-columns:
+            1fr;
+    }
+
+}

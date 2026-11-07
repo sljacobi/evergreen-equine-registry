@@ -1878,6 +1878,203 @@ ${
     ${data.acquisition_method || "Not Recorded"}
 </p>
 
+        <div class="profile-horse-stats">
+
+            <div class="profile-stats-header">
+
+                <h3 class="profile-section-title">
+                    Horse Stats
+                </h3>
+
+
+                <button
+                    type="button"
+                    class="profile-edit-stats-button"
+                    onclick="openHorseStats('${data.id}')"
+                >
+                    ${
+                        [
+                            data.speed,
+                            data.acceleration,
+                            data.health,
+                            data.stamina,
+                            data.handling,
+                            data.shoes_state,
+                            data.bonding_level,
+                            data.personality,
+                            data.metabolism
+                        ].some(
+                            value =>
+                                value !== null &&
+                                value !== undefined &&
+                                value !== ""
+                        )
+                        ? "Edit Stats"
+                        : "Add Stats"
+                    }
+                </button>
+
+            </div>
+
+
+            ${
+                [
+                    data.speed,
+                    data.acceleration,
+                    data.health,
+                    data.stamina,
+                    data.handling,
+                    data.shoes_state,
+                    data.bonding_level,
+                    data.personality,
+                    data.metabolism
+                ].some(
+                    value =>
+                        value !== null &&
+                        value !== undefined &&
+                        value !== ""
+                )
+
+                ? `
+
+                    <div class="profile-stats-grid">
+
+
+                        <div class="profile-stat-item">
+
+                            <span>
+                                Speed
+                            </span>
+
+                            <strong>
+                                ${data.speed ?? "—"} / 10
+                            </strong>
+
+                        </div>
+
+
+                        <div class="profile-stat-item">
+
+                            <span>
+                                Acceleration
+                            </span>
+
+                            <strong>
+                                ${data.acceleration ?? "—"} / 10
+                            </strong>
+
+                        </div>
+
+
+                        <div class="profile-stat-item">
+
+                            <span>
+                                Health
+                            </span>
+
+                            <strong>
+                                ${data.health ?? "—"} / 9
+                            </strong>
+
+                        </div>
+
+
+                        <div class="profile-stat-item">
+
+                            <span>
+                                Stamina
+                            </span>
+
+                            <strong>
+                                ${data.stamina ?? "—"} / 9
+                            </strong>
+
+                        </div>
+
+
+                        <div class="profile-stat-item">
+
+                            <span>
+                                Handling
+                            </span>
+
+                            <strong>
+                                ${data.handling || "—"}
+                            </strong>
+
+                        </div>
+
+
+                        <div class="profile-stat-item">
+
+                            <span>
+                                Shoes State
+                            </span>
+
+                            <strong>
+                                ${data.shoes_state ?? "—"} / 10
+                            </strong>
+
+                        </div>
+
+
+                        <div class="profile-stat-item">
+
+                            <span>
+                                Bonding Level
+                            </span>
+
+                            <strong>
+                                ${data.bonding_level ?? "—"} / 4
+                            </strong>
+
+                        </div>
+
+
+                        <div class="profile-stat-item">
+
+                            <span>
+                                Personality
+                            </span>
+
+                            <strong>
+                                ${data.personality || "—"}
+                            </strong>
+
+                        </div>
+
+
+                        <div class="profile-stat-item">
+
+                            <span>
+                                Metabolism
+                            </span>
+
+                            <strong>
+                                ${data.metabolism || "—"}
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                `
+
+                : `
+
+                    <div class="profile-stats-empty">
+
+                        <p>
+                            No stats have been entered for this horse yet.
+                        </p>
+
+                    </div>
+
+                `
+            }
+
+        </div>
+
 <h3 class="profile-section-title">
     Family
 </h3>
