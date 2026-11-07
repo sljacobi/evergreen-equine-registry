@@ -450,6 +450,109 @@ const { error } =
 
     horseForm.reset();
 
+// ========================================
+// RESET ADD HORSE SMART FIELDS
+// ========================================
+
+const resetOwnerSelect =
+    document.getElementById(
+        "ownerSelect"
+    );
+
+const resetOwnerInput =
+    document.getElementById(
+        "owner"
+    );
+
+const resetBrandSelect =
+    document.getElementById(
+        "brandSelect"
+    );
+
+const resetBrandInput =
+    document.getElementById(
+        "brand"
+    );
+
+const resetSireSelect =
+    document.getElementById(
+        "sireSelect"
+    );
+
+const resetSireInput =
+    document.getElementById(
+        "sire"
+    );
+
+const resetDamSelect =
+    document.getElementById(
+        "damSelect"
+    );
+
+const resetDamInput =
+    document.getElementById(
+        "dam"
+    );
+
+
+resetOwnerSelect.value = "";
+resetOwnerInput.value = "";
+resetOwnerInput.style.display =
+    "none";
+
+
+resetBrandSelect.value = "";
+resetBrandInput.value = "";
+resetBrandInput.style.display =
+    "none";
+
+
+resetSireSelect.value = "";
+resetSireInput.value = "";
+resetSireInput.style.display =
+    "none";
+
+
+resetDamSelect.value = "";
+resetDamInput.value = "";
+resetDamInput.style.display =
+    "none";
+
+
+document.getElementById(
+    "breed"
+).value = "";
+
+
+document.getElementById(
+    "gender"
+).value =
+    "Stallion";
+
+
+document.getElementById(
+    "status"
+).value =
+    "Active";
+
+
+document.getElementById(
+    "origin"
+).value =
+    "Wild Caught";
+
+
+document.getElementById(
+    "acquisitionMethod"
+).value =
+    "Wild Capture";
+
+
+document.getElementById(
+    "breedingStatus"
+).value =
+    "Available";
+
 addHorseButton.disabled =
     false;
 
