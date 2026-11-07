@@ -7,7 +7,7 @@ console.log(
 // ADMIN PANEL ACCESS
 // ========================================
 
-const adminPanelButton =
+const adminNavButton =
     document.getElementById(
         "adminPanelButton"
     );
@@ -43,9 +43,9 @@ function() {
 };
 
 
-if (adminPanelButton) {
+if (adminNavButton) {
 
-    adminPanelButton.addEventListener(
+    adminNavButton.addEventListener(
         "click",
         window.openAdminPanel
     );
