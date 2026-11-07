@@ -1139,3 +1139,105 @@ select:focus {
     }
 
 }
+
+/* ========================================
+   REGISTRY SCROLL AREAS
+======================================== */
+
+/* Ownership History */
+#historyList {
+    max-height: 430px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding-right: 8px;
+}
+
+
+/* Owners Registry */
+#ownersList {
+    max-height: 190px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding-right: 8px;
+}
+
+
+/* Brands Registry */
+#brandsList {
+    max-height: 250px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding-right: 8px;
+}
+
+
+/* Marketplace Archive */
+#marketplaceList {
+    max-height: 350px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding-right: 8px;
+}
+
+
+/* Horse Registry */
+#horseList {
+    max-height: 650px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding-right: 10px;
+}
+
+/* ========================================
+   EVERGREEN SCROLLBARS
+======================================== */
+
+#historyList,
+#ownersList,
+#brandsList,
+#marketplaceList,
+#horseList {
+    scrollbar-width: thin;
+    scrollbar-color:
+        var(--green-primary)
+        #253128;
+}
+
+
+#historyList::-webkit-scrollbar,
+#ownersList::-webkit-scrollbar,
+#brandsList::-webkit-scrollbar,
+#marketplaceList::-webkit-scrollbar,
+#horseList::-webkit-scrollbar {
+    width: 10px;
+}
+
+
+#historyList::-webkit-scrollbar-track,
+#ownersList::-webkit-scrollbar-track,
+#brandsList::-webkit-scrollbar-track,
+#marketplaceList::-webkit-scrollbar-track,
+#horseList::-webkit-scrollbar-track {
+    background: #253128;
+    border-radius: 10px;
+}
+
+
+#historyList::-webkit-scrollbar-thumb,
+#ownersList::-webkit-scrollbar-thumb,
+#brandsList::-webkit-scrollbar-thumb,
+#marketplaceList::-webkit-scrollbar-thumb,
+#horseList::-webkit-scrollbar-thumb {
+    background: var(--green-primary);
+    border-radius: 10px;
+    border: 2px solid #253128;
+}
+
+
+#historyList::-webkit-scrollbar-thumb:hover,
+#ownersList::-webkit-scrollbar-thumb:hover,
+#brandsList::-webkit-scrollbar-thumb:hover,
+#marketplaceList::-webkit-scrollbar-thumb:hover,
+#horseList::-webkit-scrollbar-thumb:hover {
+    background: var(--green-light);
+}
