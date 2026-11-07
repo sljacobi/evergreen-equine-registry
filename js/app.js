@@ -721,7 +721,6 @@ horseList.innerHTML += `
 
     </div>
 
-
     <div class="horse-card-stats">
 
         <h4>
@@ -749,154 +748,100 @@ horseList.innerHTML += `
 
             ? `
 
-                <div class="horse-card-stat-list">
+                <div class="horse-card-compact-stats">
 
 
-                    <div class="horse-card-stat-row">
+                    <div class="compact-stat-row">
 
-                        <span>
+                        <span class="compact-stat-label">
                             Speed
                         </span>
 
+                        <div
+                            class="compact-stat-bar"
+                            style="--stat-value: ${horse.speed ?? 0}; --stat-max: 10;"
+                        ></div>
+
                         <strong>
-                            ${
-                                horse.speed ??
-                                "—"
-                            }
-                            / 10
+                            ${horse.speed ?? "—"}/10
                         </strong>
 
                     </div>
 
 
-                    <div class="horse-card-stat-row">
+                    <div class="compact-stat-row">
 
-                        <span>
-                            Acceleration
+                        <span class="compact-stat-label">
+                            Accel.
                         </span>
 
+                        <div
+                            class="compact-stat-bar"
+                            style="--stat-value: ${horse.acceleration ?? 0}; --stat-max: 10;"
+                        ></div>
+
                         <strong>
-                            ${
-                                horse.acceleration ??
-                                "—"
-                            }
-                            / 10
+                            ${horse.acceleration ?? "—"}/10
                         </strong>
 
                     </div>
 
 
-                    <div class="horse-card-stat-row">
+                    <div class="compact-stat-row">
 
-                        <span>
+                        <span class="compact-stat-label">
                             Health
                         </span>
 
-                        <strong>
-                            ${
-                                horse.health ??
-                                "—"
-                            }
-                            / 9
-                        </strong>
-
-                    </div>
-
-
-                    <div class="horse-card-stat-row">
-
-                        <span>
-                            Stamina
+                        <span class="compact-stat-icons compact-health">
+                            ${"♥".repeat(horse.health ?? 0)}
                         </span>
 
                         <strong>
-                            ${
-                                horse.stamina ??
-                                "—"
-                            }
-                            / 9
+                            ${horse.health ?? "—"}/9
                         </strong>
 
                     </div>
 
 
-                    <div class="horse-card-stat-row">
+                    <div class="compact-stat-row">
+
+                        <span class="compact-stat-label">
+                            Stamina
+                        </span>
+
+                        <span class="compact-stat-icons compact-stamina">
+                            ${"⚡".repeat(horse.stamina ?? 0)}
+                        </span>
+
+                        <strong>
+                            ${horse.stamina ?? "—"}/9
+                        </strong>
+
+                    </div>
+
+
+                    <div class="compact-text-stat">
 
                         <span>
                             Handling
                         </span>
 
                         <strong>
-                            ${
-                                horse.handling ||
-                                "—"
-                            }
+                            ${horse.handling || "—"}
                         </strong>
 
                     </div>
 
 
-                    <div class="horse-card-stat-row">
-
-                        <span>
-                            Shoes State
-                        </span>
-
-                        <strong>
-                            ${
-                                horse.shoes_state ??
-                                "—"
-                            }
-                            / 10
-                        </strong>
-
-                    </div>
-
-
-                    <div class="horse-card-stat-row">
-
-                        <span>
-                            Bonding
-                        </span>
-
-                        <strong>
-                            ${
-                                horse.bonding_level ??
-                                "—"
-                            }
-                            / 4
-                        </strong>
-
-                    </div>
-
-
-                    <div class="horse-card-stat-row">
+                    <div class="compact-text-stat">
 
                         <span>
                             Personality
                         </span>
 
                         <strong>
-                            ${
-                                horse.personality ||
-                                "—"
-                            }
-                        </strong>
-
-                    </div>
-
-
-                    <div class="horse-card-stat-row">
-
-                        <span>
-                            Metabolism
-                        </span>
-
-                        <strong>
-                            ${
-                                horse.metabolism ||
-                                "—"
-                            }
+                            ${horse.personality || "—"}
                         </strong>
 
                     </div>

@@ -1890,3 +1890,116 @@ button:disabled:hover {
     }
 
 }
+
+/* ========================================
+   COMPACT REGISTRY HORSE STATS
+======================================== */
+
+.horse-card-compact-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+
+.compact-stat-row {
+    display: grid;
+
+    grid-template-columns:
+        72px
+        minmax(90px, 1fr)
+        44px;
+
+    align-items: center;
+
+    gap: 8px;
+
+    font-size: 12px;
+}
+
+
+.compact-stat-label {
+    color: #C9D5CC;
+    font-weight: 700;
+}
+
+
+.compact-stat-row strong {
+    color: #F4F4F4;
+    text-align: right;
+}
+
+
+.compact-stat-bar {
+    height: 8px;
+
+    overflow: hidden;
+
+    background: #435048;
+
+    border-radius: 5px;
+}
+
+
+.compact-stat-bar::before {
+    content: "";
+
+    display: block;
+
+    width:
+        calc(
+            var(--stat-value) /
+            var(--stat-max) *
+            100%
+        );
+
+    height: 100%;
+
+    background: #D8C642;
+
+    border-radius: inherit;
+}
+
+
+.compact-stat-icons {
+    white-space: nowrap;
+    overflow: hidden;
+
+    font-size: 13px;
+    letter-spacing: 1px;
+}
+
+
+.compact-health {
+    color: #F4F4F4;
+}
+
+
+.compact-stamina {
+    color: #E6A04B;
+}
+
+
+.compact-text-stat {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 12px;
+
+    padding-top: 3px;
+
+    font-size: 12px;
+}
+
+
+.compact-text-stat span {
+    color: #C9D5CC;
+    font-weight: 700;
+}
+
+
+.compact-text-stat strong {
+    color: var(--green-light);
+}
