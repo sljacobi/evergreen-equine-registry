@@ -1033,7 +1033,7 @@ select:focus {
 }
 
 /* ========================================
-   EDIT HORSE CLEAN TWO-COLUMN LAYOUT
+   EDIT HORSE ORGANIZED LAYOUT
 ======================================== */
 
 #editHorseForm .edit-form-grid {
@@ -1043,113 +1043,99 @@ select:focus {
         minmax(0, 1fr)
         minmax(0, 1fr);
 
-    grid-template-areas:
-        "name breed"
-        "gender owner"
-        "brand status"
-        "origin sire"
-        "acquisition sire"
-        "breeding dam"
-        ". dam";
-
-    column-gap: 18px;
-    row-gap: 18px;
+    gap: 18px;
 
     align-items: start;
 }
 
 
-/* 1. Registered Name */
+/* Registered Name */
 #editHorseForm .edit-form-grid > :nth-child(1) {
-    grid-area: name;
+    grid-column: 1;
+    grid-row: 1;
 }
 
 
-/* 2. Breed */
+/* Breed */
 #editHorseForm .edit-form-grid > :nth-child(2) {
-    grid-area: breed;
+    grid-column: 2;
+    grid-row: 1;
 }
 
 
-/* 3. Gender */
+/* Gender */
 #editHorseForm .edit-form-grid > :nth-child(3) {
-    grid-area: gender;
+    grid-column: 1;
+    grid-row: 2;
 }
 
 
-/* 4. Owner */
+/* Owner */
 #editHorseForm .edit-form-grid > :nth-child(4) {
-    grid-area: owner;
+    grid-column: 2;
+    grid-row: 2;
 }
 
 
-/* 5. Brand */
+/* Brand */
 #editHorseForm .edit-form-grid > :nth-child(5) {
-    grid-area: brand;
+    grid-column: 1;
+    grid-row: 3;
 }
 
 
-/* 6. Horse Status */
+/* Horse Status */
 #editHorseForm .edit-form-grid > :nth-child(6) {
-    grid-area: status;
+    grid-column: 2;
+    grid-row: 3;
 }
 
 
-/* 7. Origin */
+/* Origin */
 #editHorseForm .edit-form-grid > :nth-child(7) {
-    grid-area: origin;
+    grid-column: 1;
+    grid-row: 4;
 }
 
 
-/* 8. Sire */
+/* Sire */
 #editHorseForm .edit-form-grid > :nth-child(8) {
-    grid-area: sire;
+    grid-column: 2;
+    grid-row: 4;
 }
 
 
-/* 9. Dam */
+/* Dam */
 #editHorseForm .edit-form-grid > :nth-child(9) {
-    grid-area: dam;
+    grid-column: 2;
+    grid-row: 5;
 }
 
 
-/* 10. Acquisition Method */
+/* Acquisition Method */
 #editHorseForm .edit-form-grid > :nth-child(10) {
-    grid-area: acquisition;
+    grid-column: 1;
+    grid-row: 5;
 }
 
 
-/* 11. Breeding Status */
+/* Breeding Status */
 #editHorseForm .edit-form-grid > :nth-child(11) {
-    grid-area: breeding;
+    grid-column: 1;
+    grid-row: 6;
 }
 
 
-/* Keep expanding parent fields together */
-#editHorseForm .edit-form-grid > :nth-child(8),
-#editHorseForm .edit-form-grid > :nth-child(9) {
-    align-self: start;
-}
+/* ========================================
+   EDIT HORSE MOBILE
+======================================== */
 
-
-/* Mobile layout */
 @media (max-width: 700px) {
 
     #editHorseForm .edit-form-grid {
-        grid-template-columns: 1fr;
-
-        grid-template-areas:
-            "name"
-            "breed"
-            "gender"
-            "owner"
-            "brand"
-            "status"
-            "origin"
-            "acquisition"
-            "breeding"
-            "sire"
-            "dam";
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
     }
 
 }
