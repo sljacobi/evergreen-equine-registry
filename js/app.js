@@ -730,6 +730,7 @@ horseList.innerHTML += `
 
         ${
             [
+                horse.height,
                 horse.speed,
                 horse.acceleration,
                 horse.health,
@@ -749,6 +750,18 @@ horseList.innerHTML += `
             ? `
 
                 <div class="horse-card-compact-stats">
+
+                                    <div class="compact-text-stat">
+
+                        <span>
+                            Height
+                        </span>
+
+                        <strong>
+                            ${horse.height || "—"}
+                        </strong>
+
+                    </div>
 
 
                     <div class="compact-stat-row">
@@ -1894,6 +1907,7 @@ ${
                 >
                     ${
                         [
+                            data.height,
                             data.speed,
                             data.acceleration,
                             data.health,
@@ -1919,6 +1933,7 @@ ${
 
             ${
                 [
+                    data.height,
                     data.speed,
                     data.acceleration,
                     data.health,
@@ -1938,6 +1953,18 @@ ${
                 ? `
 
                     <div class="profile-stats-grid">
+
+                                            <div class="profile-stat-item">
+
+                            <span>
+                                Height
+                            </span>
+
+                            <strong>
+                                ${data.height || "—"}
+                            </strong>
+
+                        </div>
 
 
                         <div class="profile-stat-item">

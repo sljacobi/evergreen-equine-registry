@@ -2130,9 +2130,9 @@ button:disabled:hover {
 
 /* Make text stats stand out slightly */
 
-.profile-stat-item:nth-child(5) strong,
-.profile-stat-item:nth-child(8) strong,
-.profile-stat-item:nth-child(9) strong {
+.profile-stat-item:nth-child(6) strong,
+.profile-stat-item:nth-child(9) strong,
+.profile-stat-item:nth-child(10) strong {
     color:
         var(--green-light);
 }

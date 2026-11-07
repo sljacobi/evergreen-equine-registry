@@ -100,8 +100,8 @@ async function(horseId) {
         await supabaseClient
             .from("horses")
             .select(
-                "id, registered_name, speed, acceleration, health, stamina, handling, shoes_state, bonding_level, personality, metabolism"
-            )
+    "id, registered_name, height, speed, acceleration, health, stamina, handling, shoes_state, bonding_level, personality, metabolism"
+)
             .eq(
                 "id",
                 horseId
@@ -142,6 +142,11 @@ async function(horseId) {
     horseStatsHorseName.textContent =
         data.registered_name ||
         "Horse Stats";
+
+    document.getElementById(
+    "horseStatHeight"
+).value =
+    data.height || "";
 
 
     document.getElementById(
@@ -305,6 +310,12 @@ if (horseStatsForm) {
                 return;
             }
 
+            const height =
+    document.getElementById(
+        "horseStatHeight"
+    )
+    .value
+    .trim();
 
             const speed =
                 horseStatNumberOrNull(
@@ -464,6 +475,9 @@ if (horseStatsForm) {
                 await supabaseClient
                     .from("horses")
                     .update({
+                        height:
+                            height || null,
+
                         speed:
                             speed,
 
