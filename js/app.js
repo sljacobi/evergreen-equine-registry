@@ -226,6 +226,96 @@ if (!owner) {
     return;
 }
 
+const ownerSelect =
+    document.getElementById(
+        "ownerSelect"
+    );
+
+
+if (
+    ownerSelect.value === "new" &&
+    !owner
+) {
+
+    alert(
+        "Please enter the new Owner's name."
+    );
+
+    document.getElementById(
+        "owner"
+    ).focus();
+
+    return;
+}
+
+const brandSelect =
+    document.getElementById(
+        "brandSelect"
+    );
+
+
+if (
+    brandSelect.value === "new" &&
+    !brand
+) {
+
+    alert(
+        "Please enter the new Brand name."
+    );
+
+    document.getElementById(
+        "brand"
+    ).focus();
+
+    return;
+}
+
+const sireSelect =
+    document.getElementById(
+        "sireSelect"
+    );
+
+
+if (
+    sireSelect.value ===
+        "unregistered" &&
+    !sire
+) {
+
+    alert(
+        "Please enter the unregistered Sire's name."
+    );
+
+    document.getElementById(
+        "sire"
+    ).focus();
+
+    return;
+}
+
+const damSelect =
+    document.getElementById(
+        "damSelect"
+    );
+
+
+if (
+    damSelect.value ===
+        "unregistered" &&
+    !dam
+) {
+
+    alert(
+        "Please enter the unregistered Dam's name."
+    );
+
+    document.getElementById(
+        "dam"
+    ).focus();
+
+    return;
+}
+
 // ========================================
 // DUPLICATE HORSE NAME CHECK
 // ========================================
