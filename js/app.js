@@ -649,6 +649,7 @@ horseList.innerHTML += `
             <img
                 src="${horse.photo_url}"
                 class="horse-preview-image"
+                alt="${horse.registered_name || "Horse"}"
             >
         `
         : `
@@ -658,6 +659,7 @@ horseList.innerHTML += `
         `
     }
 
+
     <div class="horse-card-info">
 
         <h3
@@ -666,6 +668,7 @@ horseList.innerHTML += `
         >
             ${horse.registered_name}
         </h3>
+
 
         <p>
             <strong>Owner:</strong>
@@ -677,88 +680,267 @@ horseList.innerHTML += `
             ${horse.brand || "None"}
         </p>
 
+
         <p>
             ${horse.breed || "Unknown"}
             |
             ${horse.gender || "Unknown"}
         </p>
 
+
         <p>
             Status:
             ${horse.horse_status || "Active"}
+
             |
+
             Origin:
             ${horse.horse_origin || "Unknown"}
         </p>
 
-        <button onclick="editHorse('${horse.id}')">
-    Edit
-</button>
 
-<button onclick="uploadPhoto('${horse.id}')">
-    Upload Photo
-</button>
+        <button
+            onclick="editHorse('${horse.id}')"
+        >
+            Edit
+        </button>
 
-<button onclick="archiveHorse('${horse.id}')">
-    Archive
-</button>
 
-</div>
+        <button
+            onclick="uploadPhoto('${horse.id}')"
+        >
+            Upload Photo
+        </button>
 
-</div>
-`;
 
-    });
-
-const { data: historyData } =
-    await supabaseClient
-        .from("ownership_history")
-        .select("*")
-        .order("transfer_date", {
-            ascending: false
-        });
-
-historyList.innerHTML = "";
-
-if (!historyData ||
-    historyData.length === 0) {
-
-    historyList.innerHTML =
-        "<p>No ownership transfers recorded.</p>";
-
-} else {
-
-    historyData.forEach(record => {
-
-historyList.innerHTML += `
-    <div class="card">
-
-        <strong>
-            ${record.horse_name || "Unknown Horse"}
-        </strong>
-
-        <p>
-            ${record.previous_owner}
-            →
-            ${record.new_owner}
-        </p>
-
-        <p>
-            ${
-                record.transfer_date
-                    ? new Date(
-                        record.transfer_date
-                      ).toLocaleDateString()
-                    : "Date Unknown"
-            }
-        </p>
+        <button
+            onclick="archiveHorse('${horse.id}')"
+        >
+            Archive
+        </button>
 
     </div>
+
+
+    <div class="horse-card-stats">
+
+        <h4>
+            Horse Stats
+        </h4>
+
+
+        ${
+            [
+                horse.speed,
+                horse.acceleration,
+                horse.health,
+                horse.stamina,
+                horse.handling,
+                horse.shoes_state,
+                horse.bonding_level,
+                horse.personality,
+                horse.metabolism
+            ].some(
+                value =>
+                    value !== null &&
+                    value !== undefined &&
+                    value !== ""
+            )
+
+            ? `
+
+                <div class="horse-card-stat-list">
+
+
+                    <div class="horse-card-stat-row">
+
+                        <span>
+                            Speed
+                        </span>
+
+                        <strong>
+                            ${
+                                horse.speed ??
+                                "—"
+                            }
+                            / 10
+                        </strong>
+
+                    </div>
+
+
+                    <div class="horse-card-stat-row">
+
+                        <span>
+                            Acceleration
+                        </span>
+
+                        <strong>
+                            ${
+                                horse.acceleration ??
+                                "—"
+                            }
+                            / 10
+                        </strong>
+
+                    </div>
+
+
+                    <div class="horse-card-stat-row">
+
+                        <span>
+                            Health
+                        </span>
+
+                        <strong>
+                            ${
+                                horse.health ??
+                                "—"
+                            }
+                            / 9
+                        </strong>
+
+                    </div>
+
+
+                    <div class="horse-card-stat-row">
+
+                        <span>
+                            Stamina
+                        </span>
+
+                        <strong>
+                            ${
+                                horse.stamina ??
+                                "—"
+                            }
+                            / 9
+                        </strong>
+
+                    </div>
+
+
+                    <div class="horse-card-stat-row">
+
+                        <span>
+                            Handling
+                        </span>
+
+                        <strong>
+                            ${
+                                horse.handling ||
+                                "—"
+                            }
+                        </strong>
+
+                    </div>
+
+
+                    <div class="horse-card-stat-row">
+
+                        <span>
+                            Shoes State
+                        </span>
+
+                        <strong>
+                            ${
+                                horse.shoes_state ??
+                                "—"
+                            }
+                            / 10
+                        </strong>
+
+                    </div>
+
+
+                    <div class="horse-card-stat-row">
+
+                        <span>
+                            Bonding
+                        </span>
+
+                        <strong>
+                            ${
+                                horse.bonding_level ??
+                                "—"
+                            }
+                            / 4
+                        </strong>
+
+                    </div>
+
+
+                    <div class="horse-card-stat-row">
+
+                        <span>
+                            Personality
+                        </span>
+
+                        <strong>
+                            ${
+                                horse.personality ||
+                                "—"
+                            }
+                        </strong>
+
+                    </div>
+
+
+                    <div class="horse-card-stat-row">
+
+                        <span>
+                            Metabolism
+                        </span>
+
+                        <strong>
+                            ${
+                                horse.metabolism ||
+                                "—"
+                            }
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="horse-stats-button"
+                    onclick="openHorseStats('${horse.id}')"
+                >
+                    Edit Stats
+                </button>
+
+            `
+
+            : `
+
+                <div class="horse-stats-empty">
+
+                    <p>
+                        No stats entered yet.
+                    </p>
+
+                    <button
+                        type="button"
+                        class="horse-stats-button"
+                        onclick="openHorseStats('${horse.id}')"
+                    >
+                        Add Stats
+                    </button>
+
+                </div>
+
+            `
+        }
+
+    </div>
+
+</div>
 `;
 
     });
-
-}
 
     document.getElementById("horseCount").textContent =
     data.length;

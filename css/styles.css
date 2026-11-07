@@ -298,8 +298,14 @@ select:focus {
 
 .horse-card-layout {
     display: grid;
-    grid-template-columns: 220px minmax(0, 1fr);
+
+    grid-template-columns:
+        220px
+        minmax(300px, 1fr)
+        minmax(300px, 420px);
+
     gap: 20px;
+
     align-items: start;
 }
 
@@ -1495,6 +1501,392 @@ button:disabled:hover {
         justify-content: center;
 
         margin: 8px 0 0;
+    }
+
+}
+
+/* ========================================
+   HORSE REGISTRY STATS PANEL
+======================================== */
+
+.horse-card-stats {
+    min-width: 0;
+
+    padding: 14px 16px;
+
+    background: #253128;
+
+    border:
+        1px solid
+        var(--border-color);
+
+    border-radius: 10px;
+}
+
+
+.horse-card-stats h4 {
+    margin:
+        0 0
+        12px;
+
+    color:
+        var(--green-light);
+
+    font-size: 17px;
+}
+
+
+.horse-card-stat-list {
+    display: flex;
+    flex-direction: column;
+
+    gap: 6px;
+}
+
+
+.horse-card-stat-row {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 14px;
+
+    padding-bottom: 5px;
+
+    border-bottom:
+        1px solid
+        rgba(125, 183, 132, 0.12);
+
+    font-size: 13px;
+}
+
+
+.horse-card-stat-row:last-child {
+    border-bottom: none;
+}
+
+
+.horse-card-stat-row span {
+    color: #C9D5CC;
+}
+
+
+.horse-card-stat-row strong {
+    color: #F4F4F4;
+
+    text-align: right;
+}
+
+
+.horse-stats-button {
+    margin-top: 14px;
+
+    width: 100%;
+}
+
+
+.horse-stats-empty {
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    min-height: 130px;
+
+    text-align: center;
+}
+
+
+.horse-stats-empty p {
+    margin:
+        0 0
+        12px;
+
+    color: #AFC3B3;
+
+    font-size: 14px;
+}
+
+
+/* ========================================
+   HORSE REGISTRY STATS RESPONSIVE
+======================================== */
+
+@media (max-width: 1050px) {
+
+    .horse-card-layout {
+        grid-template-columns:
+            180px
+            minmax(0, 1fr);
+    }
+
+
+    .horse-preview-image,
+    .horse-preview-placeholder {
+        width: 180px;
+        height: 135px;
+    }
+
+
+    .horse-card-stats {
+        grid-column:
+            1 / -1;
+    }
+
+}
+
+
+@media (max-width: 700px) {
+
+    .horse-card-layout {
+        grid-template-columns: 1fr;
+    }
+
+
+    .horse-preview-image,
+    .horse-preview-placeholder {
+        width: 100%;
+        height: 220px;
+    }
+
+
+    .horse-card-stats {
+        grid-column: auto;
+    }
+
+}
+
+/* ========================================
+   HORSE STATS DIALOG
+======================================== */
+
+.horse-stats-dialog {
+    width:
+        min(
+            720px,
+            92vw
+        );
+
+    max-height: 88vh;
+
+    padding: 0;
+
+    background:
+        var(--bg-secondary);
+
+    color:
+        var(--text-primary);
+
+    border:
+        1px solid
+        var(--border-color);
+
+    border-radius: 14px;
+
+    box-shadow:
+        0 20px 60px
+        rgba(0, 0, 0, 0.55);
+
+    overflow: hidden;
+}
+
+
+.horse-stats-dialog::backdrop {
+    background:
+        rgba(10, 15, 11, 0.78);
+
+    backdrop-filter:
+        blur(3px);
+}
+
+
+.stats-dialog-header {
+    display: flex;
+
+    align-items: flex-start;
+    justify-content: space-between;
+
+    gap: 20px;
+
+    padding: 22px 24px;
+
+    background: #253128;
+
+    border-bottom:
+        1px solid
+        var(--border-color);
+}
+
+
+.stats-dialog-header h2 {
+    margin: 0;
+
+    color:
+        var(--green-light);
+}
+
+
+.stats-dialog-header p {
+    margin:
+        6px 0
+        0;
+
+    color: #AFC3B3;
+}
+
+
+.stats-dialog-close {
+    width: 38px;
+    height: 38px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    margin: 0;
+    padding: 0;
+
+    background: transparent;
+
+    border:
+        1px solid
+        var(--border-color);
+
+    flex-shrink: 0;
+}
+
+
+#horseStatsForm {
+    padding: 24px;
+
+    max-height:
+        calc(88vh - 100px);
+
+    overflow-y: auto;
+}
+
+
+.horse-stats-form-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(
+            2,
+            minmax(0, 1fr)
+        );
+
+    gap: 18px;
+}
+
+
+.horse-stat-form-field {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 7px;
+
+    min-width: 0;
+}
+
+
+.horse-stat-form-field > span {
+    color: #DCE6DE;
+
+    font-size: 14px;
+    font-weight: 700;
+}
+
+
+.horse-stat-form-field input,
+.horse-stat-form-field select {
+    width: 100%;
+
+    margin: 0;
+}
+
+
+.stat-input-row {
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+}
+
+
+.stat-input-row input {
+    flex: 1;
+}
+
+
+.stat-input-limit {
+    min-width: 36px;
+
+    color:
+        var(--green-light);
+
+    font-weight: 800;
+}
+
+
+.horse-stat-form-wide {
+    grid-column:
+        1 / -1;
+}
+
+
+.horse-stats-message {
+    min-height: 22px;
+
+    margin:
+        14px 0
+        0;
+
+    color: #E48B8B;
+}
+
+
+.stats-dialog-actions {
+    display: flex;
+
+    justify-content: flex-end;
+
+    gap: 10px;
+
+    margin-top: 18px;
+    padding-top: 18px;
+
+    border-top:
+        1px solid
+        var(--border-color);
+}
+
+
+@media (max-width: 700px) {
+
+    .horse-stats-form-grid {
+        grid-template-columns:
+            1fr;
+    }
+
+
+    .horse-stat-form-wide {
+        grid-column: auto;
+    }
+
+
+    .stats-dialog-actions {
+        flex-direction:
+            column-reverse;
+    }
+
+
+    .stats-dialog-actions button {
+        width: 100%;
     }
 
 }

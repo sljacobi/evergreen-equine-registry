@@ -923,6 +923,334 @@
 
 </dialog>
 
+<!-- ========================================
+     HORSE STATS DIALOG
+========================================= -->
+
+<dialog
+    id="horseStatsDialog"
+    class="horse-stats-dialog"
+>
+
+    <div class="stats-dialog-header">
+
+        <div>
+
+            <h2 id="horseStatsDialogTitle">
+                Horse Stats
+            </h2>
+
+            <p id="horseStatsHorseName">
+                Add or update this horse's stats.
+            </p>
+
+        </div>
+
+
+        <button
+            type="button"
+            id="closeHorseStatsDialog"
+            class="stats-dialog-close"
+            aria-label="Close Horse Stats"
+        >
+            ✕
+        </button>
+
+    </div>
+
+
+    <form id="horseStatsForm">
+
+        <input
+            type="hidden"
+            id="horseStatsHorseId"
+        >
+
+
+        <div class="horse-stats-form-grid">
+
+            <label class="horse-stat-form-field">
+
+                <span>
+                    Speed
+                </span>
+
+                <div class="stat-input-row">
+
+                    <input
+                        type="number"
+                        id="horseStatSpeed"
+                        min="0"
+                        max="10"
+                        step="1"
+                        placeholder="0"
+                    >
+
+                    <span class="stat-input-limit">
+                        / 10
+                    </span>
+
+                </div>
+
+            </label>
+
+
+            <label class="horse-stat-form-field">
+
+                <span>
+                    Acceleration
+                </span>
+
+                <div class="stat-input-row">
+
+                    <input
+                        type="number"
+                        id="horseStatAcceleration"
+                        min="0"
+                        max="10"
+                        step="1"
+                        placeholder="0"
+                    >
+
+                    <span class="stat-input-limit">
+                        / 10
+                    </span>
+
+                </div>
+
+            </label>
+
+
+            <label class="horse-stat-form-field">
+
+                <span>
+                    Health
+                </span>
+
+                <div class="stat-input-row">
+
+                    <input
+                        type="number"
+                        id="horseStatHealth"
+                        min="0"
+                        max="9"
+                        step="1"
+                        placeholder="0"
+                    >
+
+                    <span class="stat-input-limit">
+                        / 9
+                    </span>
+
+                </div>
+
+            </label>
+
+
+            <label class="horse-stat-form-field">
+
+                <span>
+                    Stamina
+                </span>
+
+                <div class="stat-input-row">
+
+                    <input
+                        type="number"
+                        id="horseStatStamina"
+                        min="0"
+                        max="9"
+                        step="1"
+                        placeholder="0"
+                    >
+
+                    <span class="stat-input-limit">
+                        / 9
+                    </span>
+
+                </div>
+
+            </label>
+
+
+            <label class="horse-stat-form-field">
+
+                <span>
+                    Handling
+                </span>
+
+                <input
+                    type="text"
+                    id="horseStatHandling"
+                    placeholder="Example: Elite"
+                    maxlength="100"
+                >
+
+            </label>
+
+
+            <label class="horse-stat-form-field">
+
+                <span>
+                    Shoes State
+                </span>
+
+                <div class="stat-input-row">
+
+                    <input
+                        type="number"
+                        id="horseStatShoesState"
+                        min="0"
+                        max="10"
+                        step="1"
+                        placeholder="0"
+                    >
+
+                    <span class="stat-input-limit">
+                        / 10
+                    </span>
+
+                </div>
+
+            </label>
+
+
+            <label class="horse-stat-form-field">
+
+                <span>
+                    Bonding Level
+                </span>
+
+                <div class="stat-input-row">
+
+                    <input
+                        type="number"
+                        id="horseStatBondingLevel"
+                        min="0"
+                        max="4"
+                        step="1"
+                        placeholder="0"
+                    >
+
+                    <span class="stat-input-limit">
+                        / 4
+                    </span>
+
+                </div>
+
+            </label>
+
+
+            <label class="horse-stat-form-field">
+
+                <span>
+                    Personality
+                </span>
+
+                <select id="horseStatPersonality">
+
+                    <option value="">
+                        Select Personality
+                    </option>
+
+                    <option value="Schoolmaster">
+                        Schoolmaster
+                    </option>
+
+                    <option value="Eager">
+                        Eager
+                    </option>
+
+                    <option value="Vigilant">
+                        Vigilant
+                    </option>
+
+                    <option value="Warden">
+                        Warden
+                    </option>
+
+                    <option value="Spry">
+                        Spry
+                    </option>
+
+                    <option value="Attached">
+                        Attached
+                    </option>
+
+                    <option value="Showman">
+                        Showman
+                    </option>
+
+                    <option value="Gluttonous">
+                        Gluttonous
+                    </option>
+
+                    <option value="Green">
+                        Green
+                    </option>
+
+                    <option value="Stubborn">
+                        Stubborn
+                    </option>
+
+                    <option value="Reserved">
+                        Reserved
+                    </option>
+
+                </select>
+
+            </label>
+
+
+            <label class="horse-stat-form-field horse-stat-form-wide">
+
+                <span>
+                    Metabolism
+                </span>
+
+                <input
+                    type="text"
+                    id="horseStatMetabolism"
+                    placeholder="Example: Pleased"
+                    maxlength="100"
+                >
+
+            </label>
+
+        </div>
+
+
+        <p
+            id="horseStatsMessage"
+            class="horse-stats-message"
+            aria-live="polite"
+        ></p>
+
+
+        <div class="stats-dialog-actions">
+
+            <button
+                type="button"
+                id="cancelHorseStats"
+                class="secondary-button"
+            >
+                Cancel
+            </button>
+
+
+            <button
+                type="submit"
+                id="saveHorseStatsButton"
+            >
+                Save Stats
+            </button>
+
+        </div>
+
+    </form>
+
+</dialog>
+
 <section
     class="card"
     id="breedingsSection"
@@ -1338,6 +1666,7 @@
 <script src="js/auth.js"></script>
 <script src="js/app.js"></script>
 <script src="js/admin.js"></script>
+<script src="js/stats.js"></script>
 
 <input
     type="file"
