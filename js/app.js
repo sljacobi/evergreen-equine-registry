@@ -2805,7 +2805,101 @@ if (editHorseForm) {
                 return;
             }
 
-            // ========================================
+// ========================================
+// EDIT HORSE SMART FIELD VALIDATION
+// ========================================
+
+const editOwnerSelect =
+    document.getElementById(
+        "editOwnerSelect"
+    );
+
+
+if (
+    editOwnerSelect.value === "new" &&
+    !owner
+) {
+
+    alert(
+        "Please enter the new Owner's name."
+    );
+
+    document.getElementById(
+        "editOwner"
+    ).focus();
+
+    return;
+}
+
+const editBrandSelect =
+    document.getElementById(
+        "editBrandSelect"
+    );
+
+
+if (
+    editBrandSelect.value === "new" &&
+    !brand
+) {
+
+    alert(
+        "Please enter the new Brand name."
+    );
+
+    document.getElementById(
+        "editBrand"
+    ).focus();
+
+    return;
+}
+
+const editSireSelect =
+    document.getElementById(
+        "editSireSelect"
+    );
+
+
+if (
+    editSireSelect.value ===
+        "unregistered" &&
+    !sire
+) {
+
+    alert(
+        "Please enter the unregistered Sire's name."
+    );
+
+    document.getElementById(
+        "editSire"
+    ).focus();
+
+    return;
+}
+
+const editDamSelect =
+    document.getElementById(
+        "editDamSelect"
+    );
+
+
+if (
+    editDamSelect.value ===
+        "unregistered" &&
+    !dam
+) {
+
+    alert(
+        "Please enter the unregistered Dam's name."
+    );
+
+    document.getElementById(
+        "editDam"
+    ).focus();
+
+    return;
+}
+
+// ========================================
 // EDIT HORSE DUPLICATE NAME CHECK
 // ========================================
 
