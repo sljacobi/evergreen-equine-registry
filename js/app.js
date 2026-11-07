@@ -2715,6 +2715,64 @@ if (editHorseForm) {
                 return;
             }
 
+            // ========================================
+// EDIT HORSE DUPLICATE NAME CHECK
+// ========================================
+
+const {
+    data: editDuplicateHorses,
+    error: editDuplicateCheckError
+} =
+    await supabaseClient
+        .from("horses")
+        .select(
+            "id, registered_name"
+        )
+        .ilike(
+            "registered_name",
+            horseName
+        );
+
+
+if (editDuplicateCheckError) {
+
+    console.error(
+        "Edit duplicate horse check error:",
+        editDuplicateCheckError
+    );
+
+    alert(
+        "The Registry could not check whether another horse already has this name. Please try again."
+    );
+
+    return;
+}
+
+
+const conflictingHorse =
+    (editDuplicateHorses || [])
+        .find(
+            horse =>
+                String(horse.id) !==
+                String(horseId)
+        );
+
+
+if (conflictingHorse) {
+
+    alert(
+        'Another horse named "' +
+        horseName +
+        '" already exists in the Registry.'
+    );
+
+    document.getElementById(
+        "editHorseName"
+    ).focus();
+
+    return;
+}
+
             const saveButton =
                 editHorseForm.querySelector(
                     "button[type='submit']"
