@@ -50,6 +50,11 @@ const signedInUserRole =
         "signedInUserRole"
     );
 
+const adminPanelButton =
+    document.getElementById(
+        "adminPanelButton"
+    );
+
 const signOutButton =
     document.getElementById(
         "signOutButton"
@@ -147,6 +152,13 @@ async function showAuthenticatedSite(
         profile.role === "admin"
     );
 
+if (adminPanelButton) {
+
+    adminPanelButton.style.display =
+        profile.role === "admin"
+            ? "inline-block"
+            : "none";
+}
 
     window.currentKpsUser = {
 
@@ -201,6 +213,12 @@ function showSignedOutSite() {
     signedInUserRole.classList.remove(
         "admin-role"
     );
+
+    if (adminPanelButton) {
+
+    adminPanelButton.style.display =
+        "none";
+}
 
 
     window.currentKpsUser =

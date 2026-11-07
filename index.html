@@ -145,6 +145,15 @@
         Member
     </span>
 
+<button
+    type="button"
+    id="adminPanelButton"
+    class="admin-panel-button"
+    style="display:none;"
+>
+    Admin Panel
+</button>
+
     <button
         type="button"
         id="signOutButton"
@@ -1058,11 +1067,277 @@
     </div>
 </section>
 
+<section
+    id="adminSection"
+    style="display:none;"
+>
+
+    <section class="card admin-heading-card">
+
+        <div class="admin-heading-row">
+
+            <div>
+
+                <h2 class="admin-page-title">
+                    Admin Control Center
+                </h2>
+
+                <p class="admin-page-description">
+                    Review registry activity and manage KPS members.
+                </p>
+
+            </div>
+
+
+            <button
+                type="button"
+                id="refreshAdminButton"
+            >
+                Refresh Admin Data
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <div class="admin-summary-grid">
+
+        <div class="admin-summary-card">
+
+            <span class="admin-summary-label">
+                Total Activity
+            </span>
+
+            <strong
+                id="adminTotalActivity"
+                class="admin-summary-number"
+            >
+                0
+            </strong>
+
+        </div>
+
+
+        <div class="admin-summary-card">
+
+            <span class="admin-summary-label">
+                Horses Added
+            </span>
+
+            <strong
+                id="adminHorseAdds"
+                class="admin-summary-number"
+            >
+                0
+            </strong>
+
+        </div>
+
+
+        <div class="admin-summary-card">
+
+            <span class="admin-summary-label">
+                Records Updated
+            </span>
+
+            <strong
+                id="adminRecordUpdates"
+                class="admin-summary-number"
+            >
+                0
+            </strong>
+
+        </div>
+
+
+        <div class="admin-summary-card">
+
+            <span class="admin-summary-label">
+                KPS Members
+            </span>
+
+            <strong
+                id="adminMemberCount"
+                class="admin-summary-number"
+            >
+                0
+            </strong>
+
+        </div>
+
+    </div>
+
+
+    <div class="admin-layout">
+
+        <section class="card admin-activity-card">
+
+            <div class="admin-section-heading">
+
+                <h2>
+                    Activity Log
+                </h2>
+
+                <p>
+                    Registry additions, updates and deletions recorded by the database.
+                </p>
+
+            </div>
+
+
+            <div class="admin-filter-grid">
+
+                <label class="admin-filter-field">
+
+                    <span>
+                        Search
+                    </span>
+
+                    <input
+                        type="search"
+                        id="activitySearch"
+                        placeholder="Search member, horse or action..."
+                    >
+
+                </label>
+
+
+                <label class="admin-filter-field">
+
+                    <span>
+                        Member
+                    </span>
+
+                    <select id="activityMemberFilter">
+
+                        <option value="">
+                            All Members
+                        </option>
+
+                    </select>
+
+                </label>
+
+
+                <label class="admin-filter-field">
+
+                    <span>
+                        Action
+                    </span>
+
+                    <select id="activityActionFilter">
+
+                        <option value="">
+                            All Actions
+                        </option>
+
+                        <option value="INSERT">
+                            Added
+                        </option>
+
+                        <option value="UPDATE">
+                            Updated
+                        </option>
+
+                        <option value="DELETE">
+                            Deleted
+                        </option>
+
+                    </select>
+
+                </label>
+
+
+                <label class="admin-filter-field">
+
+                    <span>
+                        Area
+                    </span>
+
+                    <select id="activityTableFilter">
+
+                        <option value="">
+                            All Areas
+                        </option>
+
+                        <option value="horses">
+                            Horses
+                        </option>
+
+                        <option value="ownership_history">
+                            Ownership History
+                        </option>
+
+                        <option value="marketplace_archive">
+                            Marketplace
+                        </option>
+
+                        <option value="breeding_logs">
+                            Breedings
+                        </option>
+
+                    </select>
+
+                </label>
+
+            </div>
+
+
+            <div
+                id="activityResultsCount"
+                class="admin-results-count"
+            >
+                0 activities
+            </div>
+
+
+            <div id="adminActivityList">
+
+                <p class="admin-empty-state">
+                    No registry activity has been recorded.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <section class="card admin-members-card">
+
+            <div class="admin-section-heading">
+
+                <h2>
+                    Member Management
+                </h2>
+
+                <p>
+                    Current KPS accounts and assigned roles.
+                </p>
+
+            </div>
+
+
+            <div id="adminMemberList">
+
+                <p class="admin-empty-state">
+                    No KPS members were found.
+                </p>
+
+            </div>
+
+        </section>
+
+    </div>
+
+</section>
+
 </main>
 
 <script src="js/supabase.js"></script>
 <script src="js/auth.js"></script>
 <script src="js/app.js"></script>
+<script src="js/admin.js"></script>
 
 <input
     type="file"

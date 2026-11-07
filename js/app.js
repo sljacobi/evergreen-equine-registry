@@ -2108,14 +2108,15 @@ window.showSection = function(sectionId) {
     }
 
     const sections = [
-        "dashboardSection",
-        "registrySection",
-        "breedingsSection",
-        "pedigreesSection",
-        "marketplaceSection",
-        "brandsSection",
-        "guideSection"
-    ];
+    "dashboardSection",
+    "registrySection",
+    "breedingsSection",
+    "pedigreesSection",
+    "marketplaceSection",
+    "brandsSection",
+    "guideSection",
+    "adminSection"
+];
 
     sections.forEach(id => {
 
