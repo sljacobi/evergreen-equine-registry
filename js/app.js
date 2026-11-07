@@ -1,4 +1,4 @@
-console.log("APPJS VERSION 2");
+console.log("APPJS VERSION 3 - PROFILE STATS");
 
 const horseForm = document.getElementById("horseForm");
 const horseList = document.getElementById("horseList");
